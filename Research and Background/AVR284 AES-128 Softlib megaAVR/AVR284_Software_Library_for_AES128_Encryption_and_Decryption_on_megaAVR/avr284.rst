@@ -1,0 +1,36 @@
+=========================================================================
+AVR284: Software Library for AES-128 Encryption and Decryption on megaAVR
+=========================================================================
+
+This application note provides an example of AES-128 encryption and decryption on ATmega328PB.
+NOTICE: If Atmel Studio encounters the error "Invalid zip package. Index was outside the bounds of the array" when importing this example, please shorten the name of the .atzip file.
+This applicaiton requires the ATmega_DFP (released with Atmel Studio) with the version 1.0.106 or later. 
+If not, please update to the latest Atmel Studio from http://www.atmel.com/tools/atmelstudio.aspx?tab=overview 
+
+For a more detailed description, please see the applicaiton note available from:
+http://www.atmel.com/Images/Atmel-42784-Software-Library-for-AES-128-Encryption-and-Decryption-on-megaAVR_ApplicationNote_AVR284.pdf
+
+========================
+SUPPORTED EVALUATION KIT
+========================
+ATmega328PB XPLAINED MINI
+
+=====
+FUSES
+===== 
+- Set Low Fuse Byte to use External Clock @ 16MHz
+- In Atmel Studio 7 this can be done by selecting Tools->Device Programming->Fuses
+- CPU runs at 16 MHz(UART BAUD RATE 38400)
+
+================
+RUNNING THE DEMO
+================
+1. Download the example .atzip file from Atmel|START.
+2. If with Atmel Studio 7 (or later), import .atzip file into Atmel Studio 7, File->Import->Atmel Start Project.
+   If with IAR 6.80(or later), unzip the .atzip file to locate .eww/.ewp files, and open with IAR IDE.
+   Essential Settings in IAR:
+   2.1 Select Full DLIB.
+   2.2 Enable bit definitions in I/O-Include files.
+   2.3 Set CSTACK size to at least 0x33.
+3. Build and flash into supported evaluation board.
+4. Run (debug) the code.

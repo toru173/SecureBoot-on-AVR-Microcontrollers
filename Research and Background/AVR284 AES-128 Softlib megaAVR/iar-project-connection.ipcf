@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iarProjectConnection name="src" oneShot="false">
+    <device>
+        <name>ATmega328PB</name>
+    </device>
+
+    <includePath>
+        <path>$PROJ_DIR$\config</path>
+        <path>$PROJ_DIR$\include</path>
+        <path>$PROJ_DIR$\utils</path>
+        <path>$PROJ_DIR$\utils\assembler</path>
+        <path>$PROJ_DIR$\AVR284_Software_Library_for_AES128_Encryption_and_Decryption_on_megaAVR</path>
+        <path>$PROJ_DIR$\</path>
+    </includePath>
+
+    <asmIncludePath>
+        <path>$PROJ_DIR$\config</path>
+        <path>$PROJ_DIR$\include</path>
+        <path>$PROJ_DIR$\utils</path>
+        <path>$PROJ_DIR$\utils\assembler</path>
+        <path>$PROJ_DIR$\AVR284_Software_Library_for_AES128_Encryption_and_Decryption_on_megaAVR</path>
+        <path>$PROJ_DIR$\</path>
+    </asmIncludePath>
+
+    <defines>
+        <define>__mega328PB__</define>
+        <define>F_CPU=16000000</define>
+    </defines>
+
+    <asmDefines>
+        <define>__mega328PB__</define>
+    </asmDefines>
+
+    
+
+    <files>
+
+            <path>atmel_start.c</path>
+            <path>atmel_start.h</path>
+            <path>driver_isr.c</path>
+    
+
+        <group name="AVR284_Software_Library_for_AES128_Encryption_and_Decryption_on_megaAVR">
+            <path>AVR284_Software_Library_for_AES128_Encryption_and_Decryption_on_megaAVR/aes.c</path>
+            <path>AVR284_Software_Library_for_AES128_Encryption_and_Decryption_on_megaAVR/aes.h</path>
+            <path>AVR284_Software_Library_for_AES128_Encryption_and_Decryption_on_megaAVR/conf_example.h</path>
+            <path>AVR284_Software_Library_for_AES128_Encryption_and_Decryption_on_megaAVR/crypt.c</path>
+            <path>AVR284_Software_Library_for_AES128_Encryption_and_Decryption_on_megaAVR/crypt.h</path>
+            <path>AVR284_Software_Library_for_AES128_Encryption_and_Decryption_on_megaAVR/main.c</path>
+            <path>AVR284_Software_Library_for_AES128_Encryption_and_Decryption_on_megaAVR/usart_io.c</path>
+            <path>AVR284_Software_Library_for_AES128_Encryption_and_Decryption_on_megaAVR/usart_io.h</path>
+        </group>
+
+        <group name="config">
+            <path>config/clock_config.h</path>
+        </group>
+
+        <group name="include">
+            <path>include/atmel_start_pins.h</path>
+            <path>include/driver_init.h</path>
+            <path>include/port.h</path>
+            <path>include/protected_io.h</path>
+            <path>include/sysctrl.h</path>
+            <path>include/system.h</path>
+            <path>include/usart.h</path>
+        </group>
+
+        <group name="src">
+            <path>src/driver_init.c</path>
+            <path>src/protected_io.S</path>
+            <path>src/usart.c</path>
+        </group>
+
+        <group name="utils">
+            <path>utils/assembler.h</path>
+            <path>utils/atomic.h</path>
+            <path>utils/compiler.h</path>
+            <path>utils/interrupt_avr8.h</path>
+            <path>utils/setbaud.h</path>
+            <path>utils/utils.h</path>
+            <path>utils/utils_assert.h</path>
+        </group>
+
+        <group name="utils/assembler">
+            <path>utils/assembler/gas.h</path>
+            <path>utils/assembler/iar.h</path>
+        </group>
+    </files>
+</iarProjectConnection>
