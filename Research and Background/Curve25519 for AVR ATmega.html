@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta name="DC.Creator" content="Peter Schwabe"></meta>
+<meta name="DC.Type" content="Text"></meta>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"></meta>
+<meta http-equiv="Content-Style-Type" content="text/css"></meta>
+<style type="text/css" media="all">@import "/layout.css";</style>
+
+<title>Curve25519 for AVR ATmega</title>
+</head>
+<body>
+<div id="top">
+  <h1>&mu;NaCl &ndash; The Networking and Cryptography library for microcontrollers</h1>
+</div>
+
+<div id="menu" style="min-height:95%">
+<div style="padding-top: 280px; padding-left: 10px">
+<h4><a href="/index.shtml">Introduction</a></h4>
+<h4><a href="/atmega.shtml">AVR ATmega</a></h4>
+<ul>
+<li><a href="/curve25519-atmega.shtml">Curve25519</a></li>
+</ul>
+<h4><a href="/msp430.shtml">MSP430</a></h4>
+<ul>
+<li><a href="/curve25519-msp430.shtml">Curve25519</a></li>
+</ul>
+<h4><a href="/cortexm0.shtml">ARM Cortex-M0</a></h4>
+<ul>
+<li><a href="/curve25519-cortexm0.shtml">Curve25519</a></li>
+</ul>
+<!--<h4><a href="">NaClCard</a></h4>-->
+<h4><a href="/faq.shtml">FAQ</a></h4>
+</div>
+</div>
+
+<div id="content">
+  <hr/>	
+  <h2>Curve25519 for AVR ATmega</h2>
+  <hr/>
+  <p>
+  The software described below is a standalone Curve25519 implementation optimized for speed.
+  We are planning to integrate it into AVRNaCl. It includes two versions, one called &quot;small&quot;
+  and one called &quot;fast&quot;. Both of those are optimized for speed, but the small implementation
+  uses slightly slower (and considerably smaller) implementations of multiprecision multiplication and squaring.
+  </p>
+
+  <hr/>
+  <h3>Build instructions</h3>
+
+  <h4>Installing an AVR GNU toolchain</h4>
+  <p>
+  In order to build Curve25519 for AVR you need an AVR GNU toolchain installed. 
+  On a Debian (jessie) systems this is easily achieved by adding the following 
+  line to the file /etc/apt/sources.list:
+  </p>
+  <div class="code">
+    deb http://www.emdebian.org/debian jessie main
+  </div>
+  <p>
+  and then the following commands (as root):
+  </p>
+  <div class="code">
+    apt-get update<br/>
+    apt-get install gcc-avr binutils-avr avr-libc avrdude
+  </div>
+
+  <h4>Building Curve25519 for AVR ATmega</h4>
+  <p>
+  To download and build the software for ATmega2560, run the following commands:
+  </p>
+  <div class="code">
+    wget <a href="/data/curve25519-atmega-20150304.tar.bz2">http://munacl.cryptojedi.org/data/curve25519-atmega-20150304.tar.bz2</a><br/>
+    tar xjvf curve25519-atmega-20150304.tar.bz2<br/>
+    cd curve25519-atmega-20150304/fast<br/>
+    make<br/>
+    cd ../small<br/>
+    make<br/>
+  </div>
+  
+  <hr/>
+  <h3>Running tests and benchmarks</h3>
+  <p>
+    Each of the two versions of the software comes with 3 testing and benchmarking routines: 
+    <ul>
+      <li>test/test_atmega2560.sh</li>
+      <li>test/speed_atmega2560.sh</li>
+      <li>test/stack_atmega2560.sh</li>
+    </ul>
+    We use the Arduino MEGA development board with an ATmega2560 to run those tests and benchmarks.
+    Each of those scripts will program the ATmega2560 on the Arduino board (connected on /dev/ttyACM0)
+    and print the output through USB-serial to standard out. 
+    Note that test_atmega2560.sh does not print anything if the test is successful.
+  </p>
+
+  <hr/>
+</div>
+</body>
+</html>
