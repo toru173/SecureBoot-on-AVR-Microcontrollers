@@ -24,7 +24,7 @@ const struct avr_mmcu_vcd_trace_t _mytrace[]  _MMCU_ = {
 int main (void)
 {
     DDRB = 0xff; // Set Port B to output
-    PORTB = 0x00 // Set output low
+    PORTB = 0x00; // Set output low
     
     int count = 0;
     
