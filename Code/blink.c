@@ -17,6 +17,7 @@ AVR_MCU(F_CPU, "atmega2580");
  */
 const struct avr_mmcu_vcd_trace_t _mytrace[]  _MMCU_ = {
     { AVR_MCU_VCD_SYMBOL("PORTB"), .what = (void*)&PORTB, },
+    { AVR_MCU_VCD_SYMBOL("PB0"), .mask = (1 << PB0), .what = (void*)&PORTB, },
 };
 
 int main (void)
