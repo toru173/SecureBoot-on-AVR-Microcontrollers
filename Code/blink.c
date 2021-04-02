@@ -23,13 +23,14 @@ const struct avr_mmcu_vcd_trace_t _mytrace[]  _MMCU_ = {
 
 int main (void)
 {
-    DDRB |= _BV(DDB0);
+    DDRB = 0xff; // Set Port B to output
+    PORTB = 0x00 // Set output low
     
     int count = 0;
     
     while(count < 10)
     {
-        PORTB ^= _BV(PB0);
+        PORTB ^= (1 << PB0); // XORs Port B with the location output 0
         _delay_ms(500);
         count++;
     }
