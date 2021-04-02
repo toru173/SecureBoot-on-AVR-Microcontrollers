@@ -1,4 +1,4 @@
-#define F_CPU 8000000UL
+#define F_CPU 8000000UL // 8MHz oscillator
 
 #include <avr/io.h>
 #include <avr/sleep.h>
