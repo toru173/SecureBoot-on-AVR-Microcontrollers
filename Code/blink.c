@@ -8,7 +8,7 @@
  * The macro adds a section to the ELF file with useful
  * information for the simulator
  */
-#include "avr_mcu_section.h"
+#include "include/avr_mcu_section.h"
 AVR_MCU(F_CPU, "atmega2580");
 
 /*
