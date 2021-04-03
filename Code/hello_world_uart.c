@@ -1,5 +1,6 @@
 /*
  * Initialises UART then prints out 'Hello World!' over serial
+ *  
  * Used as a basic demo payload for SecureBoot on AVR
  */
 
@@ -32,8 +33,8 @@ unsigned char message[] = "Hello World!";
 
 void init_uart_0(void)
 {
-    UCSR0A = 0x00; // Clear status register
-    UCSR0B = (1 << RXEN0 ) | (1 << TXEN0); // Enable Transmit & receive, even though we're transmitting
+    UCSR0A = 0x00; // Clear USART0 status register
+    UCSR0B = (1 << RXEN0 ) | (1 << TXEN0); // Enable transmit & receive
     UCSR0C = (1 << UCSZ01) | (1 << UCSZ00); // 8 bit, no parity, one stop bit
 }
 
