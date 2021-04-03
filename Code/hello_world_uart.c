@@ -37,7 +37,7 @@ const struct avr_mmcu_vcd_trace_t _mytrace[]  _MMCU_ = {
     { AVR_MCU_VCD_SYMBOL("PE1"), .mask = (1 << PE1), .what = (void*)&PORTE, },
 };
 
-const char messag[] = "Hello World!";
+const char message[] = "Hello World!";
 
 void init_uart(void)
 {
