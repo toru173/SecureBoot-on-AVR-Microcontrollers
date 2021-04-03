@@ -65,7 +65,7 @@ int main (void)
     uart_init();
     // stdin = stdout = stderr = &uart_stdio;
 
-    //unsigned char message[] = "Hello World!";
+    unsigned char message[] = "Hello World!";
     
     // fprintf(&uart_stdio, "H");
     // int i = 0;
@@ -91,7 +91,7 @@ int main (void)
     uart_putchar('l');
     uart_putchar('d');
     uart_putchar('!');
-    //uart_putchar('\n');
+    uart_putchar('\n');
     
     for (int i = 0; i < 10; i++)
         _delay_ms(500);
