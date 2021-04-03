@@ -57,8 +57,9 @@ int main (void)
     UDR0 = 0x48;
     loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
     UDR0 = 0x65;
-    
-    
+    loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
+    loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
+    UDR0 = 0x0A;
     /*
     while(i < 12)
     {
