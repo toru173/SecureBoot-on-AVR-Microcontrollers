@@ -61,13 +61,6 @@ int uart_putchar(char c, FILE *stream)
     return 0;
 }
 
-/*
-void uart_putstring(const char *data)
-{
-    while (*data != '\0')
-      uart_putchar(*data++);
-}
-*/
 
 int main (void)
 {
@@ -78,7 +71,6 @@ int main (void)
     
     printf(message);
         
-    _delay_ms(500);
         
     // this quits the simulator, since interupts are off
     // this is a "feature" that allows running tests cases and exit
