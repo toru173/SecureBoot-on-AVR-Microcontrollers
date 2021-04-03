@@ -86,8 +86,9 @@ int main (void)
     const char *const_ptr_global = "const_ptr_global_string";
     const char const_array_global[] = "const_array_global_string";
     
-    for (uint8_t i = 0; i < 12; i ++)
+    for (uint8_t i = 0; i sizeof(message); i ++)
     {
+        uart_putchar(i);
         uart_putchar(message[i]);
     }
     
