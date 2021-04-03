@@ -51,7 +51,7 @@ void uart_init(void)
     UCSR0C = (1 << UCSZ01) | (1 << UCSZ00); // 8 bit, no parity, one stop bit
 }
 
-int uart_putchar(char c, FILE *stream)
+int uart_putchar(char c)
 {
     loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
     UDR0 = c;
@@ -65,11 +65,14 @@ int main (void)
     uart_init();
     // stdin = stdout = stderr = &uart_stdio;
 
+    char[] message = "Hello World!";
+    
     // fprintf(&uart_stdio, "H");
     int i = 0;
     while(message[i] != "\0")
     {
         uart_putchar(message[i]);
+        i++;
     }
     uart_putchar("\n");
          
