@@ -10,6 +10,7 @@
 #include <avr/io.h>
 #include <avr/sleep.h>
 #include <util/delay.h>
+#include <util/setbaud.h>
 #include "uart.h"
 
 /*
@@ -41,6 +42,8 @@ unsigned char message[] = "Hello World!";
 void init_uart_0(void)
 {
     UCSR0A = 0x00; // Clear USART0 status register
+    UBRRH = UBRRH_VALUE; /* Set baud values correctly
+    UBRRL = UBRRL_VALUE;  */
     UCSR0B = (1 << RXEN0 ) | (1 << TXEN0); // Enable transmit & receive
     UCSR0C = (1 << UCSZ01) | (1 << UCSZ00); // 8 bit, no parity, one stop bit
     DDRE &= ~(1 << PE0); // Enable input on Port E (RXD0)
