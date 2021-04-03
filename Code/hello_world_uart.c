@@ -56,30 +56,6 @@ int main (void)
     
     loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
     UDR0 = message[0];
-    loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
-    UDR0 = message[1];
-    loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
-    UDR0 = message[2];
-    loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
-    UDR0 = message[3];
-    loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
-    UDR0 = message[4];
-    loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
-    UDR0 = message[5];
-    loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
-    UDR0 = message[6];
-    loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
-    UDR0 = message[7];
-    loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
-    UDR0 = message[8];
-    loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
-    UDR0 = message[9];
-    loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
-    UDR0 = message[10];
-    loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
-    UDR0 = message[11];
-    loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
-    UDR0 = message[12];
     
     /*
     while(i < 12)
