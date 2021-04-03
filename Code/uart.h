@@ -3,4 +3,4 @@
  */
 
 void uart_init(void);
-void uart_putchar(char c);
+int uart_putchar(char c);
