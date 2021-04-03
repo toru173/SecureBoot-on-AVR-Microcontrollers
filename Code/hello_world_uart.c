@@ -37,7 +37,7 @@ const struct avr_mmcu_vcd_trace_t _mytrace[]  _MMCU_ = {
     { AVR_MCU_VCD_SYMBOL("PE1"), .mask = (1 << PE1), .what = (void*)&PORTE, },
 };
 
-unsigned char message[] = "Hello World!";
+unsigned char message[11] = "Hello World!";
 
 void init_uart_0(void)
 {
@@ -46,8 +46,8 @@ void init_uart_0(void)
     UBRR0L = UBRRL_VALUE;
     UCSR0B = (1 << RXEN0 ) | (1 << TXEN0); // Enable transmit & receive
     UCSR0C = (1 << UCSZ01) | (1 << UCSZ00); // 8 bit, no parity, one stop bit
-    DDRE &= ~(1 << PE0); // Enable input on Port E (RXD0)
-    DDRE |= (1 << PE1); // Enable output on Port E (TXD0)
+    // DDRE &= ~(1 << PE0); // Enable input on Port E (RXD0)
+    // DDRE |= (1 << PE1); // Enable output on Port E (TXD0)
 }
 
 int main (void)
