@@ -21,6 +21,9 @@
 #include "avr_mcu_section.h"
 AVR_MCU(F_CPU, "atmega2560");
 
+// tell simavr to listen to commands written in this (unused) register
+AVR_MCU_SIMAVR_COMMAND(&GPIOR0);
+
 /*
  * This small section tells simavr to generate a VCD trace dump with changes to these
  * registers. Hanging the trace specifically on the TX pin (PE1) of USART0
@@ -33,6 +36,7 @@ const struct avr_mmcu_vcd_trace_t _mytrace[]  _MMCU_ = {
     { AVR_MCU_VCD_SYMBOL("UBRR0L"), .what = (void*)&UBRR0L, },
     { AVR_MCU_VCD_SYMBOL("UDRE0"), .mask = (1 << UDRE0), .what = (void*)&UCSR0A, },
     { AVR_MCU_VCD_SYMBOL("UDR0"), .what = (void*)&UDR0, },
+    { AVR_MCU_VCD_SYMBOL("GPIOR0"), .what = (void*)&GPIOR0, },
     { AVR_MCU_VCD_SYMBOL("PORTE"), .what = (void*)&PORTE, },
     { AVR_MCU_VCD_SYMBOL("PE1"), .mask = (1 << PE1), .what = (void*)&PORTE, },
 };
@@ -52,19 +56,12 @@ int main (void)
 {
     init_uart();
     int i = 0;
-    
-    loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
-    UDR0 = 0x48;
-    loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
-    UDR0 = 0x65;
-    loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
-    loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
-    UDR0 = 0x0A;
-    /*
+
     while(i < 12)
     {
         loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
-        UDR0 = i + 65;
+        UDR0 = message[i];
+        GPIOR0 = message[i];
         i++;
     }
      */
