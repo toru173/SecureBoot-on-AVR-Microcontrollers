@@ -64,7 +64,6 @@ int main (void)
         GPIOR0 = message[i];
         i++;
     }
-     */
          
     _delay_ms(500);
     
