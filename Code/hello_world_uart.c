@@ -74,7 +74,7 @@ int main (void)
     uart_init();
     stdout = &uart_stdio;
 
-    char message[] = "What the fuck, avr-gcc -_-";
+    char message[] = "What the fuck, avr-gcc -_-\n";
     
     printf(message);
         
