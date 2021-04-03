@@ -93,6 +93,20 @@ int main (void)
     uart_putchar('!');
     uart_putchar('\n');
     
+    uart_putchar(message[0]);
+    uart_putchar(message[1]);
+    uart_putchar(message[2]);
+    uart_putchar(message[3]);
+    uart_putchar(message[4]);
+    uart_putchar(message[5]);
+    uart_putchar(message[6]);
+    uart_putchar(message[7]);
+    uart_putchar(message[8]);
+    uart_putchar(message[9]);
+    uart_putchar(message[10]);
+    uart_putchar(message[11]);
+
+    
     for (int i = 0; i < 10; i++)
         _delay_ms(500);
     
