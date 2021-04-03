@@ -3,4 +3,3 @@
  */
 
 void init_uart(void);
-void putchar(char c);
