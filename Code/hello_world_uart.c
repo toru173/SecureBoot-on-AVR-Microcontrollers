@@ -65,12 +65,12 @@ int main (void)
 {
     uart_init();
 
-    static const unsigned char message[] PROGMEM = "Hello World!";
+    char message[] PROGMEM = "Hello World!";
     
     for (uint8_t i = 0; i < sizeof(message); i ++)
     {
         uart_putchar(i);
-        uart_putchar(message[i]);
+        uart_putchar(*message);
     }
     
     uart_putchar('\n');
