@@ -70,7 +70,7 @@ void uart_putstring(const char *data)
 int main (void)
 {
     uart_init();
-    stdout = &uart_stdio
+    stdout = &uart_stdio;
 
     char message[] = "What the fuck, avr-gcc -_-";
     
