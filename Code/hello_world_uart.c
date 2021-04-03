@@ -30,7 +30,7 @@ const struct avr_mmcu_vcd_trace_t _mytrace[]  _MMCU_ = {
     { AVR_MCU_VCD_SYMBOL("UCSR0C"), .what = (void*)&UCSR0C, },
     { AVR_MCU_VCD_SYMBOL("UBRR0H"), .what = (void*)&UBRR0H, },
     { AVR_MCU_VCD_SYMBOL("UBRR0L"), .what = (void*)&UBRR0L, },
-    { AVR_MCU_VCD_SYMBOL("UDRE0"), .what = (void*)&UDRE0, },
+    { AVR_MCU_VCD_SYMBOL("UDRE0"), .mask = (1 << UDRE0), .what = (void*)&UCSR0A, },
     { AVR_MCU_VCD_SYMBOL("UDR0"), .what = (void*)&UDR0, },
     { AVR_MCU_VCD_SYMBOL("PORTE"), .what = (void*)&PORTE, },
     { AVR_MCU_VCD_SYMBOL("PE1"), .mask = (1 << PE1), .what = (void*)&PORTE, },
