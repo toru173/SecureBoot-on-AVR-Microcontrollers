@@ -11,6 +11,7 @@
 #include <avr/sleep.h>
 #include <util/delay.h>
 #include <util/setbaud.h>
+#include <avr/pgmspace.h>
 
 #include <stdio.h>
 
