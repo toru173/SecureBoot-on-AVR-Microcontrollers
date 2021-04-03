@@ -65,7 +65,7 @@ int main (void)
     uart_init();
     // stdin = stdout = stderr = &uart_stdio;
 
-    char* message = "Hello World!";
+    char message[] = "Hello World!";
     
     // fprintf(&uart_stdio, "H");
     // int i = 0;
@@ -86,7 +86,7 @@ int main (void)
     const char *const_ptr_global = "const_ptr_global_string";
     const char const_array_global[] = "const_array_global_string";
     
-    for (int i = 0; i < 12; i ++)
+    for (uint8_t i = 0; i < 12; i ++)
     {
         uart_putchar(message[i]);
     }
@@ -96,7 +96,6 @@ int main (void)
     _delay_ms(500);
     
     uart_putchar(0x07);
-
     
     // this quits the simulator, since interupts are off
     // this is a "feature" that allows running tests cases and exit
