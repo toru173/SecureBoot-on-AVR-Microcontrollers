@@ -51,12 +51,12 @@ void init_uart(void)
 int main (void)
 {
     init_uart();
-    uint8_t i = 0;
+    int i = 0;
 
     while(i < 12)
     {
         loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
-        UDR0 = message[i];
+        UDR0 = *message + i;
         i++;
     }
          
