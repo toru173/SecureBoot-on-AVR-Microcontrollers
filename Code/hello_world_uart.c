@@ -1,4 +1,12 @@
+/*
+ * Initialises UART then prints out 'Hello World!' over serial
+ * Used as a basic demo payload for SecureBoot on AVR
+ */
+
 #define F_CPU 8000000UL // 8MHz oscillator
+#define BAUD 9600 // Could be faster if desired. This is just a PoC
+
+#include <stdio.h>
 
 #include <avr/io.h>
 #include <avr/sleep.h>
