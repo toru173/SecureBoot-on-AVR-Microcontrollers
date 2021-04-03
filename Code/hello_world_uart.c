@@ -72,9 +72,9 @@ int main (void)
 {
     uart_init();
 
-    //char message[] = "Hello World!";
+    char message[] = "Hello World!";
     
-    uart_putstring("Hello World!");
+    uart_putstring(message);
         
     _delay_ms(500);
     
