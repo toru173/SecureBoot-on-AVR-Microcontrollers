@@ -41,7 +41,7 @@ const struct avr_mmcu_vcd_trace_t _mytrace[]  _MMCU_ = {
 };
 
 const char message[] = "Hello World!";
-FILE uart_str = FDEV_SETUP_STREAM(uart_putchar, NULL, _FDEV_SETUP_WRITE);
+FILE uart_stdio = FDEV_SETUP_STREAM(uart_putchar, NULL, _FDEV_SETUP_WRITE);
 
 void uart_init(void)
 {
@@ -52,7 +52,7 @@ void uart_init(void)
     UCSR0C = (1 << UCSZ01) | (1 << UCSZ00); // 8 bit, no parity, one stop bit
 }
 
-int uart_putchar(char c)
+int uart_putchar(char c, FILE *stream)
 {
     loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
     UDR0 = c;
@@ -64,7 +64,7 @@ int uart_putchar(char c)
 int main (void)
 {
     uart_init();
-    stdin = stdout = stderr = &uart_str;
+    stdin = stdout = stderr = &uart_stdio;
 
     printf(message);
          
