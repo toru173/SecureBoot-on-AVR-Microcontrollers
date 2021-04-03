@@ -74,7 +74,6 @@ int main (void)
         uart_putchar(message[i]);
         i++;
     }
-    uart_putchar("\n");
          
     for (int i = 0; i < 10; i++)
         _delay_ms(500);
