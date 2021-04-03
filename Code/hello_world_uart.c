@@ -73,7 +73,7 @@ int main (void)
 
     char message[] = "Hello World!";
     
-    uart_putstring(message);
+    uart_putstring(*message);
     
     uart_putchar('\n');
     
