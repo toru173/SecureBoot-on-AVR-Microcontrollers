@@ -48,14 +48,14 @@ void init_uart(void)
 
 int main (void)
 {
-    unsigned char message[12] = "Hello World!";
+    char message[12] = "Hello World!";
     
     init_uart();
     
     for (int i = 0; i < 12; i++)
     {
         loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
-        UDR0 = i;
+        UDR0 = message[i];
     }
     
     // this quits the simulator, since interupts are off
