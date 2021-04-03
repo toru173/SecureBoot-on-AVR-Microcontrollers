@@ -25,6 +25,10 @@ AVR_MCU(F_CPU, "atmega2560");
  * registers. Hanging the trace specifically on the TX pin (PE1) of USART0
  */
 const struct avr_mmcu_vcd_trace_t _mytrace[]  _MMCU_ = {
+    { AVR_MCU_VCD_SYMBOL("UCSR0A"), .what = (void*)&UCSR0A, },
+    { AVR_MCU_VCD_SYMBOL("UCSR0B"), .what = (void*)&UCSR0B, },
+    { AVR_MCU_VCD_SYMBOL("UCSR0C"), .what = (void*)&UCSR0C, },
+    { AVR_MCU_VCD_SYMBOL("UDR0"), .what = (void*)&UDR0, },
     { AVR_MCU_VCD_SYMBOL("PORTE"), .what = (void*)&PORTE, },
     { AVR_MCU_VCD_SYMBOL("PE1"), .mask = (1 << PE1), .what = (void*)&PORTE, },
 };
