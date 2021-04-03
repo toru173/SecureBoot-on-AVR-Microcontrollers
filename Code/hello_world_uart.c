@@ -66,7 +66,7 @@ int main (void)
     }
     */
      
-    delay(500);
+    delay_ms(500);
     
     // this quits the simulator, since interupts are off
     // this is a "feature" that allows running tests cases and exit
