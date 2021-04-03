@@ -40,8 +40,8 @@ void init_uart_0(void)
     UCSR0A = 0x00; // Clear USART0 status register
     UCSR0B = (1 << RXEN0 ) | (1 << TXEN0); // Enable transmit & receive
     UCSR0C = (1 << UCSZ01) | (1 << UCSZ00); // 8 bit, no parity, one stop bit
-    DDRE &= ~(1 << PE0) // Enable input on Port E (RXD0)
-    DDRE |= (1 << PE1) // Enable output on Port E (TXD0)
+    DDRE &= ~(1 << PE0); // Enable input on Port E (RXD0)
+    DDRE |= (1 << PE1); // Enable output on Port E (TXD0)
 }
 
 int main (void)
