@@ -50,14 +50,13 @@ void init_uart(void)
 
 int main (void)
 {
-    
     init_uart();
     int i = 0;
     
     while(i < 12)
     {
         loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
-        UDR0 = 0x48;
+        UDR0 = i;
         i++;
     }
      
