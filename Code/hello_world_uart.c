@@ -45,8 +45,8 @@ int main (void)
     
     while(message[i] != 0)
     {
-        while (!( UCSR0A & (1<<UDRE0))); // Wait for transmit buffer to be empty
-        UDR0 = (message[i]);
+        loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
+        UDR0 = message[i];
         i++;
     }
     
