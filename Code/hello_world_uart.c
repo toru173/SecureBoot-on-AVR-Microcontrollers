@@ -56,7 +56,7 @@ int main (void)
     while(i < 12)
     {
         loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
-        UDR0 = i + 10;
+        UDR0 = i + 48;
         i++;
     }
      
