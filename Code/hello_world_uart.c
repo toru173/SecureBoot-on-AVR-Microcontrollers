@@ -11,6 +11,9 @@
 #include <avr/sleep.h>
 #include <util/delay.h>
 #include <util/setbaud.h>
+
+#include <stdio.h>
+
 #include "uart.h"
 
 /*
@@ -38,8 +41,9 @@ const struct avr_mmcu_vcd_trace_t _mytrace[]  _MMCU_ = {
 };
 
 const char message[] = "Hello World!";
+FILE uart_str = FDEV_SETUP_STREAM(uart_putchar, NULL, _FDEV_SETUP_WRITE);
 
-void init_uart(void)
+void uart_init(void)
 {
     UCSR0A = 0x00; // Clear USART0 status register
     UBRR0H = UBRRH_VALUE; // Set baud values correctly
@@ -48,17 +52,19 @@ void init_uart(void)
     UCSR0C = (1 << UCSZ01) | (1 << UCSZ00); // 8 bit, no parity, one stop bit
 }
 
+void uart_putchar(char c)
+{
+    loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
+    UDR0 = c;
+}
+
+
 int main (void)
 {
     init_uart();
-    int i = 0;
+    stdin = stdout = stderr = &uart_str;
 
-    while(i < 12)
-    {
-        loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
-        UDR0 = *(message + i);
-        i++;
-    }
+    printf(message);
          
     _delay_ms(500);
     

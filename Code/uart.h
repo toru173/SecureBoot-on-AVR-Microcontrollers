@@ -2,4 +2,5 @@
  * Header files for uart comms
  */
 
-void init_uart_0(void);
+void uart_init(void);
+void uart_putchar(char c)
