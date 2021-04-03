@@ -53,16 +53,21 @@ int main (void)
     init_uart();
     int i = 0;
     
+    loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
+    UDR0 = 0x48;
+    loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
+    UDR0 = 0x65;
+    
+    
+    /*
     while(i < 12)
     {
         loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
         UDR0 = i + 65;
         i++;
     }
-     
-    loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
-    UDR0 = 0x0A;
-    
+     */
+         
     _delay_ms(500);
     
     // this quits the simulator, since interupts are off
