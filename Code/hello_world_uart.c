@@ -96,7 +96,7 @@ int main (void)
     
     for (int i = 0; i < 12; i ++)
     {
-        uart_putchar(message[i]);
+        uart_putchar(*message[i]);
     }
     
     uart_putchar('\n');
