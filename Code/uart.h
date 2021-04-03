@@ -2,6 +2,8 @@
  * Header files for uart comms
  */
 
+#include <avr/io.h>
+
 void init_uart(void)
 {
     UCSRA = 0x00; // Clear status register
