@@ -80,19 +80,11 @@ int main (void)
     
      */
     
-    uart_putchar(message[0]);
-    uart_putchar(message[1]);
-    uart_putchar(message[2]);
-    uart_putchar(message[3]);
-    uart_putchar(message[4]);
-    uart_putchar(message[5]);
-    uart_putchar(message[6]);
-    uart_putchar(message[7]);
-    uart_putchar(message[8]);
-    uart_putchar(message[9]);
-    uart_putchar(message[10]);
-    uart_putchar(message[11]);
-    uart_putchar('\n');
+    char *ptr_global = "ptr_global_string";
+    char array_global[] = "array_global_string";
+
+    const char *const_ptr_global = "const_ptr_global_string";
+    const char const_array_global[] = "const_array_global_string";
     
     for (int i = 0; i < 12; i ++)
     {
