@@ -71,7 +71,7 @@ int main (void)
 {
     uart_init();
 
-    char message[] PROGMEM = "Hello World!";
+    char message[] = "Hello World!";
     
     uart_putstring(message);
     
