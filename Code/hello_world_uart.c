@@ -37,28 +37,26 @@ const struct avr_mmcu_vcd_trace_t _mytrace[]  _MMCU_ = {
     { AVR_MCU_VCD_SYMBOL("PE1"), .mask = (1 << PE1), .what = (void*)&PORTE, },
 };
 
-unsigned char message[12] = "Hello World!";
-
-void init_uart_0(void)
+void init_uart(void)
 {
     UCSR0A = 0x00; // Clear USART0 status register
     UBRR0H = UBRRH_VALUE; // Set baud values correctly
     UBRR0L = UBRRL_VALUE;
     UCSR0B = (1 << RXEN0 ) | (1 << TXEN0); // Enable transmit & receive
     UCSR0C = (1 << UCSZ01) | (1 << UCSZ00); // 8 bit, no parity, one stop bit
-    // DDRE &= ~(1 << PE0); // Enable input on Port E (RXD0)
-    // DDRE |= (1 << PE1); // Enable output on Port E (TXD0)
 }
 
 int main (void)
 {
-    uint8_t i = 0;
-    init_uart_0();
+    unsigned char message[12] = "Hello World!";
     
-    for (i = 0; i < 12; i++)
+    // uint8_t i = 0;
+    init_uart();
+    
+    for (int i = 0; i < 12; i++)
     {
         loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
-        UDR0 = i;
+        UDR0 = message[i];
     }
     
     // this quits the simulator, since interupts are off
