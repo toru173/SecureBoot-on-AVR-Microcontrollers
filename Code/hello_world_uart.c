@@ -65,7 +65,7 @@ int main (void)
     uart_init();
     // stdin = stdout = stderr = &uart_stdio;
 
-    char[] message = "Hello World!";
+    char message[] = "Hello World!";
     
     // fprintf(&uart_stdio, "H");
     int i = 0;
