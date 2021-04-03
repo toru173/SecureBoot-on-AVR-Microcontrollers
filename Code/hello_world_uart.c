@@ -63,9 +63,15 @@ int uart_putchar(char c, FILE *stream)
 int main (void)
 {
     uart_init();
-    stdin = stdout = stderr = &uart_stdio;
+    // stdin = stdout = stderr = &uart_stdio;
 
-    fprintf(&uart_stdio, "H");
+    // fprintf(&uart_stdio, "H");
+    int i = 0;
+    while(message[i] != "\0")
+    {
+        uart_putchar(message[i]);
+    }
+    uart_putchar("\n");
          
     for (int i = 0; i < 10; i++)
         _delay_ms(500);
