@@ -64,7 +64,6 @@ void uart_putstring(const char *data)
 {
     while (*data != '\0')
       uart_putchar(*data++);
-    uart_putchar('\n');
 }
 
 
