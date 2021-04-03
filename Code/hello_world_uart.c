@@ -40,7 +40,6 @@ const struct avr_mmcu_vcd_trace_t _mytrace[]  _MMCU_ = {
     { AVR_MCU_VCD_SYMBOL("PE1"), .mask = (1 << PE1), .what = (void*)&PORTE, },
 };
 
-const char message[] = "Hello World!";
 FILE uart_stdio = FDEV_SETUP_STREAM(uart_putchar, NULL, _FDEV_SETUP_WRITE);
 
 void uart_init(void)
@@ -66,7 +65,7 @@ int main (void)
     uart_init();
     stdin = stdout = stderr = &uart_stdio;
 
-    fprintf(&uart_stdio, "Hello");
+    fprintf(&uart_stdio, 0x48);
          
     for (int i = 0; i < 10; i++)
         _delay_ms(500);
