@@ -10,7 +10,7 @@
  * information for the simulator
  */
 #include "avr_mcu_section.h"
-AVR_MCU(F_CPU, "atmega2580");
+AVR_MCU(F_CPU, "atmega2560");
 
 /*
  * This small section tells simavr to generate a VCD trace dump with changes to these
