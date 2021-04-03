@@ -65,7 +65,7 @@ int main (void)
     uart_init();
     // stdin = stdout = stderr = &uart_stdio;
 
-    static unsigned char message[] = "Hello World!";
+    char* message = "Hello World!";
     
     // fprintf(&uart_stdio, "H");
     // int i = 0;
@@ -96,7 +96,7 @@ int main (void)
     
     for (int i = 0; i < 12; i ++)
     {
-        uart_putchar(i);
+        uart_putchar(message[i]);
     }
     
     uart_putchar('\n');
