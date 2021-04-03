@@ -105,6 +105,7 @@ int main (void)
     uart_putchar(message[9]);
     uart_putchar(message[10]);
     uart_putchar(message[11]);
+    uart_putchar('\n');
 
     
     for (int i = 0; i < 10; i++)
