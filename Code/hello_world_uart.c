@@ -65,7 +65,7 @@ int main (void)
     uart_init();
     // stdin = stdout = stderr = &uart_stdio;
 
-    char message[] = "Hello World!";
+    static const unsigned char message[] = "Hello World!";
     
     // fprintf(&uart_stdio, "H");
     // int i = 0;
@@ -79,12 +79,6 @@ int main (void)
     uart_putchar('\n');
     
      */
-    
-    char *ptr_global = "ptr_global_string";
-    char array_global[] = "array_global_string";
-
-    const char *const_ptr_global = "const_ptr_global_string";
-    const char const_array_global[] = "const_array_global_string";
     
     for (uint8_t i = 0; i < sizeof(message); i ++)
     {
