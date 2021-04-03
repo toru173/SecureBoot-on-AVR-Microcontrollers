@@ -64,27 +64,13 @@ int uart_putchar(char c)
 int main (void)
 {
     uart_init();
-    // stdin = stdout = stderr = &uart_stdio;
 
     static const unsigned char message[] PROGMEM = "Hello World!";
-    
-    // fprintf(&uart_stdio, "H");
-    // int i = 0;
-
-    /*
-    while(message[i] != '\0')
-    {
-        uart_putchar(message[i]);
-        i++;
-    }
-    uart_putchar('\n');
-    
-     */
     
     for (uint8_t i = 0; i < sizeof(message); i ++)
     {
         uart_putchar(i);
-        uart_putchar(message[i]);
+        uart_putchar(*message[i]);
     }
     
     uart_putchar('\n');
