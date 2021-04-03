@@ -76,7 +76,7 @@ int main (void)
 
     char message[] = "What the fuck, avr-gcc -_-";
     
-    printf(message;)
+    printf(message);
         
     _delay_ms(500);
     
