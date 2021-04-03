@@ -52,12 +52,13 @@ void init_uart_0(void)
 
 int main (void)
 {
+    uint8_t i = 0;
     init_uart_0();
     
-    for (int i = 0; i < 12; i++)
+    for (i = 0; i < 12; i++)
     {
         loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
-        UDR0 = message[i];
+        UDR0 = i;
     }
     
     // this quits the simulator, since interupts are off
