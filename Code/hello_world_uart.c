@@ -65,7 +65,7 @@ int main (void)
     uart_init();
     stdin = stdout = stderr = &uart_stdio;
 
-    fprintf(&uart_stdio, 0x48);
+    fprintf(&uart_stdio, "H");
          
     for (int i = 0; i < 10; i++)
         _delay_ms(500);
