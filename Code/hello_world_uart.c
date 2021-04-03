@@ -2,6 +2,7 @@
  * Initialises UART then prints out 'Hello World!' over serial
  *
  * Used as a basic demo payload for SecureBoot on AVR
+ *
  */
 
 #define F_CPU 8000000UL // 8MHz oscillator
@@ -70,7 +71,6 @@ int main (void)
     char message[] = "What the fuck, avr-gcc -_-\n";
     
     printf(message);
-        
         
     // this quits the simulator, since interupts are off
     // this is a "feature" that allows running tests cases and exit
