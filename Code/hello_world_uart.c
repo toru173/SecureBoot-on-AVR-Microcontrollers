@@ -64,6 +64,7 @@ void uart_putstring(const char *data)
 {
     while (*data != '\0')
       uart_putchar(*data++);
+    uart_putchar('\n');
 }
 
 
@@ -71,12 +72,10 @@ int main (void)
 {
     uart_init();
 
-    char message[] = "Hello World!";
+    //char message[] = "Hello World!";
     
-    uart_putstring(*message);
-    
-    uart_putchar('\n');
-    
+    uart_putstring("Hello World!");
+        
     _delay_ms(500);
     
     uart_putchar(0x07);
