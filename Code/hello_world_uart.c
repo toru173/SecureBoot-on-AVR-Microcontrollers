@@ -65,7 +65,7 @@ int main (void)
     uart_init();
     // stdin = stdout = stderr = &uart_stdio;
 
-    static const unsigned char message[] = "Hello World!";
+    static const unsigned char message[] PROGMEM = "Hello World!";
     
     // fprintf(&uart_stdio, "H");
     // int i = 0;
