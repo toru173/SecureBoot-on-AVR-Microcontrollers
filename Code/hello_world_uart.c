@@ -37,7 +37,7 @@ const struct avr_mmcu_vcd_trace_t _mytrace[]  _MMCU_ = {
     { AVR_MCU_VCD_SYMBOL("PE1"), .mask = (1 << PE1), .what = (void*)&PORTE, },
 };
 
-unsigned char message[11] = "Hello World!";
+unsigned char message[12] = "Hello World!";
 
 void init_uart_0(void)
 {
@@ -54,7 +54,7 @@ int main (void)
 {
     init_uart_0();
     
-    for (int i = 0; i < 11; i++)
+    for (int i = 0; i < 12; i++)
     {
         loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
         UDR0 = message[i];
