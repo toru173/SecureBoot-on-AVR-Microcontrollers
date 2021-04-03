@@ -69,7 +69,7 @@ int main (void)
     
     // fprintf(&uart_stdio, "H");
     int i = 0;
-    while(&message[i] != '\0')
+    while(message[i] != '\0')
     {
         uart_putchar(message[i]);
         i++;
