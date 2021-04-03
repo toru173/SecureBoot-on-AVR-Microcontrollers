@@ -66,9 +66,10 @@ int main (void)
     uart_init();
     stdin = stdout = stderr = &uart_stdio;
 
-    printf(message);
+    fprintf(&uart_stidio, "Hello");
          
-    _delay_ms(500);
+    for (int i = 0; i < 10; i++)
+        _delay_ms(500);
     
     // this quits the simulator, since interupts are off
     // this is a "feature" that allows running tests cases and exit
