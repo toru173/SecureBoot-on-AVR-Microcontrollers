@@ -37,6 +37,8 @@ const struct avr_mmcu_vcd_trace_t _mytrace[]  _MMCU_ = {
     { AVR_MCU_VCD_SYMBOL("PE1"), .mask = (1 << PE1), .what = (void*)&PORTE, },
 };
 
+char message[] = "Hello World!";
+
 void init_uart(void)
 {
     UCSR0A = 0x00; // Clear USART0 status register
@@ -48,18 +50,46 @@ void init_uart(void)
 
 int main (void)
 {
-    char message[12] = "Hello World!";
     
     init_uart();
     int i = 0;
     
+    loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
+    UDR0 = message[0];
+    loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
+    UDR0 = message[1];
+    loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
+    UDR0 = message[2];
+    loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
+    UDR0 = message[3];
+    loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
+    UDR0 = message[4];
+    loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
+    UDR0 = message[5];
+    loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
+    UDR0 = message[6];
+    loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
+    UDR0 = message[7];
+    loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
+    UDR0 = message[8];
+    loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
+    UDR0 = message[9];
+    loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
+    UDR0 = message[10];
+    loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
+    UDR0 = message[11];
+    loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
+    UDR0 = message[12];
+    
+    /*
     while(i < 12)
     {
         loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
-        UDR0 = message[i];
+        UDR0 = message[0];
         i++;
     }
-    
+    */
+     
     // this quits the simulator, since interupts are off
     // this is a "feature" that allows running tests cases and exit
     sleep_cpu();
