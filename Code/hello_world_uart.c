@@ -41,7 +41,7 @@ const struct avr_mmcu_vcd_trace_t _mytrace[]  _MMCU_ = {
     { AVR_MCU_VCD_SYMBOL("PE1"), .mask = (1 << PE1), .what = (void*)&PORTE, },
 };
 
-// FILE uart_stdio = FDEV_SETUP_STREAM(uart_putchar, NULL, _FDEV_SETUP_WRITE);
+FILE uart_stdio = FDEV_SETUP_STREAM(uart_putchar, NULL, _FDEV_SETUP_WRITE);
 
 void uart_init(void)
 {
@@ -70,10 +70,11 @@ void uart_putstring(const char *data)
 int main (void)
 {
     uart_init();
+    stdout = &uart_stdio
 
     char message[] = "What the fuck, avr-gcc -_-";
     
-    uart_putstring(message);
+    printf(message;)
         
     _delay_ms(500);
     
