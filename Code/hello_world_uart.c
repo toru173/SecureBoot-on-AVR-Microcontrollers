@@ -37,8 +37,8 @@ int main (void)
     while(message[i] != 0)
     {
         while (!( UCSR0A & (1<<UDRE0))); // Wait for transmit buffer to be empty
-        UDR0 = message[i]
-        i++
+        UDR0 = message[i];
+        i++;
     }
     
     // this quits the simulator, since interupts are off
