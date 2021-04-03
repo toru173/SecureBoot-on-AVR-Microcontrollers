@@ -52,16 +52,18 @@ void uart_init(void)
     UCSR0C = (1 << UCSZ01) | (1 << UCSZ00); // 8 bit, no parity, one stop bit
 }
 
-void uart_putchar(char c)
+int uart_putchar(char c)
 {
     loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
     UDR0 = c;
+    
+    return 0;
 }
 
 
 int main (void)
 {
-    init_uart();
+    uart_init();
     stdin = stdout = stderr = &uart_str;
 
     printf(message);
