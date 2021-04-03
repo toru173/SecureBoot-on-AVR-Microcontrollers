@@ -60,6 +60,12 @@ int uart_putchar(char c)
     return 0;
 }
 
+void uart_putstring(const char *data)
+{
+    while (*data != '\0')
+      uart_putchar(*data++);
+}
+
 
 int main (void)
 {
@@ -67,11 +73,7 @@ int main (void)
 
     char message[] PROGMEM = "Hello World!";
     
-    for (uint8_t i = 0; i < sizeof(message); i ++)
-    {
-        uart_putchar(i);
-        uart_putchar(*message);
-    }
+    uart_putstring(message);
     
     uart_putchar('\n');
     
