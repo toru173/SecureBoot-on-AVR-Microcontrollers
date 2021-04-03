@@ -79,19 +79,6 @@ int main (void)
     uart_putchar('\n');
     
      */
-    uart_putchar('H');
-    uart_putchar('e');
-    uart_putchar('l');
-    uart_putchar('l');
-    uart_putchar('o');
-    uart_putchar(' ');
-    uart_putchar('W');
-    uart_putchar('o');
-    uart_putchar('r');
-    uart_putchar('l');
-    uart_putchar('d');
-    uart_putchar('!');
-    uart_putchar('\n');
     
     uart_putchar(message[0]);
     uart_putchar(message[1]);
@@ -105,6 +92,13 @@ int main (void)
     uart_putchar(message[9]);
     uart_putchar(message[10]);
     uart_putchar(message[11]);
+    uart_putchar('\n');
+    
+    for (int i = 0; i < 12; i ++)
+    {
+        uart_putchar(message[i]);
+    }
+    
     uart_putchar('\n');
 
     
