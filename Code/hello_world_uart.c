@@ -72,7 +72,7 @@ int main (void)
 {
     uart_init();
 
-    char message[] = "Hello World!";
+    char message[] = "What the fuck, avr-gcc -_-";
     
     uart_putstring(message);
         
