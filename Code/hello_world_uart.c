@@ -30,14 +30,26 @@ const struct avr_mmcu_vcd_trace_t _mytrace[]  _MMCU_ = {
 
 unsigned char message[] = "Hello World!";
 
+void init_uart(void)
+{
+    UCSRA = 0x00; // Clear status register
+    UCSRB = (1 << RXEN ) | (1 << TXEN); // Enable Transmit & receive, even though we're transmitting
+    UCSRC = (1<<UCSZ1) | (1<<UCSZ0); // 8 bit, no parity, one stop bit
+}
+
+void putchar(char c)
+{
+    while (!( UCSR0A & (1<<UDRE0))); // Wait for transmit buffer to be empty
+    UDR0 = c;
+}
+
 int main (void)
 {
     int i = 0;
     
     while(message[i] != 0)
     {
-        while (!( UCSR0A & (1<<UDRE0))); // Wait for transmit buffer to be empty
-        UDR0 = message[i];
+        putchar(message[i])
         i++;
     }
     
