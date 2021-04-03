@@ -91,7 +91,7 @@ int main (void)
     uart_putchar('l');
     uart_putchar('d');
     uart_putchar('!');
-    uart_putchar('\n');
+    //uart_putchar('\n');
     
     for (int i = 0; i < 10; i++)
         _delay_ms(500);
