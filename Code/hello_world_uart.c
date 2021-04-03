@@ -79,9 +79,7 @@ int main (void)
     printf(message);
         
     _delay_ms(500);
-    
-    uart_putchar(0x07);
-    
+        
     // this quits the simulator, since interupts are off
     // this is a "feature" that allows running tests cases and exit
     sleep_cpu();
