@@ -57,12 +57,13 @@ int main()
 {
 	stdout = &mystdout;
 
-	printf("Bootloader properly programmed, and ran me! Huzzah!\n");
-
-    _delay_ms(1000);
+    while (1)
+    {
+        printf("Bootloader properly programmed, and ran me! Huzzah!\n");
+        _delay_ms(1000);
+    }
     
 	// this quits the simulator, since interrupts are off
 	// this is a "feature" that allows running tests cases and exit
-	sleep_cpu();
 }
 
