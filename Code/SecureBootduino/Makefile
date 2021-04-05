@@ -22,10 +22,9 @@ CFLAGS=-g -Wall -mcall-prologues -mmcu=$(MCU) -Os
 LDFLAGS=-Wl,-gc-sections -Wl,-relax
 CC=avr-gcc
 OBJECT_FILES=$(TARGET).o
-CLOCK=8000000
 
 target=	simduino
-payload = securepayload
+payload = secure_payload
 simavr = ./simavr
 
 IPATH = .
