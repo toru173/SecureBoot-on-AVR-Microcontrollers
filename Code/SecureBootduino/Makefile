@@ -49,7 +49,7 @@ ${target}: ${board}
 	@echo $@ done
 
 payload:
-	$(CC) -c ${payload}.c -o ${payload}.elf
+	$(CC) $(CFLAGS) $(LDFLAGS) -c ${payload}.c -o ${payload}.elf
 	avr-objcopy -R .eeprom -O ihex $< ${payload}.elf
 
 sim:
