@@ -23,10 +23,13 @@ firmware = ${firm_src:.c=.hex}
 IPATH = .
 IPATH += ./include
 IPATH += ./include/parts
+IPATH += ./include/sim
 
 VPATH = .
 VPATH += ./include
 VPATH += ./include/parts
+VPATH += ./include/sim
+
 
 LDFLAGS += -lpthread -lutil
 
