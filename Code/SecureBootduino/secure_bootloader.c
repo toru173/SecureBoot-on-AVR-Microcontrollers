@@ -62,6 +62,6 @@ BOOTLOADER_SECTION int main (void)
         UDR0 = 0x55;
     }
      */
-    returnme(1);
+    int test = returnme(1);
     sleep_mode();
 }
