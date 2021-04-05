@@ -20,7 +20,7 @@ target = secureduino
 payload = secure_payload
 bootloader = secure_bootloader
 MCU=atmega328p
-bootloader_addr = 0x7800 # Start of BLS on the Atmega328p in BYTES
+bootloader_addr = 0x7e00 # Start of BLS on the Atmega328p in BYTES
 simavr = ./simavr
 
 # From https://www.pololu.com/docs/0J61/6.3
