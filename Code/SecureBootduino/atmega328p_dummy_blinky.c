@@ -31,6 +31,7 @@
 #include <avr/interrupt.h>
 #include <avr/eeprom.h>
 #include <avr/sleep.h>
+#include <util/delay.h>
 
 /*
  * This demonstrate how to use the avr_mcu_section.h file
