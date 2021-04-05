@@ -65,5 +65,6 @@ int main (void)
     while (1)
     {
         printf("Hello World!\n");
+        _delay_ms(1000);
     }
 }
