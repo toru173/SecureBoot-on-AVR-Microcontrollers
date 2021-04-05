@@ -39,11 +39,13 @@ int BOOTLOADER_SECTION main (void)
         i--;
         _delay_ms(1000);
     }
-    */
+    
         
     while (1)
     {
         printf("Hello from the BLS!\n");
         _delay_ms(1000);
     }
+    */
+    sleep_mode();
 }
