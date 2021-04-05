@@ -66,8 +66,9 @@ int main (void)
     
     while (1)
     {
-        scanf("What is your message? %s", &input);
-        printf("\nThe message is: %s", input);
+        printf("What is your message?\n");
+        scanf("%s", &input);
+        printf("\nThank you for the message saying %s", input);
     }
     
     // this quits the simulator, since interupts are off
