@@ -26,7 +26,7 @@ simavr = ./simavr
 # From https://www.pololu.com/docs/0J61/6.3
 AVR_CFLAGS=-g -Wall -mcall-prologues -mmcu=$(MCU) -Os
 AVR_LDFLAGS=-Wl,-gc-sections -Wl,-relax
-AVR_BOOTLOADER_LDFLAGS=-Wl,--section-start=.bootloader=${bootloader_addr} -Wl,--set-start=${bootloader_addr}
+AVR_BOOTLOADER_LDFLAGS=-Wl,--section-start=.bootloader=${bootloader_addr}
 AVR_CC=avr-gcc
 
 IPATH = .
@@ -58,7 +58,7 @@ payload:
 
 bootloader:
 	${AVR_CC} ${AVR_CFLAGS} ${AVR_LDFLAGS} ${AVR_BOOTLOADER_LDFLAGS} ${bootloader}.c -o ${bootloader}.elf
-	avr-objcopy -j .bootloader -O ihex ${bootloader}.elf ${bootloader}.hex
+	avr-objcopy -Wl,--set-start=${bootloader_addr} -j .bootloader -O ihex ${bootloader}.elf ${bootloader}.hex
 	# rm -rf ${bootloader}.elf
 
 simulate:
