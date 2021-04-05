@@ -26,7 +26,7 @@ IPATH += ${simavr}/include
 IPATH += ./parts
 
 VPATH = .
-IPATH += ./parts
+VPATH += ./parts
 
 LDFLAGS += -lpthread -lutil
 
@@ -36,10 +36,10 @@ all: obj ${firmware} ${target}
 
 include Makefile.common
 
-board = ${OBJ}/${target}.elf
+board = ${target}.elf
 
-${board} : ${OBJ}/uart_pty.o
-${board} : ${OBJ}/${target}.o
+${board} : uart_pty.o
+${board} : ${target}.o
 
 ${target}: ${board}
 	@echo $@ done
