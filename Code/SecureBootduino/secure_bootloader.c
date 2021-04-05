@@ -32,7 +32,7 @@ FILE uart_stdio = FDEV_SETUP_STREAM(uart_putchar, uart_getchar, _FDEV_SETUP_RW);
 /* generate any entry or exit code itself. */
 int main(void) __attribute__ ((naked)) __attribute__ ((section (".init9")));
 
-BOOTLOADER_SECTION int main (void)
+int main (void)
 {
     /*    some chips dont set the stack properly (from STK500v2 Bootloader)
     asm volatile ( ".set __stack, %0" :: "i" (RAMEND) );
@@ -47,7 +47,7 @@ BOOTLOADER_SECTION int main (void)
     
     while (1)
     {
-        uart_putchar(0x55);
+        printf("Hello from the BLS!");
         //_delay_ms(1000);
     }
 }
