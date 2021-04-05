@@ -37,7 +37,6 @@ void uart_init(void)
     UCSR0C = (1 << UCSZ01) | (1 << UCSZ00); // 8 bit, no parity, one stop bit
 }
 
-
 int uart_putchar(char c, FILE *stream)
 {
     if (c == '\n')
@@ -62,19 +61,9 @@ int main (void)
 {
     uart_init();
     stdout = stdin = stderr = &uart_stdio;
-
-    char message[] = "Hello World!\n";
-    char input[32];
-    _delay_ms(5000);
     
     while (1)
     {
-        printf("What is your message?");
-        scanf("%s", &input);
-        printf("\nThank you for the message saying %s\n", input);
+        printf("Hello World!\n");
     }
-    
-    // this quits the simulator, since interupts are off
-    // this is a "feature" that allows running tests cases and exit
-    sleep_cpu();
 }
