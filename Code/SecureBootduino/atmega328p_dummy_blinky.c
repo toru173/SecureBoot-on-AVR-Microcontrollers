@@ -39,7 +39,7 @@
  * information for the simulator
  */
 #include "avr_mcu_section.h"
-AVR_MCU(F_CPU, "atmega328p");
+AVR_MCU(F_CPU, "atmega2560");
 
 static int uart_putchar(char c, FILE *stream) {
   if (c == '\n')
