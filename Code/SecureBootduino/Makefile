@@ -54,16 +54,16 @@ ${target}: ${board}
 payload:
 	${AVR_CC} ${AVR_CFLAGS} ${AVR_LDFLAGS} ${payload}.c -o ${payload}.elf
 	avr-objcopy -R .eeprom -O ihex ${payload}.elf ${payload}.hex
-	rm -rf ${payload}.elf
+	# rm -rf ${payload}.elf
 
 bootloader:
 	${AVR_CC} ${AVR_CFLAGS} ${AVR_LDFLAGS} ${AVR_BOOTLOADER_LDFLAGS} ${bootloader}.c -o ${bootloader}.elf
 	avr-objcopy -R .eeprom -O ihex ${bootloader}.elf ${bootloader}.hex
-	rm -rf ${bootloader}.elf
+	# rm -rf ${bootloader}.elf
 
 simulate:
 	export SIMAVR_UART_XTERM=1
-	${OBJ}/${target}.elf -v ${payload}.hex
+	${OBJ}/${target}.elf -v ${bootloader}.hex
 
 clean: clean-${OBJ}
 	rm -rf *.a *.axf ${target} *.vcd *.hex *.o
