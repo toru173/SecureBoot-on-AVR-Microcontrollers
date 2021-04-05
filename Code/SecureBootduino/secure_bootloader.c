@@ -28,19 +28,10 @@ FILE uart_stdio = FDEV_SETUP_STREAM(uart_putchar, uart_getchar, _FDEV_SETUP_RW);
 
 int BOOTLOADER_SECTION main (void)
 {
-    DDRB = 0xFF;
-    while (1)
-    {
-        DDRB ^= 0xFF;
-        _delay_ms(1000);
-    }
-    
-    /*uart_init();
-    
-    
+    uart_init();
     stdout = stdin = stderr = &uart_stdio;
     
-    
+    /*
     int i = 10;
     while(i > -1)
     {
@@ -48,13 +39,13 @@ int BOOTLOADER_SECTION main (void)
         i--;
         _delay_ms(1000);
     }
-    
+    */
         
     while (1)
     {
         printf("Hello from the BLS!\n");
         _delay_ms(1000);
     }
-    */
+    
     sleep_mode();
 }
