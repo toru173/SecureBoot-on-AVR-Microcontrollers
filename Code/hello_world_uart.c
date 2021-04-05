@@ -1,7 +1,8 @@
 /*
  * Initialises UART then prints out 'Hello World!' over serial
  *
- * Used as a basic demo payload for SecureBoot on AVR
+ * Used as a basic demo payload for SecureBoot on AVR. It uses busy-wait loops
+ * instead of interrupts for serial comms at this point
  *
  */
 
@@ -63,7 +64,7 @@ uint8_t uart_putchar(char c, FILE *stream)
 
 uint8_t uart_getchar(File *string)
 {
-    loop_until_bit_is_set(UCSR0A, RXC0);
+    loop_until_bit_is_set(UCSR0A, RXC0); // Wait until byte received
     return UDR0;
 }
 
