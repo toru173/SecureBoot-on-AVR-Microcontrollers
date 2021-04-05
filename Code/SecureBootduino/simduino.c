@@ -93,7 +93,7 @@ int main(int argc, char *argv[])
 	char boot_path[1024] = "securebootloader.hex";
 	uint32_t boot_base, boot_size;
 	char * mmcu = "atmega328p";
-	uint32_t freq = 20000000;
+	uint32_t freq = 16000000;
 	int debug = 0;
 	int verbose = 0;
 

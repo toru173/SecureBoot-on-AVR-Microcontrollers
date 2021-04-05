@@ -6,7 +6,7 @@
  *
  */
 
-#define F_CPU 8000000UL // 8MHz oscillator
+#define F_CPU 16000000UL // 16MHz oscillator
 #define BAUD 9600 // Could be faster if desired. This is just a PoC
 
 #include <avr/io.h>
@@ -24,7 +24,7 @@
  * information for the simulator
  */
 #include "avr_mcu_section.h"
-AVR_MCU(F_CPU, "atmega2560");
+AVR_MCU(F_CPU, "atmega328p");
 
 /*
  * This small section tells simavr to generate a VCD trace dump with changes to these
@@ -79,7 +79,10 @@ int main (void)
 
     char message[] = "Hello World!\n";
     
-    printf(message);
+    while (1)
+    {    printf(message);
+        _delay_ms(1000)
+    }
     
     // this quits the simulator, since interupts are off
     // this is a "feature" that allows running tests cases and exit
