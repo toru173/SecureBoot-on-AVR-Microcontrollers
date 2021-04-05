@@ -28,9 +28,16 @@ FILE uart_stdio = FDEV_SETUP_STREAM(uart_putchar, uart_getchar, _FDEV_SETUP_RW);
 
 int BOOTLOADER_SECTION main (void)
 {
-    uart_init();
+    DDRB = 0xFF;
+    while (1)
+    {
+        DDRB ^= 0xFF;
+        _delay_ms(1000);
+    }
     
-    /*
+    /*uart_init();
+    
+    
     stdout = stdin = stderr = &uart_stdio;
     
     
