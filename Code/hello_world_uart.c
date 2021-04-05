@@ -80,16 +80,6 @@ int main (void)
     
     printf(message);
     
-    char key = '\0';
-    
-    printf("Press any key:\n");
-    //scan standard stream (USART)
-    scanf("%c", &key);
-    printf("You pressed: \n");
-    //print scaned character and its code
-    printf("%c; Key code: %u\n",key, key);
-    
-    
     // this quits the simulator, since interupts are off
     // this is a "feature" that allows running tests cases and exit
     sleep_cpu();
