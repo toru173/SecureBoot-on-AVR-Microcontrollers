@@ -34,7 +34,7 @@ FILE uart_stdio = FDEV_SETUP_STREAM(uart_putchar, uart_getchar, _FDEV_SETUP_RW);
 
 int returnme(int i)
 {
-    return i;
+    return i + 1;
 }
 
 BOOTLOADER_SECTION int main (void)
@@ -63,5 +63,7 @@ BOOTLOADER_SECTION int main (void)
     }
      */
     int test = returnme(1);
+    test += 1;
+    
     sleep_mode();
 }
