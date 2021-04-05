@@ -20,8 +20,8 @@ clean:
 	$(CC) $(CFLAGS) $(OBJECT_FILES) $(LDFLAGS) -o $@
 
 sim: $(TARGET).hex
-        export SIMAVR_UART_XTERM=1
-        $(SIM) -f $(CLOCK) -m $(MCU) -vvv $(TARGET).hex
+	export SIMAVR_UART_XTERM=1
+	$(SIM) -f $(CLOCK) -m $(MCU) -vvv $(TARGET).hex
 
 program: $(TARGET).hex
 	avrdude -p $(MCU) -c avr109 -P $(PORT) -U flash:w:$(TARGET).hex
