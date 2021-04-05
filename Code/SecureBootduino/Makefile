@@ -23,10 +23,10 @@ simavr = .
 
 IPATH = .
 IPATH += ${simavr}/include
-IPATH += ./include/parts
+IPATH += ./parts
 
 VPATH = .
-IPATH += ./include/parts
+IPATH += ./parts
 
 LDFLAGS += -lpthread -lutil
 
