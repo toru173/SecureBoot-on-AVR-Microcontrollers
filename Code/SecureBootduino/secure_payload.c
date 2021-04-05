@@ -50,9 +50,11 @@ int uart_putchar(char c, FILE *stream)
 
 int uart_getchar(FILE *stream)
 {
+    char c;
     loop_until_bit_is_set(UCSR0A, RXC0); // Wait until byte received
-    uart_putchar(UDRO, stream); //echo byte back so we can see what we typed
-    return UDR0;
+    c = UDR0;
+    uart_putchar(c, stream); //echo byte back so we can see what we typed
+    return c;
 }
 
 
