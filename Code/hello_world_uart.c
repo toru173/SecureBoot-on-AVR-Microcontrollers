@@ -80,11 +80,11 @@ int main (void)
     
     printf(message);
     
-    char key;
+    char key = '\0';
     
     printf("\nPress any key:");
     //scan standard stream (USART)
-    scanf("%c", key);
+    scanf("%c", &key);
     printf("\nYou pressed: ");
     //print scaned character and its code
     printf("%c; Key code: %u",key, key);
