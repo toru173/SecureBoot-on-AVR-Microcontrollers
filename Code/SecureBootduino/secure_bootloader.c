@@ -39,8 +39,16 @@ int returnme(int i)
 
 BOOTLOADER_SECTION int main (void)
 {
+    //*    some chips dont set the stack properly (from STK500v2 Bootloader)
+    asm volatile ( ".set __stack, %0" :: "i" (RAMEND) );
+    asm volatile ( "ldi    16, %0" :: "i" (RAMEND >> 8) );
+    asm volatile ( "out %0,16" :: "i" (AVR_STACK_POINTER_HI_ADDR) );
+    asm volatile ( "ldi    16, %0" :: "i" (RAMEND & 0x0ff) );
+    asm volatile ( "out %0,16" :: "i" (AVR_STACK_POINTER_LO_ADDR) );
+    
     //char *message = "BLS!\n";
     
+    /*
     //uart init:
     UCSR0A = 0x00; // Clear USART0 status register
     UBRR0H = UBRRH_VALUE; // Set baud values correctly
@@ -53,4 +61,7 @@ BOOTLOADER_SECTION int main (void)
         while((UCSR0A & (1 << UDRE0)) == 0);
         UDR0 = 0x55;
     }
+     */
+    returnme(1);
+    sleep_mode();
 }
