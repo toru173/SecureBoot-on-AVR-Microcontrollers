@@ -71,7 +71,7 @@ int main (void)
     {
         printf("What is your message?");
         scanf("%s", &input);
-        printf("\nThank you for the message saying %s", input);
+        printf("\nThank you for the message saying %s\n", input);
     }
     
     // this quits the simulator, since interupts are off
