@@ -24,11 +24,13 @@ IPATH = .
 IPATH += ./include
 IPATH += ./include/parts
 IPATH += ./include/sim
+IPATH += ./include/sim/avr
 
 VPATH = .
 VPATH += ./include
 VPATH += ./include/parts
 VPATH += ./include/sim
+VPATH += ./include/sim/avr
 
 
 LDFLAGS += -lpthread -lutil
