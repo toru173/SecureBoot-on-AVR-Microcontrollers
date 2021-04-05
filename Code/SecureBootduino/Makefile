@@ -1,27 +1,49 @@
-# From https://www.pololu.com/docs/0J61/6.3
-MCU=atmega2560
-CFLAGS=-g -Wall -mcall-prologues -mmcu=$(MCU) -Os
-LDFLAGS=-Wl,-gc-sections -Wl,-relax
-CC=avr-gcc
-SIM=simavr
-TARGET=hello_world_uart
-OBJECT_FILES=$(TARGET).o
-CLOCK=8000000
+#
+# 	Copyright 2008, 2009 Michel Pollet <buserror@gmail.com>
+#
+#	This file is part of simavr.
+#
+#	simavr is free software: you can redistribute it and/or modify
+#	it under the terms of the GNU General Public License as published by
+#	the Free Software Foundation, either version 3 of the License, or
+#	(at your option) any later version.
+#
+#	simavr is distributed in the hope that it will be useful,
+#	but WITHOUT ANY WARRANTY; without even the implied warranty of
+#	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#	GNU General Public License for more details.
+#
+#	You should have received a copy of the GNU General Public License
+#	along with simavr.  If not, see <http://www.gnu.org/licenses/>.
 
-all: $(TARGET).hex
+target=	simduino
+firm_src = ${wildcard atmega*.c}
+firmware = ${firm_src:.c=.hex}
+simavr = ../../
 
-clean:
-	rm -f *.o *.hex *.obj *.hex
+IPATH = .
+IPATH += ../parts
+IPATH += ${simavr}/include
+IPATH += ${simavr}/simavr/sim
 
-%.hex: %.obj
-	avr-objcopy -R .eeprom -O ihex $< $@
+VPATH = .
+VPATH += ../parts
 
-%.obj: $(OBJECT_FILES)
-	$(CC) $(CFLAGS) $(OBJECT_FILES) $(LDFLAGS) -o $@
+LDFLAGS += -lpthread -lutil
 
-sim: $(TARGET).hex
-	export SIMAVR_UART_XTERM=1
-	$(SIM) -f $(CLOCK) -m $(MCU) -vvv $(TARGET).hex
+include ../Makefile.opengl
 
-program: $(TARGET).hex
-	avrdude -p $(MCU) -c avr109 -P $(PORT) -U flash:w:$(TARGET).hex
+all: obj ${firmware} ${target}
+
+include ${simavr}/Makefile.common
+
+board = ${OBJ}/${target}.elf
+
+${board} : ${OBJ}/uart_pty.o
+${board} : ${OBJ}/${target}.o
+
+${target}: ${board}
+	@echo $@ done
+
+clean: clean-${OBJ}
+	rm -rf *.a *.axf ${target} *.vcd *.hex
