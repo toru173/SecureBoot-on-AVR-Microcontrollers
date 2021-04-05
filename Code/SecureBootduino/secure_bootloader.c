@@ -14,6 +14,7 @@
 #include <stdio.h>
 
 #include "uart.h"
+#include "secure_bootloader.h"
 
 /*
  * This demonstrate how to use the avr_mcu_section.h file
@@ -25,14 +26,12 @@ AVR_MCU(F_CPU, "atmega328p");
 
 FILE uart_stdio = FDEV_SETUP_STREAM(uart_putchar, uart_getchar, _FDEV_SETUP_RW);
 
-void (*run_firmware)(void) = 0x0000;
-
 int BOOTLOADER_SECTION main (void)
 {
-    //
     uart_init();
     stdout = stdin = stderr = &uart_stdio;
     
+    /*
     int i = 10;
     while(i > -1)
     {
@@ -40,5 +39,11 @@ int BOOTLOADER_SECTION main (void)
         i--;
         _delay_ms(1000);
     }
-    
+    */
+        
+    while (1)
+    {
+        printf("Hello from the BLS!\n");
+        _delay_ms(1000);
+    }
 }
