@@ -41,10 +41,10 @@ include Makefile.common
 
 board = ${target}.elf
 
-${board} : uart_pty.o
-${board} : ${target}.o
+${board} : ${OBJ}/uart_pty.o
+${board} : ${OBJ}/${target}.o
 
-${target}: ${board}
+${target}: ${OBJ}/${board}
 	@echo $@ done
 
 clean: clean-${OBJ}
