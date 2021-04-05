@@ -26,26 +26,12 @@ AVR_MCU(F_CPU, "atmega328p");
 
 FILE uart_stdio = FDEV_SETUP_STREAM(uart_putchar, uart_getchar, _FDEV_SETUP_RW);
 
+int returnme(int i)
+{
+    return i;
+}
+
 int BOOTLOADER_SECTION main (void)
 {
-    uart_init();
-    stdout = stdin = stderr = &uart_stdio;
-    
-    /*
-    int i = 10;
-    while(i > -1)
-    {
-        printf("Verifying firmware. Boot in %d", i);
-        i--;
-        _delay_ms(1000);
-    }
-    */
-        
-    while (1)
-    {
-        printf("Hello from the BLS!\n");
-        _delay_ms(1000);
-    }
-    
-    sleep_mode();
+    int test = returnme(0);
 }
