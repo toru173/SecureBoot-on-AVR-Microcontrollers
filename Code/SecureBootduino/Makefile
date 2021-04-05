@@ -31,7 +31,7 @@ VPATH += ${simavr}/examples/parts
 
 LDFLAGS += -lpthread -lutil
 
-all: obj ${target}
+all: ${target}
 
 include ${simavr}/Makefile.common
 
