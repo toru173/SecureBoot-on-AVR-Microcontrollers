@@ -56,6 +56,8 @@ void uart_init(void)
 
 int uart_putchar(char c, FILE *stream)
 {
+    if (c == '\n')
+        uart_putchar('r', stream); // Handle newline
     loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
     UDR0 = c;
     
@@ -74,7 +76,7 @@ int main (void)
     uart_init();
     stdout = stdin = stderr = &uart_stdio;
 
-    char message[] = "Hello World!\r";
+    char message[] = "Hello World!\n";
     
     printf(message);
         
