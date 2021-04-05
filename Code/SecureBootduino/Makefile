@@ -19,12 +19,12 @@
 target=	simduino
 firm_src = ${wildcard atmega*.c}
 firmware = ${firm_src:.c=.hex}
-simavr = ../../
+simavr = .
 
 IPATH = .
-IPATH += ../parts
 IPATH += ${simavr}/include
-IPATH += ${simavr}/simavr/sim
+#IPATH += ../parts
+#IPATH += ${simavr}/simavr/sim
 
 VPATH = .
 VPATH += ../parts
@@ -35,7 +35,7 @@ include ../Makefile.opengl
 
 all: obj ${firmware} ${target}
 
-include ${simavr}/Makefile.common
+include Makefile.common
 
 board = ${OBJ}/${target}.elf
 
