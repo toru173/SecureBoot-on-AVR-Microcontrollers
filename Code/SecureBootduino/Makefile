@@ -50,8 +50,8 @@ ${target}: ${board}
 	@echo $@ done
 
 payload:
-	$(CC) $(CFLAGS) $(OBJECT_FILES) $(LDFLAGS) -o ${payload}
-	avr-objcopy -R .eeprom -O ihex $< ${payload}
+	$(CC) $(CFLAGS) $(OBJECT_FILES) $(LDFLAGS) -c ${payload}.c -o ${payload}.elf
+	avr-objcopy -R .eeprom -O ihex $< ${payload}.elf
 
 sim:
 	export SIMAVR_UART_XTERM=1
