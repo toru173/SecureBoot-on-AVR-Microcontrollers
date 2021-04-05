@@ -79,7 +79,7 @@ int main (void)
     char message[] = "Hello World!\n";
     
     printf(message);
-    /*
+    
     char key = '\0';
     
     printf("Press any key:\n");
@@ -88,7 +88,7 @@ int main (void)
     printf("You pressed: \n");
     //print scaned character and its code
     printf("%c; Key code: %u\n",key, key);
-    */
+    
     
     // this quits the simulator, since interupts are off
     // this is a "feature" that allows running tests cases and exit
