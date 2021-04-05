@@ -46,24 +46,12 @@ BOOTLOADER_SECTION int main (void)
     asm volatile ( "ldi    16, %0" :: "i" (RAMEND & 0x0ff) );
     asm volatile ( "out %0,16" :: "i" (AVR_STACK_POINTER_LO_ADDR) );
     
-    //char *message = "BLS!\n";
-    
-    /*
-    //uart init:
-    UCSR0A = 0x00; // Clear USART0 status register
-    UBRR0H = UBRRH_VALUE; // Set baud values correctly
-    UBRR0L = UBRRL_VALUE;
-    UCSR0B = (1 << RXEN0 ) | (1 << TXEN0); // Enable transmit & receive
-    UCSR0C = (1 << UCSZ01) | (1 << UCSZ00); // 8 bit, no parity, one stop bit
+    uart_init();
+    stdout = stdin = stderr = &uart_stdio;
     
     while (1)
     {
-        while((UCSR0A & (1 << UDRE0)) == 0);
-        UDR0 = 0x55;
+        printf("Hello from the BLS!");
+        _delay_ms(1000);
     }
-     */
-    int test = returnme(1);
-    test += 1;
-    
-    sleep_mode();
 }
