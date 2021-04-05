@@ -40,4 +40,6 @@ int returnme(int i)
 BOOTLOADER_SECTION int main (void)
 {
     int test = returnme(0);
+    
+    sleep_mode();
 }
