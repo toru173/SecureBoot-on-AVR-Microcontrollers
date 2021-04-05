@@ -58,7 +58,7 @@ payload:
 
 bootloader:
 	${AVR_CC} ${AVR_CFLAGS} ${AVR_LDFLAGS} ${AVR_BOOTLOADER_LDFLAGS} ${bootloader}.c -o ${bootloader}.elf
-	avr-objcopy -Wl,--set-start=${bootloader_addr} -j .bootloader -O ihex ${bootloader}.elf ${bootloader}.hex
+	avr-objcopy -Wl,--change-addresses=${bootloader_addr} -j .bootloader -O ihex ${bootloader}.elf ${bootloader}.hex
 	# rm -rf ${bootloader}.elf
 
 simulate:
