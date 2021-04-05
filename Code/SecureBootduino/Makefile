@@ -55,7 +55,7 @@ payload:
 
 simulate:
 	export SIMAVR_UART_XTERM=1
-	${OBJ}/${target}.elf -v ${payload}.hex && exit
+	${OBJ}/${target}.elf -v ${payload}.hex
 
 clean: clean-${OBJ}
 	rm -rf *.a *.axf ${target} *.vcd *.hex *.o
