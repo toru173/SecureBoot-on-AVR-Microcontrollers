@@ -39,7 +39,21 @@ int returnme(int i)
 
 BOOTLOADER_SECTION int main (void)
 {
-    int test = returnme(0);
+    char *message = "BLS!\n";
     
-    sleep_mode();
+    //uart init:
+    UCSR0A = 0x00; // Clear USART0 status register
+    UBRR0H = UBRRH_VALUE; // Set baud values correctly
+    UBRR0L = UBRRL_VALUE;
+    UCSR0B = (1 << RXEN0 ) | (1 << TXEN0); // Enable transmit & receive
+    UCSR0C = (1 << UCSZ01) | (1 << UCSZ00); // 8 bit, no parity, one stop bit
+    
+    while (1)
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            while((UCSRA & (1 << UDRE)) == 0);
+            UDRO = message[i];
+        }
+    }
 }
