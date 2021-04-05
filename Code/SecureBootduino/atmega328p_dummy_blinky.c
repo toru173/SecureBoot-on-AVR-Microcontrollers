@@ -24,7 +24,7 @@
 #undef F_CPU
 #endif
 
-#define F_CPU 16000000
+#define F_CPU 8000000
 
 #include <avr/io.h>
 #include <stdio.h>
@@ -38,7 +38,7 @@
  * information for the simulator
  */
 #include "avr_mcu_section.h"
-AVR_MCU(F_CPU, "atmega328p");
+AVR_MCU(F_CPU, "atmega2560");
 
 static int uart_putchar(char c, FILE *stream) {
   if (c == '\n')
@@ -58,6 +58,8 @@ int main()
 
 	printf("Bootloader properly programmed, and ran me! Huzzah!\n");
 
+    _delay_ms(1000);
+    
 	// this quits the simulator, since interrupts are off
 	// this is a "feature" that allows running tests cases and exit
 	sleep_cpu();
