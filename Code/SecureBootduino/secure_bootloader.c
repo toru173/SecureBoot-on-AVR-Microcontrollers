@@ -47,7 +47,7 @@ BOOTLOADER_SECTION int main (void)
     
     while (1)
     {
-        printf("Hello from the BLS!");
+        uart_putchar(0x55);
         //_delay_ms(1000);
     }
 }
