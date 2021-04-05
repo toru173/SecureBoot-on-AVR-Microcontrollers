@@ -79,6 +79,15 @@ int main (void)
     char message[] = "Hello World!\n";
     
     printf(message);
+    
+    char key;
+    
+    printf("\nPress any key:");
+    //scan standard stream (USART)
+    scanf("%c", key);
+    printf("\nYou pressed: ");
+    //print scaned character and its code
+    printf("%c; Key code: %u",key, key);
         
     // this quits the simulator, since interupts are off
     // this is a "feature" that allows running tests cases and exit
