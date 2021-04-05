@@ -48,9 +48,10 @@ int uart_putchar(char c, FILE *stream)
     return 0;
 }
 
-int uart_getchar(FILE *string)
+int uart_getchar(FILE *stream)
 {
     loop_until_bit_is_set(UCSR0A, RXC0); // Wait until byte received
+    uart_putchar(UDRO, stream) //echo byte back so we can see what we typed
     return UDR0;
 }
 
@@ -66,7 +67,7 @@ int main (void)
     
     while (1)
     {
-        printf("What is your message?\n");
+        printf("What is your message?");
         scanf("%s", &input);
         printf("\nThank you for the message saying %s", input);
     }
