@@ -90,7 +90,7 @@ void avr_special_deinit( avr_t* avr, void * data)
 int main(int argc, char *argv[])
 {
 	struct avr_flash flash_data;
-	char boot_path[1024] = "securebootloader.hex";
+	char boot_path[1024] = "secure_bootloader.hex";
 	uint32_t boot_base, boot_size;
 	char * mmcu = "atmega328p";
 	uint32_t freq = 16000000;
