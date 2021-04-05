@@ -1,0 +1,10 @@
+obj-*
+simavr/run_avr.exe
+.tags*
+._*
+TAGS
+callgrind.out.*
+*~
+perf.data
+.DS_Store
+.make.options*
