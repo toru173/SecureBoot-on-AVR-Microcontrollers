@@ -324,5 +324,5 @@ uart_pty_connect(
 				p->tap.slavename);
 		system(cmd);
 	} else
-		printf("note: export SIMAVR_UART_XTERM=1 and install picocom to get a terminal\n");
+		printf("note: Use picocom to get a terminal on the above tty\n");
 }
