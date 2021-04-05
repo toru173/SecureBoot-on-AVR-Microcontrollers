@@ -21,7 +21,6 @@ MCU=atmega328p
 CFLAGS=-g -Wall -mcall-prologues -mmcu=$(MCU) -Os
 LDFLAGS=-Wl,-gc-sections -Wl,-relax
 CC=avr-gcc
-OBJECT_FILES=$(TARGET).o
 
 target=	simduino
 payload = secure_payload
@@ -50,7 +49,7 @@ ${target}: ${board}
 	@echo $@ done
 
 payload:
-	$(CC) $(CFLAGS) $(OBJECT_FILES) $(LDFLAGS) -c ${payload}.c -o ${payload}.elf
+	$(CC) -c ${payload}.c -o ${payload}.elf
 	avr-objcopy -R .eeprom -O ihex $< ${payload}.elf
 
 sim:
