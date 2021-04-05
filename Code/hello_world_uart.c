@@ -57,7 +57,7 @@ void uart_init(void)
 int uart_putchar(char c, FILE *stream)
 {
     if (c == '\n')
-        uart_putchar('r', stream); // Handle newline
+        uart_putchar('\r', stream); // Handle newline
     loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
     UDR0 = c;
     
