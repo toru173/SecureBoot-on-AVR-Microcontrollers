@@ -27,20 +27,16 @@
 #include <stdio.h>
 #include <libgen.h>
 
-#if __APPLE__
-#include <GLUT/glut.h>
-#else
-#include <GL/glut.h>
-#endif
+
 #include <pthread.h>
 
-#include "sim_avr.h"
-#include "avr_ioport.h"
-#include "sim_elf.h"
-#include "sim_hex.h"
-#include "sim_gdb.h"
-#include "uart_pty.h"
-#include "sim_vcd_file.h"
+#include "include/sim_avr.h"
+#include "include/avr_ioport.h"
+#include "include/sim_elf.h"
+#include "include/sim_hex.h"
+#include "include/sim_gdb.h"
+#include "include/uart_pty.h"
+#include "include/sim_vcd_file.h"
 
 uart_pty_t uart_pty;
 avr_t * avr = NULL;
@@ -95,7 +91,7 @@ void avr_special_deinit( avr_t* avr, void * data)
 int main(int argc, char *argv[])
 {
 	struct avr_flash flash_data;
-	char boot_path[1024] = "ATmegaBOOT_168_atmega328.ihex";
+	char boot_path[1024] = "ATmegaBOOT_168_atmega328.hex";
 	uint32_t boot_base, boot_size;
 	char * mmcu = "atmega328p";
 	uint32_t freq = 16000000;
