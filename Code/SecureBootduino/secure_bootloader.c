@@ -53,7 +53,7 @@ BOOTLOADER_SECTION int main (void)
         for (int i = 0; i < 6; i++)
         {
             while((UCSR0A & (1 << UDRE0)) == 0);
-            UDR0 = message[i];
+            UDR0 = 0x55;
         }
     }
 }
