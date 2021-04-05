@@ -37,7 +37,7 @@
  * The macro adds a section to the ELF file with useful
  * information for the simulator
  */
-#include "include/avr_mcu_section.h"
+#include "avr_mcu_section.h"
 AVR_MCU(F_CPU, "atmega328p");
 
 static int uart_putchar(char c, FILE *stream) {
