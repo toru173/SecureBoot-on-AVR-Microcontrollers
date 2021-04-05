@@ -36,7 +36,7 @@ VPATH += ${simavr}/examples/parts
 
 LDFLAGS += -lpthread -lutil
 
-all: obj ${target} ${payload}
+all: obj payload ${target}
 
 include ${simavr}/Makefile.common
 
@@ -51,6 +51,7 @@ ${target}: ${board}
 payload:
 	${AVR_CC} ${AVR_CFLAGS} ${AVR_LDFLAGS} ${payload}.c -o ${payload}.elf
 	avr-objcopy -R .eeprom -O ihex ${payload}.elf ${payload}.hex
+	rm -rf ${payload}.elf
 
 sim:
 	export SIMAVR_UART_XTERM=1
@@ -58,3 +59,4 @@ sim:
 
 clean: clean-${OBJ}
 	rm -rf *.a *.axf ${target} *.vcd *.hex
+	rm -rf ${OBJ}
