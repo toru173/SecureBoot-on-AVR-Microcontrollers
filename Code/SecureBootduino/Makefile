@@ -50,7 +50,7 @@ ${target}: ${board}
 
 payload:
 	${AVR_CC} ${AVR_CFLAGS} ${AVR_LDFLAGS} ${payload}.c -o ${payload}.elf
-	avr-objcopy -R .eeprom -O ihex ${payload}.hex ${payload}.elf
+	avr-objcopy -R .eeprom -O ihex ${payload}.elf ${payload}.hex
 
 sim:
 	export SIMAVR_UART_XTERM=1
