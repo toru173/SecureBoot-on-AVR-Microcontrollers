@@ -81,7 +81,7 @@ int main (void)
     
     while (1)
     {    printf(message);
-        _delay_ms(1000)
+        _delay_ms(1000);
     }
     
     // this quits the simulator, since interupts are off
