@@ -19,18 +19,16 @@
 target=	simduino
 firm_src = ${wildcard atmega*.c}
 firmware = ${firm_src:.c=.hex}
-simavr = .
 
 IPATH = .
-IPATH += ${simavr}/include
-IPATH += ./parts
+IPATH += ./include
+IPATH += ./include/parts
 
 VPATH = .
-VPATH += ./parts
+VPATH += ./include
+VPATH += ./include/parts
 
 LDFLAGS += -lpthread -lutil
-
-#include ../Makefile.opengl
 
 all: obj ${firmware} ${target}
 
