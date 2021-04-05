@@ -22,7 +22,7 @@ AVR_CFLAGS=-g -Wall -mcall-prologues -mmcu=$(MCU) -Os
 AVR_LDFLAGS=-Wl,-gc-sections -Wl,-relax
 AVR_CC=avr-gcc
 
-target=	simduino
+target = secureduino
 payload = secure_payload
 simavr = ./simavr
 
