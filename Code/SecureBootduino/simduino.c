@@ -97,7 +97,6 @@ int main(int argc, char *argv[])
 	int debug = 0;
 	int verbose = 0;
 
-    fprintf(stderr, "Parsing args\n");
 	for (int i = 1; i < argc; i++) {
 		if (!strcmp(argv[i] + strlen(argv[i]) - 4, ".hex"))
 			strncpy(boot_path, argv[i], sizeof(boot_path)); // If provided with a .hex file, run it. Otherwise, run the bootloader
@@ -111,14 +110,12 @@ int main(int argc, char *argv[])
 		}
 	}
     
-    fprintf(stderr, "Creating core...\n");
 	avr = avr_make_mcu_by_name(mmcu);
 	if (!avr) {
 		fprintf(stderr, "%s: Error creating the AVR core\n", argv[0]);
 		exit(1);
 	}
 
-    fprintf(stderr, "Reading hex file...\n");
 	uint8_t * boot = read_ihex_file(boot_path, &boot_size, &boot_base);
 	if (!boot) {
 		fprintf(stderr, "%s: Unable to load %s\n", argv[0], boot_path);
@@ -157,7 +154,6 @@ int main(int argc, char *argv[])
 	uart_pty_init(avr, &uart_pty);
 	uart_pty_connect(&uart_pty, '0');
 
-    fprintf(stderr, "Starting simavr\n");
 	while (1) {
 		int state = avr_run(avr);
 		if ( state == cpu_Done || state == cpu_Crashed)
