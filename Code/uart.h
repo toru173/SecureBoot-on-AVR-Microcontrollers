@@ -3,4 +3,5 @@
  */
 
 void uart_init(void);
-int uart_putchar(char c, FILE *stream);
+uint8_t uart_putchar(char c, FILE *stream);
+uint8_t uart_getchar(FILE *stream);
