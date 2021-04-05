@@ -62,6 +62,7 @@ int main (void)
 
     char message[] = "Hello World!\n";
     char input[32];
+    _delay_ms(5000);
     
     while (1)
     {
