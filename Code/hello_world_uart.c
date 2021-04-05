@@ -62,7 +62,7 @@ uint8_t uart_putchar(char c, FILE *stream)
     return 0;
 }
 
-uint8_t uart_getchar(File *string)
+uint8_t uart_getchar(FILE *string)
 {
     loop_until_bit_is_set(UCSR0A, RXC0); // Wait until byte received
     return UDR0;
