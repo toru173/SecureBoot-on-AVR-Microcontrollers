@@ -6,7 +6,7 @@
  *
  */
 
-#define F_CPU 16000000UL // 16MHz oscillator
+#define F_CPU 16000000UL // 16MHz oscillator is what is used in the simulator
 #define BAUD 9600 // Could be faster if desired. This is just a PoC
 
 #include <avr/io.h>
@@ -25,23 +25,6 @@
  */
 #include "avr_mcu_section.h"
 AVR_MCU(F_CPU, "atmega328p");
-
-/*
- * This small section tells simavr to generate a VCD trace dump with changes to these
- * registers
- 
-const struct avr_mmcu_vcd_trace_t _mytrace[]  _MMCU_ = {
-    { AVR_MCU_VCD_SYMBOL("UCSR0A"), .what = (void*)&UCSR0A, },
-    { AVR_MCU_VCD_SYMBOL("UCSR0B"), .what = (void*)&UCSR0B, },
-    { AVR_MCU_VCD_SYMBOL("UCSR0C"), .what = (void*)&UCSR0C, },
-    { AVR_MCU_VCD_SYMBOL("UBRR0H"), .what = (void*)&UBRR0H, },
-    { AVR_MCU_VCD_SYMBOL("UBRR0L"), .what = (void*)&UBRR0L, },
-    { AVR_MCU_VCD_SYMBOL("UDRE0"), .mask = (1 << UDRE0), .what = (void*)&UCSR0A, },
-    { AVR_MCU_VCD_SYMBOL("UDR0"), .what = (void*)&UDR0, },
-    { AVR_MCU_VCD_SYMBOL("PORTE"), .what = (void*)&PORTE, },
-    { AVR_MCU_VCD_SYMBOL("PE1"), .mask = (1 << PE1), .what = (void*)&PORTE, },
-};
- */
 
 FILE uart_stdio = FDEV_SETUP_STREAM(uart_putchar, uart_getchar, _FDEV_SETUP_RW);
 
@@ -78,10 +61,12 @@ int main (void)
     stdout = stdin = stderr = &uart_stdio;
 
     char message[] = "Hello World!\n";
+    char input[32];
     
     while (1)
-    {    printf(message);
-        _delay_ms(1000);
+    {
+        scanf("What is your message? %s", &input);
+        printf("\nThe message is: %s", input);
     }
     
     // this quits the simulator, since interupts are off
