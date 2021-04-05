@@ -31,8 +31,6 @@ VPATH += ${simavr}/examples/parts
 
 LDFLAGS += -lpthread -lutil
 
-# include ./Makefile.opengl
-
 all: obj ${firmware} ${target}
 
 include ${simavr}/Makefile.common
