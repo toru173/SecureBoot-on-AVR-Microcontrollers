@@ -12,7 +12,6 @@
 #include <avr/sleep.h>
 #include <util/delay.h>
 #include <util/setbaud.h>
-#include <avr/pgmspace.h>
 
 #include <stdio.h>
 
@@ -28,7 +27,7 @@ AVR_MCU(F_CPU, "atmega2560");
 
 /*
  * This small section tells simavr to generate a VCD trace dump with changes to these
- * registers. Hanging the trace specifically on the TX pin (PE1) of USART0
+ * registers
  */
 const struct avr_mmcu_vcd_trace_t _mytrace[]  _MMCU_ = {
     { AVR_MCU_VCD_SYMBOL("UCSR0A"), .what = (void*)&UCSR0A, },
@@ -54,7 +53,7 @@ void uart_init(void)
 }
 
 
-int uart_putchar(char c, FILE *stream)
+uint8_t uart_putchar(char c, FILE *stream)
 {
     loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
     UDR0 = c;
@@ -62,13 +61,19 @@ int uart_putchar(char c, FILE *stream)
     return 0;
 }
 
+uint8_t uart_getchar(File *string)
+{
+    loop_until_bit_is_set(UCSR0A, RXC0);
+    return UDR0;
+}
+
 
 int main (void)
 {
     uart_init();
-    stdout = &uart_stdio;
+    stdout = stdin = stderr = &uart_stdio;
 
-    char message[] = "What the fuck, avr-gcc -_-\n";
+    char message[] = "Hello World!\r";
     
     printf(message);
         
