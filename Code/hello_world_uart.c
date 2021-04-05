@@ -42,7 +42,7 @@ const struct avr_mmcu_vcd_trace_t _mytrace[]  _MMCU_ = {
     { AVR_MCU_VCD_SYMBOL("PE1"), .mask = (1 << PE1), .what = (void*)&PORTE, },
 };
 
-FILE uart_stdio = FDEV_SETUP_STREAM(uart_putchar, NULL, _FDEV_SETUP_WRITE);
+FILE uart_stdio = FDEV_SETUP_STREAM(uart_putchar, uart_getchar, _FDEV_SETUP_RW);
 
 void uart_init(void)
 {
@@ -54,7 +54,7 @@ void uart_init(void)
 }
 
 
-uint8_t uart_putchar(char c, FILE *stream)
+int uart_putchar(char c, FILE *stream)
 {
     loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
     UDR0 = c;
@@ -62,7 +62,7 @@ uint8_t uart_putchar(char c, FILE *stream)
     return 0;
 }
 
-uint8_t uart_getchar(FILE *string)
+int uart_getchar(FILE *string)
 {
     loop_until_bit_is_set(UCSR0A, RXC0); // Wait until byte received
     return UDR0;
