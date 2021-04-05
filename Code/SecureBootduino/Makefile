@@ -24,6 +24,8 @@ AVR_CC=avr-gcc
 
 target = secureduino
 payload = secure_payload
+bootloader = secure_bootloader
+bootloader_addr = 0x3C00 //
 simavr = ./simavr
 
 IPATH = .
@@ -36,7 +38,7 @@ VPATH += ${simavr}/examples/parts
 
 LDFLAGS += -lpthread -lutil
 
-all: obj payload ${target}
+all: obj payload bootloader ${target}
 
 include ${simavr}/Makefile.common
 
@@ -52,6 +54,11 @@ payload:
 	${AVR_CC} ${AVR_CFLAGS} ${AVR_LDFLAGS} ${payload}.c -o ${payload}.elf
 	avr-objcopy -R .eeprom -O ihex ${payload}.elf ${payload}.hex
 	rm -rf ${payload}.elf
+
+bootloader:
+	${AVR_CC} ${AVR_CFLAGS} ${AVR_LDFLAGS} --section-start=.bootloader=$(bootloader_addr) ${bootloader}.c -o ${bootloader}.elf
+	avr-objcopy -R .eeprom -O ihex ${bootloader}.elf ${bootloader}.hex
+	rm -rf ${bootloader}.elf
 
 simulate:
 	export SIMAVR_UART_XTERM=1
