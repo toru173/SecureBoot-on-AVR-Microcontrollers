@@ -56,8 +56,8 @@ payload:
 	rm -rf ${payload}.elf
 
 bootloader:
-	${AVR_CC} ${AVR_CFLAGS} ${AVR_LDFLAGS} --section-start=.bootloader=$(bootloader_addr) ${bootloader}.c -o ${bootloader}.elf
-	avr-objcopy -R .eeprom -O ihex ${bootloader}.elf ${bootloader}.hex
+	${AVR_CC} ${AVR_CFLAGS} ${AVR_LDFLAGS} ${bootloader}.c -o ${bootloader}.elf
+	avr-objcopy -R .eeprom --section-start=.bootloader=$(bootloader_addr) -O ihex ${bootloader}.elf ${bootloader}.hex
 	rm -rf ${bootloader}.elf
 
 simulate:
