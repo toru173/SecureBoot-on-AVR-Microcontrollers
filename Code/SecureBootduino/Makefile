@@ -59,4 +59,3 @@ simulate:
 
 clean: clean-${OBJ}
 	rm -rf *.a *.axf ${target} *.vcd *.hex
-	rm -rf ${OBJ}
