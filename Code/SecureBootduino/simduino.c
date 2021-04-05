@@ -30,13 +30,13 @@
 
 #include <pthread.h>
 
-#include "sim_avr.h"
-#include "avr_ioport.h"
-#include "sim_elf.h"
-#include "sim_hex.h"
-#include "sim_gdb.h"
-#include "uart_pty.h"
-#include "sim_vcd_file.h"
+#include "include/sim_avr.h"
+#include "include/avr_ioport.h"
+#include "include/sim_elf.h"
+#include "include/sim_hex.h"
+#include "include/sim_gdb.h"
+#include "include/uart_pty.h"
+#include "include/sim_vcd_file.h"
 
 uart_pty_t uart_pty;
 avr_t * avr = NULL;
