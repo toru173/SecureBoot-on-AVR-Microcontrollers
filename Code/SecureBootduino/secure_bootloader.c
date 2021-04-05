@@ -39,7 +39,7 @@ int returnme(int i)
 
 BOOTLOADER_SECTION int main (void)
 {
-    char *message = "BLS!\n";
+    char message[] = "BLS!\n";
     
     //uart init:
     UCSR0A = 0x00; // Clear USART0 status register
