@@ -17,7 +17,7 @@
 #	along with simavr.  If not, see <http://www.gnu.org/licenses/>.
 
 target=	simduino
-firm_src = ${wildcard atmega*.c}
+firm_src = ${wildcard secure_*.c}
 firmware = ${firm_src:.c=.hex}
 simavr = ./simavr
 
