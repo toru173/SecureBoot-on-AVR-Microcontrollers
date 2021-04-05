@@ -18,8 +18,6 @@
 
 # From https://www.pololu.com/docs/0J61/6.3
 MCU=atmega328p
-CFLAGS=-g -Wall -mcall-prologues -mmcu=$(MCU) -Os
-LDFLAGS=-Wl,-gc-sections -Wl,-relax
 CC=avr-gcc
 
 target=	simduino
@@ -49,7 +47,7 @@ ${target}: ${board}
 	@echo $@ done
 
 payload:
-	$(CC) $(CFLAGS) $(LDFLAGS) -c ${payload}.c -o ${payload}.elf
+	$(CC) ${CFLAGS} ${LFLAGS} ${payload}.c -o ${payload}.elf
 	avr-objcopy -R .eeprom -O ihex ${payload}.hex ${payload}.elf
 
 sim:
