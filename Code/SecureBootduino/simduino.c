@@ -99,13 +99,13 @@ int main(int argc, char *argv[])
 
 	for (int i = 1; i < argc; i++) {
 		if (!strcmp(argv[i] + strlen(argv[i]) - 4, ".hex"))
-			strncpy(boot_path, argv[i], sizeof(boot_path));
-		else if (!strcmp(argv[i], "-d"))
+			strncpy(boot_path, argv[i], sizeof(boot_path)); // If provided with a .hex file, run it. Otherwise, run the bootloader
+		else if (!strcmp(argv[i], "-d")) // Enable debug with GDB
 			debug++;
-		else if (!strcmp(argv[i], "-v"))
+		else if (!strcmp(argv[i], "-v")) // Enable verbose mode
 			verbose++;
 		else {
-			fprintf(stderr, "%s: invalid argument %s\n", argv[0], argv[i]);
+			fprintf(stderr, "%s: invalid argument %s\n", argv[0], argv[i]); // Error, invalid arguments
 			exit(1);
 		}
 	}
