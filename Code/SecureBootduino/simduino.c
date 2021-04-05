@@ -156,6 +156,7 @@ int main(int argc, char *argv[])
 
 	while (1) {
 		int state = avr_run(avr);
+        fprintf(stderr, "Core State: %d", state);
 		if ( state == cpu_Done || state == cpu_Crashed)
 			break;
 	}
