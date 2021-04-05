@@ -16,9 +16,16 @@
 #	You should have received a copy of the GNU General Public License
 #	along with simavr.  If not, see <http://www.gnu.org/licenses/>.
 
+# From https://www.pololu.com/docs/0J61/6.3
+MCU=atmega328p
+CFLAGS=-g -Wall -mcall-prologues -mmcu=$(MCU) -Os
+LDFLAGS=-Wl,-gc-sections -Wl,-relax
+CC=avr-gcc
+OBJECT_FILES=$(TARGET).o
+CLOCK=8000000
+
 target=	simduino
-firm_src = ${wildcard atmega*.c}
-firmware = ${firm_src:.c=.hex}
+payload = securepayload
 simavr = ./simavr
 
 IPATH = .
@@ -31,7 +38,7 @@ VPATH += ${simavr}/examples/parts
 
 LDFLAGS += -lpthread -lutil
 
-all: ${target}
+all: obj ${target} ${payload}
 
 include ${simavr}/Makefile.common
 
@@ -42,6 +49,14 @@ ${board} : ${OBJ}/${target}.o
 
 ${target}: ${board}
 	@echo $@ done
+
+payload:
+	$(CC) $(CFLAGS) $(OBJECT_FILES) $(LDFLAGS) -o ${payload}
+	avr-objcopy -R .eeprom -O ihex $< ${payload}
+
+sim:
+	export SIMAVR_UART_XTERM=1
+	${OBJ}/${target}.elf -d ${payload}.hex
 
 clean: clean-${OBJ}
 	rm -rf *.a *.axf ${target} *.vcd *.hex
