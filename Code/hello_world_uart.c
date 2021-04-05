@@ -82,12 +82,12 @@ int main (void)
     
     char key = '\0';
     
-    printf("\nPress any key:");
+    printf("Press any key:\n");
     //scan standard stream (USART)
     scanf("%c", &key);
-    printf("\nYou pressed: ");
+    printf("You pressed: \n");
     //print scaned character and its code
-    printf("%c; Key code: %u",key, key);
+    printf("%c; Key code: %u\n",key, key);
         
     // this quits the simulator, since interupts are off
     // this is a "feature" that allows running tests cases and exit
