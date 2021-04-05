@@ -53,7 +53,7 @@ payload:
 	avr-objcopy -R .eeprom -O ihex ${payload}.elf ${payload}.hex
 	rm -rf ${payload}.elf
 
-sim:
+simulate:
 	export SIMAVR_UART_XTERM=1
 	${OBJ}/${target}.elf -v ${payload}.hex
 
