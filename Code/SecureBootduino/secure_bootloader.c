@@ -37,5 +37,10 @@ int main (void)
     uart_init();
     stdout = stdin = stderr = &uart_stdio;
     
+    while (1)
+    {
+        printf("Hello from the BLS!\n");
+        _delay_ms(1000);
+    }
     
 }
