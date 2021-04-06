@@ -19,6 +19,7 @@
 target = secureduino
 payload = secure_payload
 trailing_bytes = 13
+payload_size = 0
 bootloader = secure_bootloader
 MCU=atmega328p
 bootloader_addr = 0x7800 # Start of BLS on the Atmega328p in BYTES
