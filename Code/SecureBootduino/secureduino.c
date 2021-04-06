@@ -92,10 +92,11 @@ int main(int argc, char *argv[])
 	struct avr_flash flash_data;
 	char boot_path[1024] = "secure_bootloader.hex";
 	uint32_t boot_base, boot_size;
-	char * mmcu = "atmega328p";
+	char * mmcu = "atmega328p"; // Didn't seem to like the Atmega2560 o_O
 	uint32_t freq = 16000000;
 	int debug = 0;
 	int verbose = 0;
+    avr_flashaddr_t    bootloader_pc = 0x7800;
 
 	for (int i = 1; i < argc; i++) {
 		if (!strcmp(argv[i] + strlen(argv[i]) - 4, ".hex"))
@@ -139,7 +140,7 @@ int main(int argc, char *argv[])
 
 	memcpy(avr->flash + boot_base, boot, boot_size);
 	free(boot);
-	avr->pc = boot_base;
+	avr->pc = bootloader_pc; // Force to start at bootloader
 	/* end of flash, remember we are writing /code/ */
 	avr->codeend = avr->flashend;
 	avr->log = 1 + verbose;
