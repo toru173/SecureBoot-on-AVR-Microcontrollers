@@ -90,21 +90,17 @@ void avr_special_deinit( avr_t* avr, void * data)
 int main(int argc, char *argv[])
 {
 	struct avr_flash flash_data;
-	char boot_path[1024] = "secure_bootloader.hex";
+	char boot_path[1024] = "secure_bootloader.hex"; // Default hex
 	uint32_t boot_base, boot_size;
 	char * mmcu = "atmega328p"; // Didn't seem to like the Atmega2560 o_O
 	uint32_t freq = 16000000;
 	int debug = 0;
 	int verbose = 0;
-<<<<<<< HEAD
-    avr_flashaddr_t    bootloader_pc = 0x3FE00; // Force boot address to bootloader as there is no reliable way to programme fuses
-=======
-    avr_flashaddr_t    bootloader_pc = 0x7800;
->>>>>>> parent of 6c47fdc (Update secureduino.c)
+    avr_flashaddr_t    bootloader_pc = 0x7800; // Force boot address to bootloader as there is no reliable way to programme fuses
 
 	for (int i = 1; i < argc; i++) {
 		if (!strcmp(argv[i] + strlen(argv[i]) - 4, ".hex"))
-			strncpy(boot_path, argv[i], sizeof(boot_path)); // If provided with a .hex file, run it. Otherwise, run the bootloader
+			strncpy(boot_path, argv[i], sizeof(boot_path)); // If provided with a .hex file, run it. Otherwise, run the default
 		else if (!strcmp(argv[i], "-d")) // Enable debug with GDB
 			debug++;
 		else if (!strcmp(argv[i], "-v")) // Enable verbose mode
