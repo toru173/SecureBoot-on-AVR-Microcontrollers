@@ -30,17 +30,18 @@ FILE uart_stdio = FDEV_SETUP_STREAM(uart_putchar, uart_getchar, _FDEV_SETUP_RW);
 /* The main function is in init9, which removes the interrupt vector table */
 /* we don't need. It is also 'naked', which means the compiler does not    */
 /* generate any entry or exit code itself. */
-int main(void) __attribute__ ((naked)) __attribute__ ((section (".init9")));
+//int main(void) __attribute__ ((naked)) __attribute__ ((section (".init9")));
 
 int main (void)
 {
     uart_init();
     stdout = stdin = stderr = &uart_stdio;
     
-    while (1)
+    for (int i = 10; i > -1; i--)
     {
-        printf("Hello from the BLS!\n");
+        printf("Hello from the bootloader! Starting main application firmware in: %d", i);
         _delay_ms(1000);
     }
     
+    run_firmware();
 }
