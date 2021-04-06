@@ -64,7 +64,7 @@ bootloader:
 	# rm -rf ${bootloader}.elf
 
 binary:
-	avr-objcopy --gap-fill=0xff --add-section .payload=${payload}.hex --add-section .bootloader=${bootloader}.hex binary.hex
+	avr-objcopy --gap-fill=0xff --add-section .payload=${payload}.hex --add-section .bootloader=${bootloader}.hex -O binary.hex
 	#dd if=${payload}.hex of=binary.hex bs=1 count=$$((${payload_size}-${trailing_bytes}))
 	#cat ${bootloader}.hex >> binary.hex
 
