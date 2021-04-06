@@ -18,6 +18,7 @@
 
 target = secureduino
 payload = secure_payload
+payload_size := $(stat -c '%s' ${payload}.hex)
 trailing_bytes = 13
 bootloader = secure_bootloader
 MCU=atmega328p
@@ -63,8 +64,8 @@ bootloader:
 	# rm -rf ${bootloader}.elf
 
 binary:
-	echo $(stat -L -c '%s' secure_payload.hex)
-	dd if=${payload}.hex of=binary.hex bs=1 count=$(($(stat -c '%s' ${payload}.hex)-${trailing_bytes}))
+	echo ${payload_size}
+	dd if=${payload}.hex of=binary.hex bs=1 count=${payload_size}-${trailing_bytes}))
 	cat ${bootloader}.hex >> binary.hex
 
 simulate:
