@@ -18,6 +18,8 @@
 
 target = secureduino
 payload = secure_payload
+payload_size = $(($(stat -c '%s' ${payload})))
+trailing_bytes = 13
 bootloader = secure_bootloader
 MCU=atmega328p
 bootloader_addr = 0x7800 # Start of BLS on the Atmega328p in BYTES
@@ -61,9 +63,13 @@ bootloader:
 	avr-objcopy -j .text -j .data -O ihex ${bootloader}.elf ${bootloader}.hex
 	# rm -rf ${bootloader}.elf
 
+binary:
+	dd if=${payload}.hex of=binary.hex bs=1 count=${payload_size}-${trailing_bytes}
+	dd if=${bootloader}.hex of=binary.hex bs=1 seek=${payload_size}-${trailing_bytes}
+
 simulate:
 	export SIMAVR_UART_XTERM=1
-	${OBJ}/${target}.elf -v ${bootloader}.hex
+	${OBJ}/${target}.elf -v binary.hex
 
 clean: clean-${OBJ}
 	rm -rf *.a *.axf ${target} *.vcd *.hex *.o
