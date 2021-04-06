@@ -20,13 +20,13 @@ target = secureduino
 payload = secure_payload
 bootloader = secure_bootloader
 MCU=atmega328p
-bootloader_addr = 0x7e00 # Start of BLS on the Atmega328p in BYTES
+bootloader_addr = 0x7800 # Start of BLS on the Atmega328p in BYTES
 simavr = ./simavr
 
 # From https://www.pololu.com/docs/0J61/6.3
 AVR_CFLAGS=-g -Wall -mcall-prologues -mmcu=$(MCU) -Os
 AVR_LDFLAGS=-Wl,-gc-sections -Wl,-relax
-AVR_BOOTLOADER_LDFLAGS=-Wl,--section-start=.bootloader=${bootloader_addr}
+AVR_BOOTLOADER_LDFLAGS=-Wl,--section-start=.text=${bootloader_addr}
 AVR_CC=avr-gcc
 
 IPATH = .
@@ -58,7 +58,7 @@ payload:
 
 bootloader:
 	${AVR_CC} ${AVR_CFLAGS} ${AVR_LDFLAGS} ${AVR_BOOTLOADER_LDFLAGS} ${bootloader}.c -o ${bootloader}.elf
-	avr-objcopy -j .text -j .data -j .bootloader -O ihex ${bootloader}.elf ${bootloader}.hex
+	avr-objcopy -j .text -j .data -O ihex ${bootloader}.elf ${bootloader}.hex
 	# rm -rf ${bootloader}.elf
 
 simulate:
