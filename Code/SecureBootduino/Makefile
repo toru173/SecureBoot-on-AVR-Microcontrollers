@@ -62,9 +62,9 @@ bootloader:
 	avr-objcopy -j .text -j .data -O ihex ${bootloader}.elf ${bootloader}.hex
 	# rm -rf ${bootloader}.elf
 
-binary: payload_size = $(stat -c '%s' ${payload}.hex)
-	dd if=${payload}.hex of=binary.hex bs=1 count=${payload_size}-${trailing_bytes}
-	dd if=${bootloader}.hex of=binary.hex bs=1 seek=${payload_size}-${trailing_bytes}
+binary:
+	dd if=${payload}.hex of=binary.hex bs=1 count=$(stat -c '%s' ${payload}.hex)-${trailing_bytes}
+	cat ${bootloader}.hex >> binary.hex
 
 simulate:
 	export SIMAVR_UART_XTERM=1
