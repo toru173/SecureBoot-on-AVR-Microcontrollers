@@ -69,7 +69,7 @@ binary: #https://www.avrfreaks.net/forum/merging-bootloader-hex-file-and-applica
 	# simduino doesn't like an Intel Hex file with multiple segments (it will only load one)
 	# Below hack to get everything into a single .hex file with one segment
 	avr-objcopy -O binary binary.hex binary.bin
-	avr-objcopy --gap-fill 0xff -O ihex binary.bin binary.hex
+	avr-objcopy --gap-fill 0xff -I binary -O ihex binary.bin binary.hex
 
 simulate:
 	export SIMAVR_UART_XTERM=1
