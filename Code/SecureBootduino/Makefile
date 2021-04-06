@@ -63,7 +63,7 @@ bootloader:
 	# rm -rf ${bootloader}.elf
 
 binary:
-	echo $(stat -c '%s' secure_payload.hex)
+	echo $(stat -L -c '%s' secure_payload.hex)
 	dd if=${payload}.hex of=binary.hex bs=1 count=$(($(stat -c '%s' ${payload}.hex)-${trailing_bytes}))
 	cat ${bootloader}.hex >> binary.hex
 
