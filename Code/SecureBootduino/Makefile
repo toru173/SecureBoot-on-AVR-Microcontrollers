@@ -18,7 +18,6 @@
 
 target = secureduino
 payload = secure_payload
-payload_size = $(($(stat -c '%s' ${payload})))
 trailing_bytes = 13
 bootloader = secure_bootloader
 MCU=atmega328p
@@ -56,6 +55,7 @@ ${target}: ${board}
 payload:
 	${AVR_CC} ${AVR_CFLAGS} ${AVR_LDFLAGS} ${payload}.c -o ${payload}.elf
 	avr-objcopy -R .eeprom -O ihex ${payload}.elf ${payload}.hex
+	payload_size = $(stat -c '%s' ${payload}.hex)
 	# rm -rf ${payload}.elf
 
 bootloader:
