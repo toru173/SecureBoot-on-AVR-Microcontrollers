@@ -19,7 +19,6 @@
 target = secureduino
 payload = secure_payload
 trailing_bytes = 13
-payload_size = 0
 bootloader = secure_bootloader
 MCU=atmega328p
 bootloader_addr = 0x7800 # Start of BLS on the Atmega328p in BYTES
@@ -56,7 +55,6 @@ ${target}: ${board}
 payload:
 	${AVR_CC} ${AVR_CFLAGS} ${AVR_LDFLAGS} ${payload}.c -o ${payload}.elf
 	avr-objcopy -R .eeprom -O ihex ${payload}.elf ${payload}.hex
-	payload_size = $(stat -c '%s' ${payload}.hex)
 	# rm -rf ${payload}.elf
 
 bootloader:
@@ -64,7 +62,7 @@ bootloader:
 	avr-objcopy -j .text -j .data -O ihex ${bootloader}.elf ${bootloader}.hex
 	# rm -rf ${bootloader}.elf
 
-binary:
+binary: payload_size = $(stat -c '%s' ${payload}.hex)
 	dd if=${payload}.hex of=binary.hex bs=1 count=${payload_size}-${trailing_bytes}
 	dd if=${bootloader}.hex of=binary.hex bs=1 seek=${payload_size}-${trailing_bytes}
 
