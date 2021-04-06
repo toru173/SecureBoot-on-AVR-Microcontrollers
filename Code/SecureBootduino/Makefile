@@ -67,10 +67,9 @@ binary:
 	#dd if=${payload}.hex of=binary.hex bs=1 count=$$((${payload_size}-${trailing_bytes}))
 	#cat ${bootloader}.hex >> binary.hex
 	
-full.hex: ${payload}.hex ${bootloader}.hex
+full:
 	@cat ${payload}.hex | awk '/^:00000001FF/ == 0' > $@
 	@cat ${bootloader}.hex >> $@
-	@$(AVR_SIZE) $@
 
 simulate:
 	export SIMAVR_UART_XTERM=1
