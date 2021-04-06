@@ -62,14 +62,10 @@ bootloader:
 	${AVR_CC} ${AVR_CFLAGS} ${AVR_LDFLAGS} ${AVR_BOOTLOADER_LDFLAGS} ${bootloader}.c -o ${bootloader}.elf
 	avr-objcopy -j .text -j .data -O ihex ${bootloader}.elf ${bootloader}.hex
 	# rm -rf ${bootloader}.elf
-
-binary:
-	#dd if=${payload}.hex of=binary.hex bs=1 count=$$((${payload_size}-${trailing_bytes}))
-	#cat ${bootloader}.hex >> binary.hex
 	
-full:
-	@cat ${payload}.hex | awk '/^:00000001FF/ == 0' > $@
-	@cat ${bootloader}.hex >> $@
+binary: #https://www.avrfreaks.net/forum/merging-bootloader-hex-file-and-application-hex-file-one
+	@cat ${payload}.hex | awk '/^:00000001FF/ == 0' > binary.hex
+	@cat ${bootloader}.hex >> binary.hex
 
 simulate:
 	export SIMAVR_UART_XTERM=1
