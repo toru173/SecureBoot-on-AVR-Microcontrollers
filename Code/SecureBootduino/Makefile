@@ -71,6 +71,10 @@ binary: payload bootloader
 	# Below hack to get everything into a single .hex file with one segment
 	avr-objcopy -I ihex -O binary binary.hex binary.bin
 	avr-objcopy -I binary -O ihex binary.bin binary.hex
+	
+debug:
+	export SIMAVR_UART_XTERM=1
+	${OBJ}/${target}.elf -d binary.hex
 
 simulate:
 	export SIMAVR_UART_XTERM=1
