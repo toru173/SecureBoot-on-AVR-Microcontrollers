@@ -39,7 +39,7 @@ int main (void)
     
     for (int i = 10; i > -1; i--)
     {
-        printf("Hello from the bootloader! Starting main application firmware in: %d", i);
+        printf("Hello from the bootloader! Starting main application firmware in: %d\n", i);
         _delay_ms(1000);
     }
     
