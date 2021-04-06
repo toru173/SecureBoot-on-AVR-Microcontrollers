@@ -63,13 +63,14 @@ bootloader:
 	avr-objcopy -j .text -j .data -O ihex ${bootloader}.elf ${bootloader}.hex
 	# rm -rf ${bootloader}.elf
 	
-binary: #https://www.avrfreaks.net/forum/merging-bootloader-hex-file-and-application-hex-file-one
+binary: payload bootloader
+	#https://www.avrfreaks.net/forum/merging-bootloader-hex-file-and-application-hex-file-one
 	@cat ${payload}.hex | awk '/^:00000001FF/ == 0' > binary.hex
 	@cat ${bootloader}.hex >> binary.hex
 	# simduino doesn't like an Intel Hex file with multiple segments (it will only load one)
 	# Below hack to get everything into a single .hex file with one segment
 	avr-objcopy -I ihex -O binary binary.hex binary.bin
-	avr-objcopy --gap-fill 0xff -I binary -O ihex binary.bin binary.hex
+	avr-objcopy -I binary -O ihex binary.bin binary.hex
 
 simulate:
 	export SIMAVR_UART_XTERM=1
