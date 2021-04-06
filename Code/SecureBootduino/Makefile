@@ -68,8 +68,8 @@ binary:
 	#cat ${bootloader}.hex >> binary.hex
 	
 full.hex: ${payload}.hex ${bootloader}.hex
-	@cat main.hex | awk '/^:00000001FF/ == 0' > $@
-	@cat boot.hex >> $@
+	@cat ${payload}.hex | awk '/^:00000001FF/ == 0' > $@
+	@cat ${bootloader}.hex >> $@
 	@$(AVR_SIZE) $@
 
 simulate:
