@@ -63,7 +63,8 @@ bootloader:
 	# rm -rf ${bootloader}.elf
 
 binary:
-	dd if=${payload}.hex of=binary.hex bs=1 count=$(stat -c '%s' ${payload}.hex)-${trailing_bytes}
+	echo $(($(stat -c '%s' ${payload}.hex)-${trailing_bytes}))
+	dd if=${payload}.hex of=binary.hex bs=1 count=$(($(stat -c '%s' ${payload}.hex)-${trailing_bytes}))
 	cat ${bootloader}.hex >> binary.hex
 
 simulate:
