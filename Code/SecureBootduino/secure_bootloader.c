@@ -50,11 +50,13 @@ int main (void)
     
     uart_getrawchar(); // Wait for input before continuing
     
-    for (int bytes = 0; bytes < lines; bytes++)
+    for (int bytes = 0; bytes < lines; bytes += 2)
     {
-        my_printf(bytetohex(pgm_read_byte(flashpointer)));
+        my_printf(bytetohex(pgm_read_byte(flashpointer++)));
+        my_printf(bytetohex(pgm_read_byte(flashpointer++)));
         my_printf(" ");
-        flashpointer ++;
+        if (bytes % 40)
+            my_printf("\n");
     }
     
     run_firmware();
