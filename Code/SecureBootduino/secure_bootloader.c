@@ -63,7 +63,8 @@ int main (void)
             my_printf(bytetohex(pgm_read_byte(flashpointer++)));
             my_printf(" ");
         }
-        //my_printf("\n");
+        my_printf(" About to crash...");
+        my_printf("\n");
     }
     
     run_firmware();
