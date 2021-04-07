@@ -26,7 +26,7 @@ bootloader_addr = 0x7000 # Start of BLS on the Atmega2560 in BYTES
 simavr = ./simavr
 includedir = ./include
 
-INCLUDE_FILES := $(wildcard $(*.c))
+INCLUDE_FILES = $(wildcard *.c)
 
 # From https://www.pololu.com/docs/0J61/6.3
 AVR_CFLAGS=-g -Wall -mcall-prologues -mmcu=$(MCU) -Os
