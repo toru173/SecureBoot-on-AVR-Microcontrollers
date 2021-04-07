@@ -65,8 +65,6 @@ int main (void)
         }
         my_printf("\n");
     }
-    
-    my_printf("Very long string that I hope won't crash!\n");
-    
+        
     run_firmware();
 }
