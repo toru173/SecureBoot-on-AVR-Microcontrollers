@@ -66,7 +66,7 @@ char *bytetohex(uint8_t byte)
 {
     char *c = "\0\0";
     c[0] = byte & 0xF0;
-    c[1] = byte & 0x0F;
+    c[1] = byte & 0xFF;
     return c;
 }
 
