@@ -39,10 +39,15 @@ int main (void)
     uart_init();
     stdout = stdin = stderr = &uart_stdio;
     
+    u16int_t flashpointer = 0x0000;
+    
     // Wait until we connect to the UART
     uart_getrawchar();
     
+    u8int_t byte = pgm_read_byte(flashpointer);
+    
     printf("\nHere we go!\n");
+    printf(byte + 0x30); //convert to ASCII
     
     run_firmware();
 }
