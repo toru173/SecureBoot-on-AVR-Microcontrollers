@@ -38,8 +38,8 @@ int main (void)
     stdout = stdin = stderr = &uart_stdio;
     
     // Wait until we connect to the UART
-    char *c;
-    scanf("%s", c);
+    char *c = '\0';
+    scanf("%c", c);
     
     printf(c);
     
