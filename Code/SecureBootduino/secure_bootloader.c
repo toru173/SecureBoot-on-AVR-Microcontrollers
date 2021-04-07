@@ -46,7 +46,7 @@ int main (void)
     
     uint8_t byte = pgm_read_byte(flashpointer);
     
-    printf(bytetohex(byte));
+    printf("%d", sizeof(bytetohex(byte)));
     printf("\nHere we go!\n");
     
     run_firmware();
