@@ -8,7 +8,9 @@
 #include <avr/pgmspace.h>
 #include <avr/sleep.h>
 
+#ifdef DEBUG
 #include <stdio.h> // Handy for debugging but bloats code. Can be stripped!
+#endif
 
 #include "mcu_defs.h"
 #include "secure_bootloader.h"
