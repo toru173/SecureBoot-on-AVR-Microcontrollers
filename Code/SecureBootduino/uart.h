@@ -65,8 +65,8 @@ void my_printf(char *string)
 char *bytetohex(uint8_t byte)
 {
     char *c = "\0\0";
-    c[0] = byte & 0xF;
-    c[1] = byte >> 4 & 0x0F;
+    c[0] = (byte & 0xF0) + 0x30;
+    c[1] = (byte & 0x0F) + 0x30;
     return c;
 }
 
