@@ -1,6 +1,7 @@
 /*
  * Header files for uart comms
  */
+#include <stdlib.h>
 
 void uart_init(void);
 int uart_putchar(char c, FILE *stream);
@@ -66,7 +67,7 @@ char *bytetohex(uint8_t byte)
     char c[2];
     c[0] = byte & 0xF0;
     c[1] = byte & 0x0F;
-    return c;
+    return *c;
 }
 
 // Finish me later
