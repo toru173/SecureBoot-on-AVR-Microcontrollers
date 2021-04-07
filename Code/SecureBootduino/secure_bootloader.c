@@ -3,7 +3,10 @@
  */
 
 // #define DEBUG
-#define USERAWSTRINGS
+
+#ifndef DEBUG
+#define USERAWSTRINGS //for UART comms. Saves code space
+#endif
 
 #include <avr/io.h>
 #include <avr/pgmspace.h>
