@@ -38,7 +38,8 @@ int main (void)
     stdout = stdin = stderr = &uart_stdio;
     
     // Wait until we connect to the UART
-    char *c = scanf("", &c);
+    char *c;
+    scanf("Waiting for connection...", &c);
     
     printf(c);
     
