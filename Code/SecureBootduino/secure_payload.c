@@ -8,7 +8,6 @@
 
 #include <avr/io.h>
 #include <avr/sleep.h>
-#include <util/delay.h>
 
 #include <stdio.h>
 
@@ -19,6 +18,8 @@
 #define FCPU CLOCK
 #define BAUD UART_BAUD
 #include <util/setbaud.h>
+#include <util/delay.h>
+
 
 /*
  * This demonstrate how to use the avr_mcu_section.h file
