@@ -26,12 +26,6 @@ AVR_MCU(F_CPU, "atmega328p");
 
 FILE uart_stdio = FDEV_SETUP_STREAM(uart_putchar, uart_getchar, _FDEV_SETUP_RW);
 
-/* Function Prototypes (taken from optiboot.c*/
-/* The main function is in init9, which removes the interrupt vector table */
-/* we don't need. It is also 'naked', which means the compiler does not    */
-/* generate any entry or exit code itself. */
-//int main(void) __attribute__ ((naked)) __attribute__ ((section (".init9")));
-
 int main (void)
 {
     uart_init();
