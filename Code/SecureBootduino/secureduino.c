@@ -126,7 +126,7 @@ int main(int argc, char *argv[])
 	}
 	if (boot_base > 32*1024*1024) {
 		mmcu = "atmega2560";
-		freq = 20000000;
+		freq = CLOCK;
 	}
 	printf("%s bootloader 0x%05x: %d bytes\n", mmcu, boot_base, boot_size);
 
