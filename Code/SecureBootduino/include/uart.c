@@ -6,7 +6,15 @@
 #define USERICHSTRINGS
 #endif
 
+#include "mcu_defs.h"
 #include <avr/io.h>
+
+// Set up MCU
+#define F_CPU CLOCK
+#define BAUD UART_BAUD
+#include <util/setbaud.h>
+#include <util/delay.h>
+
 #include "uart.h"
 
 void uart_init(void)
