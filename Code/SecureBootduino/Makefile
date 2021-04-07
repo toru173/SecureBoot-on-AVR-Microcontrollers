@@ -32,12 +32,12 @@ AVR_BOOTLOADER_LDFLAGS=-Wl,--section-start=.text=${bootloader_addr}
 AVR_CC=avr-gcc
 
 IPATH = .
+IPATH += ./include
 IPATH += ${simavr}/examples/parts
 IPATH += ${simavr}/include
 IPATH += ${simavr}/simavr/sim
 
 VPATH = .
-VPATH += include
 VPATH += ${simavr}/examples/parts
 
 LDFLAGS += -lpthread -lutil
