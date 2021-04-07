@@ -11,7 +11,6 @@
 
 #include <stdio.h>
 
-#include "uart.h"
 #include "mcu_defs.h"
 
 // Set up MCU
@@ -19,6 +18,8 @@
 #define BAUD UART_BAUD
 #include <util/setbaud.h>
 #include <util/delay.h>
+
+#include "uart.h"
 
 
 /*
