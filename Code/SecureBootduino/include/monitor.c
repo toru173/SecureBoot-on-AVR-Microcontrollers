@@ -30,7 +30,7 @@ uint8_t hextobyte(char hex[2])
     return byte;
 }
 
-void dumpROM(void)
+void dumpROM()
 {
     // Assume ROM < 32K for now, as testing with Atmega328p
     
