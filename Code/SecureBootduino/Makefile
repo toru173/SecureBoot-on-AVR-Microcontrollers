@@ -43,7 +43,7 @@ VPATH = .
 VPATH += ${includedir}
 VPATH += ${simavr}/examples/parts
 
-LDFLAGS += -lpthread -lutil
+LDFLAGS += -lpthread -lutil -I${includedir}
 
 all: obj binary ${target}
 
