@@ -324,5 +324,5 @@ uart_pty_connect(
 				p->tap.slavename);
 		system(cmd);
 	} else
-		printf("note: Use picocom to get a terminal on the above tty\nExecution paused until a key is pressed\n");
+		printf("note: Use picocom to get a terminal on the above tty\nExecution paused. Press 'm' to enter the monitor, any other key to continue\n");
 }
