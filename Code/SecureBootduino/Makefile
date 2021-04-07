@@ -41,7 +41,7 @@ VPATH += ${simavr}/examples/parts
 
 LDFLAGS += -lpthread -lutil
 
-all: obj payload bootloader ${target}
+all: obj binary ${target}
 
 include ${simavr}/Makefile.common
 
@@ -56,19 +56,20 @@ ${target}: ${board}
 payload:
 	${AVR_CC} ${AVR_CFLAGS} ${AVR_LDFLAGS} ${payload}.c -o ${payload}.elf
 	avr-objcopy -R .eeprom -O ihex ${payload}.elf ${payload}.hex
-	# rm -rf ${payload}.elf
+	avr-size ${payload}.hex
 
 bootloader:
 	${AVR_CC} ${AVR_CFLAGS} ${AVR_LDFLAGS} ${AVR_BOOTLOADER_LDFLAGS} ${bootloader}.c -o ${bootloader}.elf
 	avr-objcopy -j .text -j .data -O ihex ${bootloader}.elf ${bootloader}.hex
-	# rm -rf ${bootloader}.elf
+	avr-size ${bootloader}.hex
 	
+#https://www.avrfreaks.net/forum/merging-bootloader-hex-file-and-application-hex-file-one
+# simduino doesn't like an Intel Hex file with multiple segments (it will only load the first)
+# Below hack to get everything into a single .hex file with one segment
+
 binary: payload bootloader
-	#https://www.avrfreaks.net/forum/merging-bootloader-hex-file-and-application-hex-file-one
 	@cat ${payload}.hex | awk '/^:00000001FF/ == 0' > binary.hex
 	@cat ${bootloader}.hex >> binary.hex
-	# simduino doesn't like an Intel Hex file with multiple segments (it will only load one)
-	# Below hack to get everything into a single .hex file with one segment
 	avr-objcopy -I ihex -O binary binary.hex binary.bin
 	avr-objcopy -I binary -O ihex binary.bin binary.hex
 	
