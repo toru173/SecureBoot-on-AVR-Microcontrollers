@@ -44,12 +44,12 @@ int main (void)
     stdout = stdin = stderr = &uart_stdio;
     #endif
     
-    lines = 0x160;
+    uint16_t lines = 0x160;
     char * line[40];
     
     uint16_t flashpointer = 0x0000;
     
-    for (int bytes = 0; bytes < lines, bytes++)
+    for (int bytes = 0; bytes < lines; bytes++)
     {
         my_printf(bytetohex(pgm_read_byte(flashpointer)));
         my_printf(" ");
