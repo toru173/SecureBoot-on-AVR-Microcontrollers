@@ -45,9 +45,10 @@ int main (void)
     #endif
     
     uint16_t lines = 0x160;
-    char * line[40];
     
     uint16_t flashpointer = 0x0000;
+    
+    uart_getrawchar(); // Wait for input before continuing
     
     for (int bytes = 0; bytes < lines; bytes++)
     {
@@ -55,12 +56,6 @@ int main (void)
         my_printf(" ");
         flashpointer ++;
     }
-    // Wait until we connect to the UART
-    uart_getrawchar();
-    
-    
-    
-    my_printf(bytetohex(byte));
     
     run_firmware();
 }
