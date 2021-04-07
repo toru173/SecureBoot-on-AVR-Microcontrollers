@@ -50,7 +50,7 @@ int main (void)
     
     uart_getrawchar(); // Wait for input before continuing
     
-    for (int line = 0; line < maxlines; line++)
+    while (flashpointer <= 0xFFFF)
     {
         for (int word = 0; word < 8; word++)
         {
