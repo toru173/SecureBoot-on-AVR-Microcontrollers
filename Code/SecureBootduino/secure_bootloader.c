@@ -46,7 +46,6 @@ int main (void)
     
     uint8_t byte = pgm_read_byte(flashpointer);
     
-    printf("%d\n", sizeof(bytetohex(byte)));
     printf(bytetohex(byte));
     printf("\n");
     my_printf(bytetohex(byte));
