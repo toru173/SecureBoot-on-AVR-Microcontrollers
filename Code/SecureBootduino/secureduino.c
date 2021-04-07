@@ -37,7 +37,7 @@
 #include "uart_pty.h"
 #include "sim_vcd_file.h"
 
-#include "mcu_defs.h"
+#include "include/mcu_defs.h"
 
 uart_pty_t uart_pty;
 avr_t * avr = NULL;
