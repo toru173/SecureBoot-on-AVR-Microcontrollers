@@ -9,6 +9,8 @@
 #include <avr/io.h>
 #include <avr/sleep.h>
 
+#include <stdio.h>
+
 #include "mcu_defs.h"
 
 // Set up MCU
@@ -19,8 +21,6 @@
 
 // Set up USART
 #include "uart.h"
-
-#include <stdio.h>
 
 /*
  * This demonstrate how to use the avr_mcu_section.h file
