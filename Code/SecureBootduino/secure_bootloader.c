@@ -38,7 +38,7 @@ int main (void)
     stdout = stdin = stderr = &uart_stdio;
     
     // Wait until we connect to the UART
-    char *c = uart_getchar(uart_stdio);
+    char *c = uart_getchar(&uart_stdio);
     
     printf(c);
     
