@@ -1,5 +1,5 @@
 /*
- * Header files for uart comms
+ * function for uart comms
  */
 
 #ifdef DEBUG
