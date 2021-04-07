@@ -63,7 +63,7 @@ int main (void)
             my_printf(bytetohex(pgm_read_byte(flashpointer++)));
             my_printf(" ");
         }
-        my_printf(" A\n");
+        my_printf(" \n");
     }
     
     run_firmware();
