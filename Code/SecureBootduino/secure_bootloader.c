@@ -38,11 +38,9 @@ int main (void)
     stdout = stdin = stderr = &uart_stdio;
     
     // Wait until we connect to the UART
-    char c = uart_getchar(&uart_stdio);
-    
-    //uart_putchar(&c, &uart_stdio);
-    
-    printf("Here we go!");
+    char c = uart_getrawchar();
+        
+    printf("Here we go!\n");
     
     run_firmware();
 }
