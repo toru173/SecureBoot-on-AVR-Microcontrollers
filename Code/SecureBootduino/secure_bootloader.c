@@ -44,19 +44,22 @@ int main (void)
     stdout = stdin = stderr = &uart_stdio;
     #endif
     
-    uint16_t lines = 0x160;
+    uint16_t lines = 8;
     
     uint16_t flashpointer = 0x0000;
     
     uart_getrawchar(); // Wait for input before continuing
     
-    for (int l = 0, l < lines, l++)
+    for (int lines = 0; l < maxlines; lines++)
+    {
         for (int words = 0; words < 8; words++)
         {
             my_printf(bytetohex(pgm_read_byte(flashpointer++)));
             my_printf(bytetohex(pgm_read_byte(flashpointer++)));
             my_printf(" ");
         }
+        my_printf("\n");
+    }
     
     run_firmware();
 }
