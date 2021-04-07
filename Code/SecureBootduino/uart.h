@@ -52,3 +52,26 @@ int uart_getrawchar()
     uart_putrawchar(c); //echo byte back so we can see what we typed
     return c;
 }
+
+void my_printf(char *string)
+{
+    for (int i = 0; i < strlen(string); i++)
+    {
+        uart_putrawchar(string[i])
+    }
+}
+
+char *bytetohex(uint8_t byte)
+{
+    char c[2];
+    c[0] = byte & 0xF0;
+    c[1] = byte & 0x0F;
+    return c;
+}
+
+// Finish me later
+uint8_t hextobyte(char hex[2])
+{
+    uint8_t byte = 0x00;
+    return byte;
+}
