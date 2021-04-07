@@ -63,7 +63,7 @@ int main (void)
             my_printf(bytetohex(pgm_read_byte(flashpointer++)));
             my_printf(" ");
         }
-        my_printf(" ");
+        my_printf("\n");
     }
     
     my_printf("Very long string that I hope won't crash!\n");
