@@ -30,7 +30,7 @@ INCLUDE_FILES := $(wildcard $(includedir/*.c))
 
 # From https://www.pololu.com/docs/0J61/6.3
 AVR_CFLAGS=-g -Wall -mcall-prologues -mmcu=$(MCU) -Os
-AVR_LDFLAGS=-Wl,-gc-sections -Wl,-relax -I ${includedir}
+AVR_LDFLAGS=-Wl,-gc-sections -Wl,-relax -I${includedir}
 AVR_BOOTLOADER_LDFLAGS=-Wl,--section-start=.text=${bootloader_addr}
 AVR_CC=avr-gcc
 
@@ -57,6 +57,7 @@ ${target}: ${board}
 	@echo $@ done
 
 payload:
+	@echo @{INCLUDE_FILES}
 	@${AVR_CC} ${AVR_CFLAGS} ${AVR_LDFLAGS} ${payload}.c ${INCLUDE_FILES} -o ${payload}.elf
 	@avr-objcopy -R .eeprom -O ihex ${payload}.elf ${payload}.hex
 	avr-size ${payload}.hex
