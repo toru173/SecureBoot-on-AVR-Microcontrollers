@@ -78,7 +78,7 @@ char *bytetohex(uint8_t byte)
         nybble1 += 0x30; // 0-9
     c[0] = nybble0;
     c[1] = nybble1;
-    return c
+    return c;
 }
 
 // Finish me later
