@@ -14,12 +14,12 @@ int uart_putchar(char c, FILE *stream);
 int uart_getchar(FILE *stream);
 #endif
 
-int uart_putrawchar(char c)
-int uart_getrawchar()
-void my_printf(char *string)
+int uart_putrawchar(char c);
+int uart_getrawchar();
+void my_printf(char *string);
 
-char *bytetohex(uint8_t byte)
-uint8_t hextobyte(char hex[2])
+char *bytetohex(uint8_t byte);
+uint8_t hextobyte(char hex[2]);
 
 
 void uart_init(void)
