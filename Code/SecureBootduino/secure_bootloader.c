@@ -39,7 +39,7 @@ int main (void)
     
     // Wait until we connect to the UART
     char *c;
-    scanf("%s", &c);
+    scanf("%s", c);
     
     printf(c);
     
