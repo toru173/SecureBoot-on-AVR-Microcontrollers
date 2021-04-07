@@ -9,7 +9,7 @@
 #include <avr/sleep.h>
 
 #ifdef DEBUG
-#include <stdio.h> // Handy for debugging but bloats code. Can be stripped!
+#include <stdio.h> // Handy for debugging but bloats code
 #endif
 
 #include "mcu_defs.h"
@@ -44,12 +44,21 @@ int main (void)
     stdout = stdin = stderr = &uart_stdio;
     #endif
     
+    lines = 0x160;
+    char * line[40];
+    
     uint16_t flashpointer = 0x0000;
     
+    for (int bytes = 0; bytes < lines, bytes++)
+    {
+        my_printf(bytetohex(pgm_read_byte(flashpointer)));
+        my_printf(" ");
+        flashpointer ++;
+    }
     // Wait until we connect to the UART
     uart_getrawchar();
     
-    uint8_t byte = pgm_read_byte(flashpointer);
+    
     
     my_printf(bytetohex(byte));
     
