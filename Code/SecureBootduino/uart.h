@@ -65,9 +65,20 @@ void my_printf(char *string)
 char *bytetohex(uint8_t byte)
 {
     char *c = "\0\0";
-    c[0] = (byte >> 4) + 0x30;
-    c[1] = (byte & 0x0F) + 0x30;
-    return c;
+    uint8_t nybble0 = (byte >> 4) & 0x0F
+    uint8_t nybble1 = byte& 0x0F
+    if (nybble0 > 0x09)
+        nybble0 += 0x41;
+    else
+        nybble0 += 0x30;
+
+    if (nybble1 > 0x09)
+        nybble1 += 0x41;
+    else
+        nybble1 += 0x30;
+    c[0] = nybble0;
+    c[1] = nybble1;
+    return c
 }
 
 // Finish me later
