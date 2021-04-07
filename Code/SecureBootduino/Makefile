@@ -70,7 +70,7 @@ bootloader:
 binary: payload bootloader
 	@cat ${payload}.hex | awk '/^:00000001FF/ == 0' > binary.hex
 	@cat ${bootloader}.hex >> binary.hex
-	avr-objcopy -I ihex -O binary binary.hex binary.bin
+	avr-objcopy --gap-fill 0xFF -I ihex -O binary binary.hex binary.bin
 	avr-objcopy -I binary -O ihex binary.bin binary.hex
 	
 debug:
