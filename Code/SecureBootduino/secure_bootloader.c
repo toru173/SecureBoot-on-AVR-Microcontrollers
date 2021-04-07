@@ -2,9 +2,6 @@
  * Secure bootloader checks signature of firmware and provides for other utilities
  */
 
-#define F_CPU CLOCK // 16MHz oscillator is what is used in the simulator
-#define BAUD 9600 // Could be faster if desired. This is just a PoC
-
 #include <avr/io.h>
 #include <avr/boot.h>
 #include <avr/sleep.h>
@@ -16,6 +13,11 @@
 #include "mcu_defs.h"
 #include "uart.h"
 #include "secure_bootloader.h"
+
+// Set up MCU
+#define FCPU CLOCK
+#define BAUD UART_BAUD
+#include <util/setbaud.h>
 
 /*
  * This demonstrate how to use the avr_mcu_section.h file
