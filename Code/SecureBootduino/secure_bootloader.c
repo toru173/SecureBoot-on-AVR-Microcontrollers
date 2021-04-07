@@ -8,7 +8,6 @@
 #include <stdio.h>
 
 #include "mcu_defs.h"
-#include "uart.h"
 #include "secure_bootloader.h"
 
 // Set up MCU
