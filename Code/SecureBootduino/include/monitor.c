@@ -3,6 +3,7 @@
  */
 
 #include <avr/io.h>
+#include "mcu_defs.h"
 #include "monitor.h"
 
 char *bytetohex(uint8_t byte)
@@ -35,7 +36,7 @@ void dumpROM()
 {
     // Assume ROM < 32K for now, as testing with Atmega328p
     
-    uint16_t  flashpoint = 0x0000;
+    uint16_t  flashpointer = 0x0000;
     
     while (flashpointer < 0x8000)
     {
