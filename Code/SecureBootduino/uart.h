@@ -1,7 +1,10 @@
 /*
  * Header files for uart comms
  */
-#include <stdlib.h>
+
+#ifdef DEBUG
+#define USERICHSTRINGS
+#endif
 
 void uart_init(void);
 int uart_putchar(char c, FILE *stream);
@@ -16,6 +19,8 @@ void uart_init(void)
     UCSR0C = (1 << UCSZ01) | (1 << UCSZ00); // 8 bit, no parity, one stop bit
 }
 
+
+#ifdef USERICHSTRINGS
 int uart_putchar(char c, FILE *stream)
 {
     if (c == '\n')
@@ -25,6 +30,7 @@ int uart_putchar(char c, FILE *stream)
     
     return 0;
 }
+#endif
 
 int uart_putrawchar(char c)
 {
@@ -36,6 +42,7 @@ int uart_putrawchar(char c)
     return 0;
 }
 
+#ifdef USERICHSTRINGS
 int uart_getchar(FILE *stream)
 {
     char c;
@@ -44,6 +51,7 @@ int uart_getchar(FILE *stream)
     uart_putchar(c, stream); //echo byte back so we can see what we typed
     return c;
 }
+#endif
 
 int uart_getrawchar()
 {
