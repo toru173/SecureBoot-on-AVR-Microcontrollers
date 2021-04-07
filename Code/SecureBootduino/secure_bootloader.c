@@ -46,7 +46,7 @@ int main (void)
     
     uint8_t byte = pgm_read_byte(flashpointer);
     
-    uart_putrawchar(byte);
+    my_printf(bytetohex(byte));
     printf("\nHere we go!\n");
     
     run_firmware();
