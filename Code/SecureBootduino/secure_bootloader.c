@@ -13,7 +13,7 @@
 #include "secure_bootloader.h"
 
 // Set up MCU
-#define FCPU CLOCK
+#define F_CPU CLOCK
 #define BAUD UART_BAUD
 #include <util/setbaud.h>
 #include <util/delay.h>
