@@ -55,7 +55,7 @@ int main (void)
     
     uart_getrawchar(); // Wait for input before continuing
     
-    while (flashpointer < 0x7A00)
+    while (flashpointer < 0xFFFF)
     {
         for (int word = 0; word < 8; word++)
         {
@@ -63,7 +63,7 @@ int main (void)
             my_printf(bytetohex(pgm_read_byte(flashpointer++)));
             my_printf(" ");
         }
-        my_printf("\n");
+        //my_printf("\n");
     }
     
     run_firmware();
