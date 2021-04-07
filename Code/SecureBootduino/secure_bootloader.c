@@ -2,7 +2,7 @@
  * Secure bootloader checks signature of firmware and provides for other utilities
  */
 
-#define DEBUG
+// #define DEBUG
 
 #include <avr/io.h>
 #include <avr/pgmspace.h>
@@ -32,7 +32,9 @@
 #include "avr_mcu_section.h"
 AVR_MCU(F_CPU, MCU);
 
+#ifdef DEBUG
 FILE uart_stdio = FDEV_SETUP_STREAM(uart_putchar, uart_getchar, _FDEV_SETUP_RW);
+#endif
 
 int main (void)
 {
