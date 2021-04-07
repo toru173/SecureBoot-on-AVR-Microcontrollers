@@ -34,7 +34,7 @@ void dumpROM(void)
 {
     // Assume ROM < 32K for now, as testing with Atmega328p
     
-    uint16_t  flashpoint = 0x000000
+    uint16_t  flashpoint = 0x0000;
     
     while (flashpointer < 0x8000)
     {
