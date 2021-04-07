@@ -54,32 +54,32 @@ ${target}: ${board}
 	@echo $@ done
 
 payload:
-	${AVR_CC} ${AVR_CFLAGS} ${AVR_LDFLAGS} ${payload}.c -o ${payload}.elf
-	avr-objcopy -R .eeprom -O ihex ${payload}.elf ${payload}.hex
-	avr-size ${payload}.hex
+	@${AVR_CC} ${AVR_CFLAGS} ${AVR_LDFLAGS} ${payload}.c -o ${payload}.elf
+	@avr-objcopy -R .eeprom -O ihex ${payload}.elf ${payload}.hex
+	@avr-size ${payload}.hex
 
 bootloader:
-	${AVR_CC} ${AVR_CFLAGS} ${AVR_LDFLAGS} ${AVR_BOOTLOADER_LDFLAGS} ${bootloader}.c -o ${bootloader}.elf
-	avr-objcopy -j .text -j .data -O ihex ${bootloader}.elf ${bootloader}.hex
-	avr-size ${bootloader}.hex
+	@${AVR_CC} ${AVR_CFLAGS} ${AVR_LDFLAGS} ${AVR_BOOTLOADER_LDFLAGS} ${bootloader}.c -o ${bootloader}.elf
+	@avr-objcopy -j .text -j .data -O ihex ${bootloader}.elf ${bootloader}.hex
+	@avr-size ${bootloader}.hex
 	
-#https://www.avrfreaks.net/forum/merging-bootloader-hex-file-and-application-hex-file-one
+# Hex merging from https://www.avrfreaks.net/forum/merging-bootloader-hex-file-and-application-hex-file-one
 # simduino doesn't like an Intel Hex file with multiple segments (it will only load the first)
-# Below hack to get everything into a single .hex file with one segment
+# Below hack to get everything into a single .hex file with one segment. Leave BIN behind for debug
 
 binary: payload bootloader
 	@cat ${payload}.hex | awk '/^:00000001FF/ == 0' > binary.hex
 	@cat ${bootloader}.hex >> binary.hex
-	avr-objcopy --gap-fill 0xFF -I ihex -O binary binary.hex binary.bin
-	avr-objcopy -I binary -O ihex binary.bin binary.hex
+	@avr-objcopy --gap-fill 0xFF -I ihex -O binary binary.hex binary.bin
+	@avr-objcopy -I binary -O ihex binary.bin binary.hex
 	
 debug:
-	export SIMAVR_UART_XTERM=1
-	${OBJ}/${target}.elf -d binary.hex
+	@export SIMAVR_UART_XTERM=1
+	@${OBJ}/${target}.elf -d binary.hex
 
 simulate:
-	export SIMAVR_UART_XTERM=1
-	${OBJ}/${target}.elf -v binary.hex
+	@export SIMAVR_UART_XTERM=1
+	@${OBJ}/${target}.elf -v binary.hex
 
 clean: clean-${OBJ}
-	rm -rf *.a *.axf ${target} *.vcd *.hex *.o
+	rm -rf *.a *.axf ${target} *.vcd *.hex *.o *.bin *.elf
