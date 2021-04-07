@@ -2,7 +2,7 @@
  * Header files for mcu comms
  */
 
-#define MCU "atmega2560"
+#define MCU "atmega328p"
 #define CLOCK 16000000
-#define BLS_START 0x3FE00
+#define BLS_START 0x7000
 #define UART_BAUD 57600
