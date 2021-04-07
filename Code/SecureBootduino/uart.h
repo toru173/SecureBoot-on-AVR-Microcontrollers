@@ -55,9 +55,9 @@ int uart_getrawchar()
 
 void my_printf(char *string)
 {
-    for (int i = 0; i < strlen(string); i++)
+    for (int i = 0; i < len(string) - 1; i++)
     {
-        uart_putrawchar(string[i])
+        uart_putrawchar(string[i]);
     }
 }
 
