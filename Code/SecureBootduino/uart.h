@@ -6,9 +6,7 @@
 #define USERICHSTRINGS
 #endif
 
-#ifdef USERICHSTRINGS
 #include <stdio.h>
-#endif
 
 void uart_init(void);
 int uart_putchar(char c, FILE *stream);
