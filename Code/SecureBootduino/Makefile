@@ -57,7 +57,7 @@ ${target}: ${board}
 	@echo $@ done
 
 payload:
-	@echo @{INCLUDE_FILES}
+	@echo ${INCLUDE_FILES}
 	@${AVR_CC} ${AVR_CFLAGS} ${AVR_LDFLAGS} ${payload}.c ${INCLUDE_FILES} -o ${payload}.elf
 	@avr-objcopy -R .eeprom -O ihex ${payload}.elf ${payload}.hex
 	avr-size ${payload}.hex
