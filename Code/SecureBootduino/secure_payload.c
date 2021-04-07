@@ -6,8 +6,6 @@
  *
  */
 
-#define USERICHSTRINGS // Include support for printf, scanf etc
-
 #include <avr/io.h>
 #include <avr/sleep.h>
 
