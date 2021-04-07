@@ -24,15 +24,15 @@ bootloader = secure_bootloader
 MCU=atmega328p
 bootloader_addr = 0x7800 # Start of BLS on the Atmega328p in BYTES
 simavr = ./simavr
+includedir = ./include
 
 # From https://www.pololu.com/docs/0J61/6.3
 AVR_CFLAGS=-g -Wall -mcall-prologues -mmcu=$(MCU) -Os
-AVR_LDFLAGS=-Wl,-gc-sections -Wl,-relax
+AVR_LDFLAGS=-Wl,-gc-sections -Wl,-relax -I${includedir}
 AVR_BOOTLOADER_LDFLAGS=-Wl,--section-start=.text=${bootloader_addr}
 AVR_CC=avr-gcc
 
 IPATH = .
-IPATH += ./include
 IPATH += ${simavr}/examples/parts
 IPATH += ${simavr}/include
 IPATH += ${simavr}/simavr/sim
