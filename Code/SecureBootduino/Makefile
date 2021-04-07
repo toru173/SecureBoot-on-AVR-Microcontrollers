@@ -37,6 +37,7 @@ IPATH += ${simavr}/include
 IPATH += ${simavr}/simavr/sim
 
 VPATH = .
+VPATH += ./include
 VPATH += ${simavr}/examples/parts
 
 LDFLAGS += -lpthread -lutil
