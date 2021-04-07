@@ -26,7 +26,7 @@ bootloader_addr = 0x7800 # Start of BLS on the Atmega328p in BYTES
 simavr = ./simavr
 includedir = ./include
 
-INCLUDE_FILES := $(wildcard $(includedir/*.c)
+INCLUDE_FILES := $(wildcard $(includedir/*.c))
 
 # From https://www.pololu.com/docs/0J61/6.3
 AVR_CFLAGS=-g -Wall -mcall-prologues -mmcu=$(MCU) -Os
