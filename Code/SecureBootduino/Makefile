@@ -26,6 +26,8 @@ bootloader_addr = 0x7800 # Start of BLS on the Atmega328p in BYTES
 simavr = ./simavr
 includedir = ./include
 
+INCLUDE_FILES := $(wildcard $(includedir/*.c)
+
 # From https://www.pololu.com/docs/0J61/6.3
 AVR_CFLAGS=-g -Wall -mcall-prologues -mmcu=$(MCU) -Os
 AVR_LDFLAGS=-Wl,-gc-sections -Wl,-relax -I ${includedir}
@@ -55,12 +57,12 @@ ${target}: ${board}
 	@echo $@ done
 
 payload:
-	@${AVR_CC} ${AVR_CFLAGS} ${AVR_LDFLAGS} ${payload}.c -o ${payload}.elf
+	@${AVR_CC} ${AVR_CFLAGS} ${AVR_LDFLAGS} ${payload}.c ${INCLUDE_FILES} -o ${payload}.elf
 	@avr-objcopy -R .eeprom -O ihex ${payload}.elf ${payload}.hex
 	avr-size ${payload}.hex
 
 bootloader:
-	@${AVR_CC} ${AVR_CFLAGS} ${AVR_LDFLAGS} ${AVR_BOOTLOADER_LDFLAGS} ${bootloader}.c -o ${bootloader}.elf
+	@${AVR_CC} ${AVR_CFLAGS} ${AVR_LDFLAGS} ${AVR_BOOTLOADER_LDFLAGS} ${bootloader}.c ${INCLUDE_FILES} -o ${bootloader}.elf
 	@avr-objcopy -j .text -j .data -O ihex ${bootloader}.elf ${bootloader}.hex
 	avr-size ${bootloader}.hex
 	
