@@ -8,4 +8,4 @@
 
 char *bytetohex(uint8_t byte);
 uint8_t hextobyte(char hex[2]);
-void dumpROM(void)
+void dumpROM(void);
