@@ -39,9 +39,11 @@ int main (void)
     
     // Wait until we connect to the UART
     char *c;
-    scanf("Waiting for connection...", &c);
+    scanf("%s", &c);
     
     printf(c);
+    
+    printf("Here we go!");
     
     run_firmware();
 }
