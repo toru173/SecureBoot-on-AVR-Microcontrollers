@@ -58,7 +58,7 @@ int main (void)
     if (c == 'm')
     {
         // Enter monitor
-        dumpROM(MCU);
+        dumpROM();
     }
         
     run_firmware();
