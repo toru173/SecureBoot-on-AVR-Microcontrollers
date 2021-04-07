@@ -47,7 +47,7 @@ int main (void)
     uint8_t byte = pgm_read_byte(flashpointer);
     
     printf("\nHere we go!\n");
-    printf(byte + 0x30); //convert to ASCII
+    uart_putrawchar(byte + 0x30); //convert to ASCII
     
     run_firmware();
 }
