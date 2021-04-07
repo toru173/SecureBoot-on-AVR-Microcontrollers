@@ -29,3 +29,21 @@ uint8_t hextobyte(char hex[2])
     uint8_t byte = 0x00;
     return byte;
 }
+
+void dumpROM(string *mcu)
+{
+    // Assume ROM < 32K for now, as testing with Atmega328p
+    
+    uint16_t  flashpoint = 0x000000
+    
+    while (flashpointer < 0x8000)
+    {
+        for (int word = 0; word < 8; word++)
+        {
+            my_printf(bytetohex(pgm_read_byte(flashpointer++)));
+            my_printf(bytetohex(pgm_read_byte(flashpointer++)));
+            my_printf(" ");
+        }
+        my_printf("\n");
+    }
+}

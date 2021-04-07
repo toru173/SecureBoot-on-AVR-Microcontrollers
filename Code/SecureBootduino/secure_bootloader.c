@@ -53,17 +53,12 @@ int main (void)
     
     uint16_t flashpointer = 0x0000;
     
-    uart_getrawchar(); // Wait for input before continuing
+    char *c = uart_getrawchar(); // Wait for input before continuing
     
-    while (flashpointer < 0x8000)
+    if (c == 'm')
     {
-        for (int word = 0; word < 8; word++)
-        {
-            my_printf(bytetohex(pgm_read_byte(flashpointer++)));
-            my_printf(bytetohex(pgm_read_byte(flashpointer++)));
-            my_printf(" ");
-        }
-        my_printf("\n");
+        // Enter monitor
+        dumpROM(MCU);
     }
         
     run_firmware();
