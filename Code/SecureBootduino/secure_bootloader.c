@@ -50,9 +50,7 @@ int main (void)
     #ifdef DEBUG
     stdout = stdin = stderr = &uart_stdio;
     #endif
-    
-    uint16_t flashpointer = 0x0000;
-    
+        
     char c = uart_getrawchar(); // Wait for input before continuing
     
     if (c == 'm')
