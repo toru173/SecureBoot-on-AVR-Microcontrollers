@@ -9,7 +9,7 @@
 #include <avr/sleep.h>
 
 #ifdef DEBUG
-#include <stdio.h> // Handy for debugging but bloats code
+#include <stdio.h> // Handy for debugging but bloats code significantly
 #endif
 
 #include "mcu_defs.h"
