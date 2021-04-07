@@ -68,12 +68,12 @@ char *bytetohex(uint8_t byte)
     uint8_t nybble0 = (byte >> 4) & 0x0F;
     uint8_t nybble1 = byte& 0x0F;
     if (nybble0 > 0x09)
-        nybble0 += 0x41; // A-F
+        nybble0 += 0x40; // A-F
     else
         nybble0 += 0x30; // 0-9
 
     if (nybble1 > 0x09)
-        nybble1 += 0x41; // A-F
+        nybble1 += 0x40; // A-F
     else
         nybble1 += 0x30; // 0-9
     c[0] = nybble0;
