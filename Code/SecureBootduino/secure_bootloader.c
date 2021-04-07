@@ -3,6 +3,7 @@
  */
 
 // #define DEBUG
+#define USERAWSTRINGS
 
 #include <avr/io.h>
 #include <avr/pgmspace.h>
