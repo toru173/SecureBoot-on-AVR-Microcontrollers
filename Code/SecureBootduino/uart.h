@@ -56,7 +56,7 @@ int uart_getrawchar()
 
 void my_printf(char *string)
 {
-    for (int i = 0; i < len(string) - 1; i++)
+    for (int i = 0; i < sizeof(string); i++)
     {
         uart_putrawchar(string[i]);
     }
@@ -64,10 +64,10 @@ void my_printf(char *string)
 
 char *bytetohex(uint8_t byte)
 {
-    char c[2];
+    char *c = "\0\0";
     c[0] = byte & 0xF0;
     c[1] = byte & 0x0F;
-    return *c;
+    return &c;
 }
 
 // Finish me later
