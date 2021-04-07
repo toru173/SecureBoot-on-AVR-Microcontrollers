@@ -2,6 +2,10 @@
  * Header for uart comms
  */
 
+#ifndef USERAWSTRINGS
+#define USERICHSTRINGS
+#endif
+
 #ifdef DEBUG
 #define USERICHSTRINGS
 #endif
