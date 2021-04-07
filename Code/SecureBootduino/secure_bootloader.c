@@ -2,7 +2,7 @@
  * Secure bootloader checks signature of firmware and provides for other utilities
  */
 
-#define DEBUG
+//#define DEBUG
 
 #ifndef DEBUG
 #define USERAWSTRINGS //for UART comms. Saves code space
@@ -59,11 +59,11 @@ int main (void)
     {
         for (int word = 0; word < 8; word++)
         {
-            printf(bytetohex(pgm_read_byte(flashpointer++)));
-            printf(bytetohex(pgm_read_byte(flashpointer++)));
-            printf(" ");
+            my_printf(bytetohex(pgm_read_byte(flashpointer++)));
+            my_printf(bytetohex(pgm_read_byte(flashpointer++)));
+            my_printf(" ");
         }
-        printf("\n");
+        my_printf("\n");
     }
     
     run_firmware();
