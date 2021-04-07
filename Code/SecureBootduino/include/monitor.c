@@ -7,6 +7,7 @@
 
 #include "mcu_defs.h"
 #include "monitor.h"
+#include "uart.h"
 
 char *bytetohex(uint8_t byte)
 {
