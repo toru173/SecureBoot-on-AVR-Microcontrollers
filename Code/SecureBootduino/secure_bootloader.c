@@ -50,9 +50,9 @@ int main (void)
     
     uart_getrawchar(); // Wait for input before continuing
     
-    for (int lines = 0; l < maxlines; lines++)
+    for (int line = 0; line < maxlines; line++)
     {
-        for (int words = 0; words < 8; words++)
+        for (int word = 0; word < 8; word++)
         {
             my_printf(bytetohex(pgm_read_byte(flashpointer++)));
             my_printf(bytetohex(pgm_read_byte(flashpointer++)));
