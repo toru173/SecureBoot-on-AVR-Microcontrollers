@@ -40,6 +40,7 @@ IPATH += ${simavr}/include
 IPATH += ${simavr}/simavr/sim
 
 VPATH = .
+VPATH += ${includedir}
 VPATH += ${simavr}/examples/parts
 
 LDFLAGS += -lpthread -lutil
