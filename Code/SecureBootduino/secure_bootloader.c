@@ -3,10 +3,7 @@
  */
 
 #include <avr/io.h>
-#include <avr/boot.h>
 #include <avr/sleep.h>
-
-#include <stdio.h>
 
 #include "mcu_defs.h"
 #include "secure_bootloader.h"
@@ -17,7 +14,10 @@
 #include <util/setbaud.h>
 #include <util/delay.h>
 
+// Set up USART
 #include "uart.h"
+
+#include <stdio.h>
 
 /*
  * This demonstrate how to use the avr_mcu_section.h file
