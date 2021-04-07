@@ -2,10 +2,13 @@
  * Secure bootloader checks signature of firmware and provides for other utilities
  */
 
+#define DEBUG
+
 #include <avr/io.h>
+#include <avr/pgmspace.h>
 #include <avr/sleep.h>
 
-#include <stdio.h>
+#include <stdio.h> // Handy for debugging but bloats code. Can be stripped!
 
 #include "mcu_defs.h"
 #include "secure_bootloader.h"
@@ -34,11 +37,10 @@ int main (void)
     uart_init();
     stdout = stdin = stderr = &uart_stdio;
     
-    while (1)
-    {
-        printf("Hello World!\n");
-        _delay_ms(1000);
-    }
+    // Wait until we connect to the UART
+    char c = uart_getchar();
+    
+    printf(c);
     
     run_firmware();
 }
