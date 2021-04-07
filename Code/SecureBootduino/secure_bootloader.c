@@ -40,7 +40,7 @@ int main (void)
     // Wait until we connect to the UART
     char c = uart_getchar(&uart_stdio);
     
-    uart_putchar(&c, &uart_stdio)
+    uart_putchar(&c, &uart_stdio);
     
     printf("Here we go!");
     
