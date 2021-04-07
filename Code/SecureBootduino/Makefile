@@ -56,12 +56,12 @@ ${target}: ${board}
 payload:
 	@${AVR_CC} ${AVR_CFLAGS} ${AVR_LDFLAGS} ${payload}.c -o ${payload}.elf
 	@avr-objcopy -R .eeprom -O ihex ${payload}.elf ${payload}.hex
-	@avr-size ${payload}.hex
+	avr-size ${payload}.hex
 
 bootloader:
 	@${AVR_CC} ${AVR_CFLAGS} ${AVR_LDFLAGS} ${AVR_BOOTLOADER_LDFLAGS} ${bootloader}.c -o ${bootloader}.elf
 	@avr-objcopy -j .text -j .data -O ihex ${bootloader}.elf ${bootloader}.hex
-	@avr-size ${bootloader}.hex
+	avr-size ${bootloader}.hex
 	
 # Hex merging from https://www.avrfreaks.net/forum/merging-bootloader-hex-file-and-application-hex-file-one
 # simduino doesn't like an Intel Hex file with multiple segments (it will only load the first)
@@ -75,11 +75,11 @@ binary: payload bootloader
 	
 debug:
 	@export SIMAVR_UART_XTERM=1
-	@${OBJ}/${target}.elf -d binary.hex
+	${OBJ}/${target}.elf -d binary.hex
 
 simulate:
 	@export SIMAVR_UART_XTERM=1
-	@${OBJ}/${target}.elf -v binary.hex
+	${OBJ}/${target}.elf -v binary.hex
 
 clean: clean-${OBJ}
 	rm -rf *.a *.axf ${target} *.vcd *.hex *.o *.bin *.elf
