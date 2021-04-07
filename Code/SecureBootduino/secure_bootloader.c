@@ -24,6 +24,9 @@
 // Set up USART
 #include "uart.h"
 
+// Monitor
+#include "monitor.h"
+
 /*
  * This demonstrate how to use the avr_mcu_section.h file
  * The macro adds a section to the ELF file with useful
@@ -43,8 +46,6 @@ int main (void)
     #ifdef DEBUG
     stdout = stdin = stderr = &uart_stdio;
     #endif
-    
-    int maxlines = 8;
     
     uint16_t flashpointer = 0x0000;
     
