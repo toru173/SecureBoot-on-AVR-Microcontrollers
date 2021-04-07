@@ -28,7 +28,7 @@ int uart_putchar(char c, FILE *stream)
 int uart_putrawchar(char c)
 {
     if (c == '\n')
-        uart_putchar('\r'); // Handle newline
+        uart_putrawchar('\r'); // Handle newline
     loop_until_bit_is_set(UCSR0A, UDRE0); // Wait for transmit buffer to be empty
     UDR0 = c;
     
@@ -49,6 +49,6 @@ int uart_getrawchar()
     char c;
     loop_until_bit_is_set(UCSR0A, RXC0); // Wait until byte received
     c = UDR0;
-    uart_putchar(c, stream); //echo byte back so we can see what we typed
+    uart_putrawchar(c); //echo byte back so we can see what we typed
     return c;
 }
