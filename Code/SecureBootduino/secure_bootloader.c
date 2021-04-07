@@ -44,7 +44,7 @@ int main (void)
     stdout = stdin = stderr = &uart_stdio;
     #endif
     
-    uint16_t lines = 8;
+    int maxlines = 8;
     
     uint16_t flashpointer = 0x0000;
     
