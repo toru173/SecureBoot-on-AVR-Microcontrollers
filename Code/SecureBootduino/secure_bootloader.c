@@ -31,9 +31,9 @@ int main (void)
     uart_init();
     stdout = stdin = stderr = &uart_stdio;
     
-    for (int i = 10; i > -1; i--)
+    while (1)
     {
-        printf("Hello from the bootloader! Starting main application firmware in: %d\n", i);
+        printf("Hello World!\n");
         _delay_ms(1000);
     }
     
