@@ -2,6 +2,7 @@
  * Header files for monitor comms
  */
 
+#include <avr/io.h>
 #include "monitor.h"
 
 char *bytetohex(uint8_t byte)
