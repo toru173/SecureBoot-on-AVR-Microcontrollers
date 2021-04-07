@@ -39,7 +39,10 @@ FILE uart_stdio = FDEV_SETUP_STREAM(uart_putchar, uart_getchar, _FDEV_SETUP_RW);
 int main (void)
 {
     uart_init();
+    
+    #ifdef DEBUG
     stdout = stdin = stderr = &uart_stdio;
+    #endif
     
     uint16_t flashpointer = 0x0000;
     
