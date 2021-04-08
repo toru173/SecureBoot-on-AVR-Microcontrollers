@@ -75,8 +75,8 @@ int main (void)
     char c = uart_getrawchar(); // Wait for input before continuing
     
     //AVRNaCl Defines (Could be put in their own header, above?)
-    const unsigned char *h;
-    const unsigned char *m;
+    static unsigned char *h;
+    static unsigned char *m;
     
     h  = calloc(crypto_hashblocks_STATEBYTES,1);
     if(!h) my_printf("allocation of h failed\n");
