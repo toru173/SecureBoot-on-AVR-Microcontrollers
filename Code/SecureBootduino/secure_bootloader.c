@@ -55,9 +55,6 @@ uint16_t *get512block(uint16_t baseaddress) // Address always less than 64K
         return NULL;
     for (uint16_t i = baseaddress; i < (baseaddress + 64); i++)
     {
-        my_printf("Reading byte ");
-        my_printf(bytetohex((uint8_t) i));
-        my_printf("\n");
         *(buffer + i) = pgm_read_byte(baseaddress + i);
     }
     return buffer;
@@ -78,15 +75,6 @@ int main (void)
         // Enter monitor
         uint16_t *blockptr = get512block(0x0000);
         my_printf("\ngot block!\n");
-
-        for (int i = 0; i < 64; i++)
-        {
-            my_printf("Byte ");
-            my_printf(bytetohex((uint8_t) i));
-            my_printf(" in block is: ");
-            my_printf(bytetohex(*(blockptr + i)));
-            my_printf("\n");
-        }
         
         free(blockptr);
     }
