@@ -93,10 +93,12 @@ int main (void)
         for (int i = 0; i < BLOCK_SIZE_BYTES; i++)
           m[i] = 0x00;
         
+        m[0] = '\0';
+        
         //uint16_t *blockptr = get1024block(0x0000);
 
         my_printf("\nHashing beginning. Success should be zero:\n");
-        my_printf(bytetohex((uint8_t) (crypto_hashblocks_sha512(h, m, 127))));
+        my_printf(bytetohex((uint8_t) (crypto_hashblocks_sha512(h, m, 128))));
         my_printf("\nhashing finished!\n");
         
         for (int i = 0; i < 64; i++)
