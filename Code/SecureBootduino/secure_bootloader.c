@@ -73,6 +73,7 @@ int main (void)
         // Enter monitor
         uint16_t *blockptr = get512block(0x0000);
         my_printf("\ngot block!\n");
+        _delay_ms(500);
         for (int i = 0; i < 64; i++)
         {
             my_printf("Block:\n");
