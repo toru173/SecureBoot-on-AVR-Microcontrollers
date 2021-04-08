@@ -29,7 +29,7 @@ avrnacl = include/avrnacl
 
 INCLUDE_FILES = $(wildcard ${includedir}/*.c)
 AVRNACL_FILES = $(wildcard ${avrnacl}/*.c)
-AVRNACL_FILES += $(wildcard ${avrnacl}/*.S)
+AVRNACL_FILES += $(wildcard ${avrnacl}/assembly/*.S)
 
 # From https://www.pololu.com/docs/0J61/6.3
 AVR_CFLAGS=-g -Wall -mcall-prologues -mmcu=$(MCU) -Os
