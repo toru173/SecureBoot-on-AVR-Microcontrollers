@@ -48,6 +48,7 @@ AVR_MCU(F_CPU, MCU);
 FILE uart_stdio = FDEV_SETUP_STREAM(uart_putchar, uart_getchar, _FDEV_SETUP_RW);
 #endif
 
+
 uint16_t *get512block(uint16_t baseaddress) // Address always less than 64K
 {
     uint16_t *buffer = malloc(64); // 64 byte (512 bit) buffer
@@ -59,6 +60,7 @@ uint16_t *get512block(uint16_t baseaddress) // Address always less than 64K
     }
     return buffer;
 }
+
 
 int main (void)
 {
@@ -73,7 +75,7 @@ int main (void)
     if (c == 'm')
     {
         // Enter monitor
-        uint16_t *blockptr = get512block(0x0000);
+        uint16_t *blockptr = get512block(0x7000);
         my_printf("\ngot block!\n");
         
         free(blockptr);
