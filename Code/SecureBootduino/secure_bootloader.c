@@ -77,9 +77,10 @@ int main (void)
         // Enter monitor
         uint16_t *blockptr = get512block(0x7000);
         my_printf("\ngot block!\n");
+        
         for (int i = 0; i < 64; i++)
         {
-            my_printf(bytetohex((uint8_t) *(blockptr + i)));
+            my_printf(bytetohex(*(blockptr + i)));
         }
         free(blockptr);
     }
