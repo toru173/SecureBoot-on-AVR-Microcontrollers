@@ -72,12 +72,12 @@ int main (void)
         unsigned char hash[STATE_VEC_BYTES];
         unsigned char block[BLOCK_SIZE_BYTES];
         
-        for (int i = 0, i < BLOCK_SIZE_BYTES, i++)
+        for (int i = 0; i < BLOCK_SIZE_BYTES; i++)
             block[i] = 0;
 
         my_printf("\nHashing beginning. Success should be zero: ");
         my_printf(bytetohex((uint8_t) crypto_hashblocks_512(hash, block, sizeof(block));
-        my_printf("\nhashing finished!\n");
+        my_printf("\nhashing finished! Complete hash:\n");
         
         for (int i = 0; i < 64; i++)
             my_printf(bytetohex(hash[i]));
