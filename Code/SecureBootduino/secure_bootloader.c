@@ -46,6 +46,16 @@ AVR_MCU(F_CPU, MCU);
 FILE uart_stdio = FDEV_SETUP_STREAM(uart_putchar, uart_getchar, _FDEV_SETUP_RW);
 #endif
 
+uint16_t *get512block(uint16_t *baseaddress) // Address always less than 64K
+{
+    uint16_t *buffer = malloc(64) // 64 byte (512 bit) buffer
+    if (!buffer) // Unable to allocate
+        return -1;
+    for (uint16_t i = baseaddress; i < 64; i++)
+        *(buffer + i) = pgm_read_byte(baseaddress + i);
+    return *buffer
+}
+
 int main (void)
 {
     uart_init();
@@ -59,7 +69,8 @@ int main (void)
     if (c == 'm')
     {
         // Enter monitor
-        dumpROM();
+        unint16_t *rom = *get512block(0x0000);
+        my_printf(rom);
     }
         
     run_firmware();
