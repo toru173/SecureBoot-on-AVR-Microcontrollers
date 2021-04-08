@@ -78,9 +78,9 @@ int main (void)
         
     char c = uart_getrawchar(); // Wait for input before continuing
     
-    h  = malloc(crypto_hashblocks_STATEBYTES,1);
+    h  = malloc(crypto_hashblocks_STATEBYTES);
     if(!h) my_printf("allocation of h failed");
-    m  = malloc(MAXTEST_BYTES,1);
+    m  = malloc(MAXTEST_BYTES);
     if(!m) my_printf("allocation of m failed");
     
     if (c == 'm')
