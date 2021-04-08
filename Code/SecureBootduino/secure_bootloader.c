@@ -2,7 +2,7 @@
  * Secure bootloader checks signature of firmware and provides for other utilities
  */
 
-#define DEBUG
+//#define DEBUG
 
 #ifndef DEBUG
 #define USERAWSTRINGS //for UART comms. Saves code space
@@ -70,22 +70,20 @@ int main (void)
     
     if (c == 'm')
     {
-        printf("\nHello from the bootloader!\n");
         // Enter monitor
-        //uint16_t *blockptr = get512block(0x0000);
+        uint16_t *blockptr = get512block(0x0000);
         my_printf("\ngot block!\n");
-        //_delay_ms(500);
-        /*
+
         for (int i = 0; i < 64; i++)
         {
-            my_printf("Block:\n");
+            my_printf("Byte ");
             my_printf((char *) i);
-            my_printf("\nbyte is:\n");
+            my_printf(" in block is: ");
             my_printf(bytetohex(*(blockptr + i)));
             my_printf("\n");
         }
-         */
-        //free(blockptr);
+        
+        free(blockptr);
     }
     _delay_ms(1000);
     run_firmware();
