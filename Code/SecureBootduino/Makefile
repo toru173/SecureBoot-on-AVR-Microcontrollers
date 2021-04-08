@@ -33,7 +33,7 @@ AVRNACL_FILES += $(wildcard ${cryptofiles}/assembly/*.S)
 
 # From https://www.pololu.com/docs/0J61/6.3
 AVR_CFLAGS=-g -Wall -mcall-prologues -mmcu=$(MCU) -Os
-AVR_LDFLAGS=-Wl,-gc-sections -Wl,-relax -I${includedir} -I${avrnacl}
+AVR_LDFLAGS=-Wl,-gc-sections -Wl,-relax -I${includedir} -I${cryptofiles}
 AVR_BOOTLOADER_LDFLAGS=-Wl,--section-start=.text=${bootloader_addr}
 AVR_CC=avr-gcc
 
