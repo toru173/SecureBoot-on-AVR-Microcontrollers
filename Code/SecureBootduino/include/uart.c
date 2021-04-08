@@ -71,8 +71,10 @@ int uart_getrawchar()
 
 void my_printf(char *string)
 {
+    int i = 0;
     while (string[i] != '\0') // C strings are null terminated
     {
         uart_putrawchar(string[i]);
+        i++;
     }
 }
