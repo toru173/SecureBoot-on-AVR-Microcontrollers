@@ -104,9 +104,6 @@ int main (void)
         
         my_printf("\n");
         
-        free(h);
-        free(m);
-        
     }
     _delay_ms(1000);
     run_firmware();
