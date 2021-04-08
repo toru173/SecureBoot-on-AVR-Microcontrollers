@@ -33,7 +33,7 @@
 
 //AVRNaCl Encryption Library
 #include "avrnacl.h"
-#include "random.h"
+#include "randombytes.h"
 
 #define MAXTEST_BYTES
 
