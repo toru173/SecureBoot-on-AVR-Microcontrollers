@@ -53,8 +53,13 @@ uint16_t *get512block(uint16_t *baseaddress) // Address always less than 64K
     uint16_t *buffer = malloc(64); // 64 byte (512 bit) buffer
     if (!buffer) // Unable to allocate
         return NULL;
-    for (uint16_t i = *baseaddress; i < *(baseaddress + 64); i++)
+    for (uint16_t i = baseaddress; i < (baseaddress + 64); i++)
+    {
+        my_printf("Reading byte ");
+        my_printf(bytetohex((uint8_t) i));
+        my_printf("\n");
         *(buffer + i) = pgm_read_byte(baseaddress + i);
+    }
     return buffer;
 }
 
