@@ -23,9 +23,9 @@ trailing_bytes = 13
 bootloader = secure_bootloader
 MCU=atmega328p
 bootloader_addr = 0x7000 # Start of BLS on the Atmega2560 in BYTES
-simavr = ./simavr
-includedir = ./include
-avrnacl = ./include/avrnacl
+simavr = simavr
+includedir = include
+avrnacl = include/avrnacl
 
 INCLUDE_FILES = $(wildcard ${includedir}/*.c)
 AVRNACL_FILES = $(wildcard ${avrnacl}/*.c)
