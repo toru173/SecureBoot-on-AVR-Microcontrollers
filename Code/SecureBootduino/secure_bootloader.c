@@ -31,6 +31,9 @@
 // Monitor
 #include "monitor.h"
 
+//AVRNaCL Encryption Library
+#include "avrnacl.h"
+
 /*
  * This demonstrate how to use the avr_mcu_section.h file
  * The macro adds a section to the ELF file with useful
