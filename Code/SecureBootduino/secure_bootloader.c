@@ -73,7 +73,7 @@ int main (void)
         // Enter monitor
         uint16_t blockptr = *get512block(0x0000);
         for (int i = 0; i < 64; i++)
-            my_printf(&(blockptr + i));
+            my_printf((char)(blockptr + i));
         free(blockptr);
     }
         
