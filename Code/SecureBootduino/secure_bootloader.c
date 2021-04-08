@@ -82,8 +82,11 @@ int main (void)
     static unsigned char m[BLOCK_SIZE_BYTES];
      */
     
+    static unsigned char *h;
+    static unsigned char *m;
+    
     h = calloc(STATE_VEC_BYTES,1);
-    if(!h2) my_printf("allocation of h2 failed");
+    if(!h) my_printf("allocation of h2 failed");
     m  = calloc(BLOCK_SIZE_BYTES,1);
     if(!m) my_printf("allocation of m failed");
     
@@ -99,8 +102,8 @@ int main (void)
             my_printf(bytetohex(h[i]));
         
         // Zero block
-        for (int i = 0; i < BLOCK_SIZE_BYTES; i++)
-          m[i] = 0x00;
+        //for (int i = 0; i < BLOCK_SIZE_BYTES; i++)
+        //  m[i] = 0x00;
         
         //uint16_t *blockptr = get1024block(0x0000);
 
