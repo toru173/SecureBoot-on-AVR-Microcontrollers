@@ -35,7 +35,7 @@
 
 //AVRNaCl Encryption Library
 #include "avrnacl.h"
-#define MAXTEST_BYTES 1024
+#define MAXTEST_BYTES 128
 
 
 /*
@@ -87,11 +87,22 @@ int main (void)
     {
         // Enter monitor
         my_printf("\nWelcome to the monitor\n");
-
-        my_printf("Hashing beginning...\n");
-        crypto_hashblocks_sha512(h, m, 128);
         
+        // Create IV
+        for (i = 0; i < 64; i++)
+          h[i] = avrnacl_sha512_iv[i];
+        
+        uint16_t *blockptr = get1024block(0x0000);
+        
+        for (i = 0; i < 128; i++)
+            m[i] = blockptr[i];
+
+        my_printf("Hashing beginning. Success should be zero...\n");
+        myprintf(bytetohex((uint8_t) (crypto_hashblocks_sha512(h, m, 128))));
         my_printf("\nhashing finished!\n");
+        
+        for (i = 0; i < 64; i++)
+            my_printf(bytetohex(h[i]));
         
         free(h);
         free(m);
