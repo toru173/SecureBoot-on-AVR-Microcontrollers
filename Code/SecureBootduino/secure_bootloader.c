@@ -4,6 +4,8 @@
 
 //#define DEBUG
 
+#include <stdlib.h>
+
 #ifndef DEBUG
 #define USERAWSTRINGS //for UART comms. Saves code space
 #endif
@@ -35,8 +37,6 @@
 #include "avrnacl.h"
 #include "randombytes.h"
 
-#define MAXTEST_BYTES
-
 #define STATE_VEC_BYTES 64
 #define BLOCK_SIZE_BYTES 128
 
@@ -53,6 +53,13 @@ AVR_MCU(F_CPU, MCU);
 FILE uart_stdio = FDEV_SETUP_STREAM(uart_putchar, uart_getchar, _FDEV_SETUP_RW);
 #endif
 
+#define MAXTEST_BYTES (1024 + BLOCK_SIZE_BYTES)
+
+static unsigned char *h;
+static unsigned char *h2;
+static unsigned char *m;
+static unsigned char *m2;
+
 int main (void)
 {
     uart_init();
@@ -66,6 +73,8 @@ int main (void)
     if (c == 'm')
     {
         // Enter monitor
+        
+        
         
         long long i;
         long long j;
