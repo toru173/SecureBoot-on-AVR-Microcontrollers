@@ -79,7 +79,7 @@ int main (void)
         my_printf("\ngot block!\n");
         for (int i = 0; i < 64; i++)
         {
-            my_printf(bytestohex((uint8_t) *(blockptr + i)))
+            my_printf(bytetohex((uint8_t) *(blockptr + i)))
         }
         free(blockptr);
     }
