@@ -37,9 +37,10 @@
 #include "avrnacl.h"
 
 //AVRNaCl Defines (Could be put in their own header, above?)
-
 static unsigned char *h;
 static unsigned char *m;
+
+#define MAXTEST_BYTES 1024
 
 /*
  * This demonstrate how to use the avr_mcu_section.h file
@@ -86,13 +87,13 @@ int main (void)
     {
         // Enter monitor
         my_printf("\nWelcome to the monitor\n");
-        uint16_t *blockptr = get1024block(0x7000);
+        //uint16_t *blockptr = get1024block(0x7000);
 
         crypto_hashblocks(h,m,0);
         
         my_printf("\nhashing finished!\n");
         
-        free(blockptr);
+        //free(blockptr);
         
     }
     _delay_ms(1000);
