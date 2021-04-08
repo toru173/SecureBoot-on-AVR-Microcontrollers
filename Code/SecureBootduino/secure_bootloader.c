@@ -77,7 +77,7 @@ int main (void)
         // Enter monitor
         my_printf("\nWelcome to the monitor\n");
         
-        /*uint16_t *blockptr = get512block(0x7000);
+        uint16_t *blockptr = get512block(0x0100);
         
         my_printf("\ngot block!\n");
         
@@ -85,8 +85,8 @@ int main (void)
         {
             my_printf(bytetohex(*(blockptr + i)));
         }
-        //free(blockptr);
-         */
+        free(blockptr);
+        
     }
     _delay_ms(1000);
     run_firmware();
