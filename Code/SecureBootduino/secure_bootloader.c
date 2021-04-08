@@ -90,16 +90,16 @@ int main (void)
         my_printf("\nWelcome to the monitor\n");
         
         // Create IV
-        for (i = 0; i < 64; i++)
+        for (int i = 0; i < 64; i++)
           h[i] = avrnacl_sha512_iv[i];
         
-        uint16_t blockptr = get1024block(0x0000);
+        uint16_t *blockptr = get1024block(0x0000);
         
         for (int i = 0; i < 128; i++)
             m[i] = blockptr[i];
 
         my_printf("Hashing beginning. Success should be zero...\n");
-        myprintf(bytetohex((uint8_t) (crypto_hashblocks_sha512(h, m, 128))));
+        my_printf(bytetohex((uint8_t) (crypto_hashblocks_sha512(h, m, 128))));
         my_printf("\nhashing finished!\n");
         
         for (i = 0; i < 64; i++)
