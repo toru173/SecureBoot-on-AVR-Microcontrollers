@@ -75,6 +75,8 @@ int main (void)
     if (c == 'm')
     {
         // Enter monitor
+        my_printf("Welcome to the monitor");
+        
         uint16_t *blockptr = get512block(0x7000);
         my_printf("\ngot block!\n");
         
