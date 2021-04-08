@@ -48,7 +48,7 @@ AVR_MCU(F_CPU, MCU);
 FILE uart_stdio = FDEV_SETUP_STREAM(uart_putchar, uart_getchar, _FDEV_SETUP_RW);
 #endif
 
-uint16_t *get512block(uint16_t *baseaddress) // Address always less than 64K
+uint16_t *get512block(uint16_t baseaddress) // Address always less than 64K
 {
     uint16_t *buffer = malloc(64); // 64 byte (512 bit) buffer
     if (!buffer) // Unable to allocate
