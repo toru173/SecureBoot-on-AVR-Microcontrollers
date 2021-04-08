@@ -35,6 +35,7 @@
 
 //AVRNaCl Encryption Library
 #include "avrnacl.h"
+#include "consts.c"
 #define MAXTEST_BYTES 128
 
 
@@ -94,7 +95,7 @@ int main (void)
         
         uint16_t *blockptr = get1024block(0x0000);
         
-        for (i = 0; i < 128; i++)
+        for (int i = 0; i < 128; i++)
             m[i] = blockptr[i];
 
         my_printf("Hashing beginning. Success should be zero...\n");
