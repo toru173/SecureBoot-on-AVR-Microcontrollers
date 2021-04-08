@@ -102,7 +102,7 @@ int main (void)
         my_printf(bytetohex((uint8_t) (crypto_hashblocks_sha512(h, m, 128))));
         my_printf("\nhashing finished!\n");
         
-        for (i = 0; i < 64; i++)
+        for (int i = 0; i < 64; i++)
             my_printf(bytetohex(h[i]));
         
         free(h);
