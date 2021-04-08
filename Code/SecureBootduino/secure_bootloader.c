@@ -93,7 +93,7 @@ int main (void)
         for (i = 0; i < 64; i++)
           h[i] = avrnacl_sha512_iv[i];
         
-        uint16_t *blockptr = get1024block(0x0000);
+        uint16_t blockptr = get1024block(0x0000);
         
         for (int i = 0; i < 128; i++)
             m[i] = blockptr[i];
