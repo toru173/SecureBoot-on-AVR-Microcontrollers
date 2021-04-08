@@ -89,7 +89,8 @@ int main (void)
         my_printf("\nWelcome to the monitor\n");
         //uint16_t *blockptr = get1024block(0x7000);
 
-        crypto_hashblocks(h,m,0);
+        my_printf("Hashing beginning...\n");
+        crypto_hashblocks(h,m,2**15);
         
         my_printf("\nhashing finished!\n");
         
