@@ -73,7 +73,7 @@ int main (void)
         unsigned char block[BLOCK_SIZE_BYTES];
         
         for (int i = 0; i < BLOCK_SIZE_BYTES; i++)
-            block[i] = pgm_read_byte[i];
+            block[i] = pgm_read_byte(i);
 
         my_printf("\n");
         my_printf(bytetohex(sizeof(block)));
