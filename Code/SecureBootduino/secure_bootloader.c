@@ -37,20 +37,6 @@
 #include "avrnacl.h"
 
 //AVRNaCl Defines (Could be put in their own header, above?)
-#undef crypto_hashblocks
-#undef crypto_hashblocks_STATEBYTES
-#undef crypto_hashblocks_BLOCKBYTES
-
-#define CONCAT(x,y) x ## y
-#define CONCAT3(x,y,z) x ## y ## z
-#define XCONCAT(x,y) CONCAT(x,y)
-#define XCONCAT3(x,y,z) CONCAT3(x,y,z)
-#define XSTR(s) STR(s)
-#define STR(s) #s
-
-#define crypto_hashblocks             XCONCAT(crypto_hashblocks_,PRIMITIVE)
-#define crypto_hashblocks_STATEBYTES XCONCAT3(crypto_hashblocks_,PRIMITIVE,_STATEBYTES)
-#define crypto_hashblocks_BLOCKBYTES  XCONCAT3(crypto_hashblocks_,PRIMITIVE,_BLOCKBYTES)
 
 static unsigned char *h;
 static unsigned char *m;
