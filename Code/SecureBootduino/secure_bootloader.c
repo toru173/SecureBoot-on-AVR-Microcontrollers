@@ -118,10 +118,10 @@ int main (void)
         my_printf(checksum);
         my_printf("\n");
 
-        h  -= 16;
-        h2 -= 16;
-        m  -= 16;
-        m2 -= 16;
+        *h  -= 16;
+        *h2 -= 16;
+        *m  -= 16;
+        *m2 -= 16;
 
         free(h);
         free(h2);
