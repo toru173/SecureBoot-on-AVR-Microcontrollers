@@ -35,7 +35,6 @@
 
 //AVRNaCl Encryption Library
 #include "avrnacl.h"
-#include "consts.h"
 
 #define STATE_VEC_BYTES 64
 #define BLOCK_SIZE_BYTES 128
@@ -53,20 +52,6 @@ AVR_MCU(F_CPU, MCU);
 FILE uart_stdio = FDEV_SETUP_STREAM(uart_putchar, uart_getchar, _FDEV_SETUP_RW);
 #endif
 
-/*
-uint16_t *get1024block(uint16_t baseaddress) // Address always less than 64K.
-{
-    uint16_t *buffer = malloc(128); // 128 byte (1024 bit) buffer
-    if (!buffer) // Unable to allocate
-        return NULL;
-    for (int i = 0; i < 128; i++)
-    {
-        *(buffer + i) = pgm_read_byte(baseaddress + i);
-    }
-    return buffer;
-}
- */
-
 
 int main (void)
 {
@@ -77,38 +62,15 @@ int main (void)
     #endif
         
     char c = uart_getrawchar(); // Wait for input before continuing
-    /*
-    static unsigned char h[STATE_VEC_BYTES];
-    static unsigned char m[BLOCK_SIZE_BYTES];
-     */
-    
-    static unsigned char *h;
-    static unsigned char *m;
-    
-    h = calloc(STATE_VEC_BYTES,1);
-    if(!h) my_printf("allocation of h2 failed");
-    m  = calloc(BLOCK_SIZE_BYTES,1);
-    if(!m) my_printf("allocation of m failed");
     
     if (c == 'm')
     {
         // Enter monitor
         
-        // Create IV
-        for (int i = 0; i < STATE_VEC_BYTES; i++)
-          h[i] = avrnacl_sha512_iv[i];
-        
-        for (int i = 0; i < 64; i++)
-            my_printf(bytetohex(h[i]));
-        
-        // Zero block
-        //for (int i = 0; i < BLOCK_SIZE_BYTES; i++)
-        //  m[i] = 0x00;
-        
         //uint16_t *blockptr = get1024block(0x0000);
 
         my_printf("\nHashing beginning. Success should be zero: ");
-        my_printf(bytetohex((uint8_t) (crypto_hashblocks_sha512(h, m, 128))));
+        my_printf(bytetohex((uint8_t) (crypto_hash_sha512(h, m, 128))));
         my_printf("\nhashing finished!\n");
         
         for (int i = 0; i < 64; i++)
