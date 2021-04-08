@@ -1,5 +1,5 @@
 /*
-	simduino.c
+	secureduino.c
 
 	Copyright 2008, 2009 Michel Pollet <buserror@gmail.com>
 
@@ -17,6 +17,8 @@
 
 	You should have received a copy of the GNU General Public License
 	along with simavr.  If not, see <http://www.gnu.org/licenses/>.
+ 
+     Modified 2021 by Thomas Mahoney
  */
 
 #include <unistd.h>
@@ -131,7 +133,7 @@ int main(int argc, char *argv[])
 	printf("%s bootloader 0x%05x: %d bytes\n", mmcu, boot_base, boot_size);
 
 	snprintf(flash_data.avr_flash_path, sizeof(flash_data.avr_flash_path),
-			"simduino_%s_flash.bin", mmcu);
+			"secureduino_%s_flash.bin", mmcu);
 	flash_data.avr_flash_fd = 0;
 	// register our own functions
 	avr->custom.init = avr_special_init;
