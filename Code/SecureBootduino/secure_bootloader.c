@@ -77,9 +77,15 @@ int main (void)
     #endif
         
     char c = uart_getrawchar(); // Wait for input before continuing
-    
+    /*
     static unsigned char h[STATE_VEC_BYTES];
     static unsigned char m[BLOCK_SIZE_BYTES];
+     */
+    
+    h = calloc(STATE_VEC_BYTES,1);
+    if(!h2) my_printf("allocation of h2 failed");
+    m  = calloc(BLOCK_SIZE_BYTES,1);
+    if(!m) my_printf("allocation of m failed");
     
     if (c == 'm')
     {
@@ -98,7 +104,7 @@ int main (void)
         
         //uint16_t *blockptr = get1024block(0x0000);
 
-        my_printf("\nHashing beginning. Success should be zero:\n");
+        my_printf("\nHashing beginning. Success should be zero: ");
         my_printf(bytetohex((uint8_t) (crypto_hashblocks_sha512(h, m, 128))));
         my_printf("\nhashing finished!\n");
         
