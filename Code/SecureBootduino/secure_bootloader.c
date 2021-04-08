@@ -80,21 +80,21 @@ int main (void)
     
     h  = calloc(crypto_hashblocks_STATEBYTES,1);
     if(!h) my_printf("allocation of h failed");
-    m  = calloc(MAXTEST_BYTES,1);
+    m  = get1024block(0x0000);
     if(!m) my_printf("allocation of m failed");
     
     if (c == 'm')
     {
         // Enter monitor
         my_printf("\nWelcome to the monitor\n");
-        //uint16_t *blockptr = get1024block(0x7000);
 
         my_printf("Hashing beginning...\n");
-        crypto_hashblocks(h, m, 32768);
+        my_printf(bytetohex(sizeof(crypto_hashblocks_sha512(h, m, 1024))));
         
         my_printf("\nhashing finished!\n");
         
-        //free(blockptr);
+        free(h)
+        free(m)
         
     }
     _delay_ms(1000);
