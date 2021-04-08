@@ -90,7 +90,7 @@ int main (void)
         //uint16_t *blockptr = get1024block(0x7000);
 
         my_printf("Hashing beginning...\n");
-        crypto_hashblocks(h,m,(2**15));
+        crypto_hashblocks(h, m, 32768);
         
         my_printf("\nhashing finished!\n");
         
