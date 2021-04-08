@@ -1,210 +1,36 @@
 /*
- * File:    avrnacl_8bitc/crypto_hashblocks/sha512.c
+ * File:    avrnacl_small/crypto_hashblocks/sha512.c
  * Author:  Michael Hutter, Peter Schwabe
- * Version: Wed Aug 6 13:19:40 2014 +0200
+ * Version: Wed Aug 6 13:39:23 2014 +0200
  * Public Domain
  */
 
+#include <avr/pgmspace.h> 
+
 #include "avrnacl.h"
 #include "bigint.h"
+
+#define myu64_convert_bigendian avrnacl_myu64_convert_bigendian
+#define Ch avrnacl_Ch
+#define Maj avrnacl_Maj
+#define Sigma avrnacl_Sigma
+#define sigma avrnacl_sigma
+#define M avrnacl_M
+#define expand avrnacl_expand
 
 typedef struct{
   unsigned char v[8];
 } myu64;
 
-static void myu64_load_bigendian(myu64 *r, const unsigned char *x)
-{
-  r->v[7] = x[0];
-  r->v[6] = x[1];
-  r->v[5] = x[2];
-  r->v[4] = x[3];
-  r->v[3] = x[4];
-  r->v[2] = x[5];
-  r->v[1] = x[6];
-  r->v[0] = x[7];
-}
+extern void myu64_convert_bigendian(unsigned char *r, const unsigned char *x, unsigned char length);
+extern void Ch(myu64 *r, const myu64 *x, const myu64 *y, const myu64 *z);
+extern void Maj(myu64 *r, const myu64 *x, const myu64 *y, const myu64 *z);
+extern void Sigma(myu64 *r, const myu64 *x, unsigned char c1, unsigned char c2, unsigned char c3);
+extern void sigma(myu64 *r, const myu64 *x, unsigned char c1, unsigned char c2, unsigned char c3);
+extern void M(myu64 *w0, const myu64 *w14, const myu64 *w9, const myu64 *w1);
+extern void expand(myu64 *w);
 
-static void myu64_store_bigendian(unsigned char *r, const myu64 *x)
-{
-  r[7] = x->v[0];
-  r[6] = x->v[1];
-  r[5] = x->v[2];
-  r[4] = x->v[3];
-  r[3] = x->v[4];
-  r[2] = x->v[5];
-  r[1] = x->v[6];
-  r[0] = x->v[7];
-}
-
-
-static void myu64_add(myu64 *r, const myu64 *x, const myu64 *y)
-{
-  bigint_add(r->v, x->v, y->v, 8);
-}
-
-static void myu64_xor(myu64 *r, const myu64 *x, const myu64 *y)
-{
-  unsigned char i;
-  for(i=0;i<8;i++)
-    r->v[i] = x->v[i] ^ y->v[i];
-}
-
-static void myu64_and(myu64 *r, const myu64 *x, const myu64 *y)
-{
-  unsigned char i;
-  for(i=0;i<8;i++)
-    r->v[i] = x->v[i] & y->v[i];
-}
-
-static void myu64_not(myu64 *r, const myu64 *x)
-{
-  unsigned char i;
-  for(i=0;i<8;i++)
-    r->v[i] = ~x->v[i];
-}
-
-static void myu64_ror(myu64 *r, unsigned char n)
-{
-  myu64 t = *r;
-  unsigned char u = n >> 3;
-  unsigned char l = n & 7;
-  unsigned char i;
-  for(i=0;i<8;i++)
-    r->v[i] = (t.v[(i+u+1)&7] << (8-l)) | (t.v[(i+u)&7] >> l);
-}
-
-// Works for values 6 and 7 as required, does not work generally
-static void myu64_shr(myu64 *r, unsigned char n)
-{
-  unsigned char i;
-  for(i=0;i<7;i++)
-    r->v[i] = (r->v[i] >> n) | (r->v[i+1] << (8-n));
-  r->v[7] >>= n;
-}
-
-static void Ch(myu64 *r, const myu64 *x, const myu64 *y, const myu64 *z)
-{
-  myu64 t;
-  myu64_and(&t,x,y);
-  myu64_not(r,x);
-  myu64_and(r,r,z);
-  myu64_xor(r,r,&t);
-}
-
-static void Maj(myu64 *r, const myu64 *x, const myu64 *y, const myu64 *z)
-{
-  myu64 t0;
-  myu64 t1;
-  myu64_and(&t0,x,y);
-  myu64_and(&t1,x,z);
-  myu64_and(r,y,z);
-  myu64_xor(r,r,&t0);
-  myu64_xor(r,r,&t1);
-}
-
-static void Sigma0(myu64 *r, const myu64 *x)
-{
-  *r = *x;
-  myu64 t = *x;
-  myu64_ror(r, 28);
-  myu64_ror(&t, 34);
-  myu64_xor(r, r, &t);
-  myu64_ror(&t, 5);
-  myu64_xor(r, r, &t);
-}
-
-static void Sigma1(myu64 *r, const myu64 *x)
-{
-  *r = *x;
-  myu64 t = *x;
-  myu64_ror(r, 14);
-  myu64_ror(&t, 18);
-  myu64_xor(r, r, &t);
-  myu64_ror(&t, 23);
-  myu64_xor(r, r, &t);
-}
-
-static void sigma0(myu64 *r, const myu64 *x)
-{
-  *r = *x;
-  myu64 t0 = *x;
-  myu64 t1 = *x;
-  myu64_ror(r, 1);
-  myu64_ror(&t0, 8);
-  myu64_xor(r, r, &t0);
-  myu64_shr(&t1, 7);
-  myu64_xor(r, r, &t1);
-}
-
-static void sigma1(myu64 *r, const myu64 *x)
-{
-  *r = *x;
-  myu64 t0 = *x;
-  myu64 t1 = *x;
-  myu64_ror(r, 19);
-  myu64_ror(&t0, 61);
-  myu64_xor(r, r, &t0);
-  myu64_shr(&t1, 6);
-  myu64_xor(r, r, &t1);
-}
-
-static void M(myu64 *w0, const myu64 *w14, const myu64 *w9, const myu64 *w1)
-{
-  myu64 t0, t1;
-  sigma0(&t0, w1);
-  sigma1(&t1, w14);
-  myu64_add(w0, w0, w9);
-  myu64_add(w0, w0, &t0);
-  myu64_add(w0, w0, &t1);
-}
-
-static void expand(myu64 *w0, myu64 *w1, myu64 *w2, myu64 *w3, myu64 *w4, myu64 *w5, myu64 *w6, myu64 *w7,
-                   myu64 *w8, myu64 *w9, myu64 *w10, myu64 *w11, myu64 *w12, myu64 *w13, myu64 *w14, myu64 *w15)
-{
-  M(w0 ,w14,w9 ,w1 );
-  M(w1 ,w15,w10,w2 );
-  M(w2 ,w0 ,w11,w3 );
-  M(w3 ,w1 ,w12,w4 );
-  M(w4 ,w2 ,w13,w5 );
-  M(w5 ,w3 ,w14,w6 );
-  M(w6 ,w4 ,w15,w7 );
-  M(w7 ,w5 ,w0 ,w8 );
-  M(w8 ,w6 ,w1 ,w9 );
-  M(w9 ,w7 ,w2 ,w10);
-  M(w10,w8 ,w3 ,w11);
-  M(w11,w9 ,w4 ,w12);
-  M(w12,w10,w5 ,w13);
-  M(w13,w11,w6 ,w14);
-  M(w14,w12,w7 ,w15);
-  M(w15,w13,w8 ,w0 );
-}
-
-static void myF(myu64 *a, myu64 *b, myu64 *c, myu64 *d, myu64 *e, myu64 *f, myu64 *g, myu64 *h, const myu64 *w, const myu64 *k)
-{
-  myu64 t, t1, t2;
-  Ch(&t, e, f, g);
-  Sigma1(&t1, e);
-  myu64_add(&t1, &t1, h);
-  myu64_add(&t1, &t1, &t);
-  myu64_add(&t1, &t1, k);
-  myu64_add(&t1, &t1, w);
-
-  Sigma0(&t2, a);
-  Maj(&t,a,b,c);
-  myu64_add(&t2, &t2, &t);
-
-  *h = *g;
-  *g = *f;
-  *f = *e;
-  myu64_add(e,d,&t1);
-  *d = *c;
-  *c = *b;
-  *b = *a;
-  myu64_add(a,&t1,&t2);
-}
-
-
-const myu64 roundconstants[80] = {
+const myu64 roundconstants_pgm[80] PROGMEM = {
 {{0x22, 0xae, 0x28, 0xd7, 0x98, 0x2f, 0x8a, 0x42}},
 {{0xcd, 0x65, 0xef, 0x23, 0x91, 0x44, 0x37, 0x71}},
 {{0x2f, 0x3b, 0x4d, 0xec, 0xcf, 0xfb, 0xc0, 0xb5}},
@@ -286,91 +112,85 @@ const myu64 roundconstants[80] = {
 {{0xec, 0xfa, 0xd6, 0x3a, 0xab, 0x6f, 0xcb, 0x5f}},
 {{0x17, 0x58, 0x47, 0x4a, 0x8c, 0x19, 0x44, 0x6c}}};
 
+
+static void myF(myu64 *state, const myu64 *w, int k_index)
+{
+  myu64 t, t1, t2;
+  unsigned char i;
+  Ch(&t, state+4, state+5, state+6);
+  Sigma(&t1, state+4, 14, 18, 23);
+  bigint_add64(t1.v, t1.v, (state+7)->v);  
+  bigint_add64(t1.v, t1.v, t.v);  
+  for(i=0;i<8;i++)
+    t.v[i] = pgm_read_byte((unsigned char *)roundconstants_pgm+k_index*8+i);
+  bigint_add64(t1.v, t1.v, t.v);  
+  bigint_add64(t1.v, t1.v, w->v);  
+  Sigma(&t2, state+0, 28, 34, 5);
+  Maj(&t,state+0,state+1,state+2);
+  bigint_add64(t2.v, t2.v, t.v);    
+  *(state+7) = *(state+6);
+  *(state+6) = *(state+5);
+  *(state+5) = *(state+4);
+  bigint_add64((state+4)->v, (state+3)->v, t1.v);  
+  *(state+3) = *(state+2);
+  *(state+2) = *(state+1);
+  *(state+1) = *(state+0);
+  bigint_add64((state+0)->v, t1.v, t2.v);
+}
+
 int crypto_hashblocks_sha512(
     unsigned char *statebytes,
     const unsigned char *in,crypto_uint16 inlen
     )
 {
   myu64 state[8];
-  myu64 a;
-  myu64 b;
-  myu64 c;
-  myu64 d;
-  myu64 e;
-  myu64 f;
-  myu64 g;
-  myu64 h;
+  myu64 state_safe[8];  
+  myu64 w[16];
   unsigned char i;
 
-  myu64 w[16];
-
-  myu64_load_bigendian(&a, statebytes +  0); state[0] = a;
-  myu64_load_bigendian(&b, statebytes +  8); state[1] = b;
-  myu64_load_bigendian(&c, statebytes + 16); state[2] = c;
-  myu64_load_bigendian(&d, statebytes + 24); state[3] = d;
-  myu64_load_bigendian(&e, statebytes + 32); state[4] = e;
-  myu64_load_bigendian(&f, statebytes + 40); state[5] = f;
-  myu64_load_bigendian(&g, statebytes + 48); state[6] = g;
-  myu64_load_bigendian(&h, statebytes + 56); state[7] = h;
-
+  myu64_convert_bigendian(state[0].v, statebytes + 0, 8);
+  for (i=0;i<8;i++)
+    state_safe[i] = state[i];
+	
   while (inlen >= 128) 
   {
     for(i=0;i<16;i++)
-      myu64_load_bigendian(w+i, in + 8*i);
+      myu64_convert_bigendian(w[i].v, in + 8*i, 1);
+	 
+    for(i=0;i<16;i++)
+      myF(state, w+i, i);
+
+    expand(w);
 
     for(i=0;i<16;i++)
-      myF(&a, &b, &c, &d, &e, &f, &g, &h, w+i, roundconstants+i);
+      myF(state, w+i, i+16);
 
-    expand( w+0,  w+1, w+2, w+3, w+4, w+5, w+6, w+7, w+8, w+9, w+10, w+11, w+12, w+13, w+14, w+15);
-
-    for(i=0;i<16;i++)
-      myF(&a, &b, &c, &d, &e, &f, &g, &h, w+i, roundconstants+i+16);
-
-    expand( w+0,  w+1, w+2, w+3, w+4, w+5, w+6, w+7, w+8, w+9, w+10, w+11, w+12, w+13, w+14, w+15);
+    expand(w);
 
     for(i=0;i<16;i++)
-      myF(&a, &b, &c, &d, &e, &f, &g, &h, w+i, roundconstants+i+32);
+      myF(state, w+i, i+32);
 
-    expand( w+0,  w+1, w+2, w+3, w+4, w+5, w+6, w+7, w+8, w+9, w+10, w+11, w+12, w+13, w+14, w+15);
-
-    for(i=0;i<16;i++)
-      myF(&a, &b, &c, &d, &e, &f, &g, &h, w+i, roundconstants+i+48);
-
-    expand( w+0,  w+1, w+2, w+3, w+4, w+5, w+6, w+7, w+8, w+9, w+10, w+11, w+12, w+13, w+14, w+15);
+    expand(w);
 
     for(i=0;i<16;i++)
-      myF(&a, &b, &c, &d, &e, &f, &g, &h, w+i, roundconstants+i+64);
+      myF(state, w+i, i+48);
 
-    myu64_add(&a, &a, state+0);
-    myu64_add(&b, &b, state+1);
-    myu64_add(&c, &c, state+2);
-    myu64_add(&d, &d, state+3);
-    myu64_add(&e, &e, state+4);
-    myu64_add(&f, &f, state+5);
-    myu64_add(&g, &g, state+6);
-    myu64_add(&h, &h, state+7);
+    expand(w);
 
-    state[0] = a;
-    state[1] = b;
-    state[2] = c;
-    state[3] = d;
-    state[4] = e;
-    state[5] = f;
-    state[6] = g;
-    state[7] = h;
+    for(i=0;i<16;i++)
+      myF(state, w+i, i+64);
+	
+    for(i=0;i<8;i++)
+      bigint_add64(state[i].v, state[i].v, state_safe[i].v);  
+
+    for(i=0;i<8;i++)
+      state_safe[i] = state[i];
 
     in += 128;
     inlen -= 128;
   }
-
-  myu64_store_bigendian(statebytes +  0,state+0);
-  myu64_store_bigendian(statebytes +  8,state+1);
-  myu64_store_bigendian(statebytes + 16,state+2);
-  myu64_store_bigendian(statebytes + 24,state+3);
-  myu64_store_bigendian(statebytes + 32,state+4);
-  myu64_store_bigendian(statebytes + 40,state+5);
-  myu64_store_bigendian(statebytes + 48,state+6);
-  myu64_store_bigendian(statebytes + 56,state+7);
+ 
+  myu64_convert_bigendian(statebytes+0, state_safe[0].v, 8);
 
   return inlen;
 }
