@@ -93,8 +93,8 @@ int main (void)
         
         my_printf("\nhashing finished!\n");
         
-        free(h)
-        free(m)
+        free(h);
+        free(m);
         
     }
     _delay_ms(1000);
