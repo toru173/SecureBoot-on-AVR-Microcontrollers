@@ -55,11 +55,6 @@ FILE uart_stdio = FDEV_SETUP_STREAM(uart_putchar, uart_getchar, _FDEV_SETUP_RW);
 
 #define MAXTEST_BYTES (1024 + BLOCK_SIZE_BYTES)
 
-static unsigned char *h;
-static unsigned char *h2;
-static unsigned char *m;
-static unsigned char *m2;
-
 int main (void)
 {
     uart_init();
@@ -85,10 +80,10 @@ int main (void)
         unsigned char m[MAXTEST_BYTES+32];
         unsigned char m2[MAXTEST_BYTES+32];
 
-        h  += 16;
-        h2 += 16;
-        m  += 16;
-        m2 += 16;
+        *h  += 16;
+        *h2 += 16;
+        *m  += 16;
+        *m2 += 16;
 
         for (i = 0;i < MAXTEST_BYTES;++i)
         {
