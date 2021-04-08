@@ -35,7 +35,7 @@
 
 //AVRNaCl Encryption Library
 #include "avrnacl.h"
-#define MAXTEST_BYTES 1024
+#define MAXTEST_BYTES 2**15
 
 
 /*
@@ -89,7 +89,7 @@ int main (void)
         my_printf("\nWelcome to the monitor\n");
 
         my_printf("Hashing beginning...\n");
-        my_printf(bytetohex(sizeof(crypto_hashblocks_sha512(h, m, 1024))));
+        crypto_hashblocks_sha512(h, m, 128);
         
         my_printf("\nhashing finished!\n");
         
