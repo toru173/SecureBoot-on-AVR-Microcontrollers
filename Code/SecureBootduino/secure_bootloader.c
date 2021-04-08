@@ -55,7 +55,7 @@ uint16_t *get512block(uint16_t *baseaddress) // Address always less than 64K
         return -1;
     for (uint16_t i = *baseaddress; i < *(baseaddress + 64); i++)
         *(buffer + i) = pgm_read_byte(baseaddress + i);
-    return *buffer
+    return *buffer;
 }
 
 int main (void)
@@ -71,9 +71,9 @@ int main (void)
     if (c == 'm')
     {
         // Enter monitor
-        uint16_t *rom = *get512block(0x0000);
-        my_printf(rom);
-        free(rom);
+        uint16_t blockptr = *get512block(0x0000);
+        my_printf(blockptr);
+        free(blockptr);
     }
         
     run_firmware();
