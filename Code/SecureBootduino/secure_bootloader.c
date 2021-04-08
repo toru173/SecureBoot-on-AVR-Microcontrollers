@@ -80,7 +80,7 @@ int main (void)
     
     h  = calloc(crypto_hashblocks_STATEBYTES,1);
     if(!h) my_printf("allocation of h failed\n");
-    m  = calloc(crypto_hashblocks_BLOCKBYTES,1);
+    m  = calloc(MAXTEST_BYTES,1);
     if(!m) my_printf("allocation of m failed\n");
     
     if (c == 'm')
