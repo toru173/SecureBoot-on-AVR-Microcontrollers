@@ -75,18 +75,19 @@ int main (void)
         // Enter monitor
         
         
-        
         long long i;
         long long j;
+        
+        char checksum[STATE_VEC_BYTES * 2 + 1];
 
         h  = calloc(STATE_VEC_BYTES+32,1);
-        if(!h) fail("allocation of h failed");
+        if(!h) my_printf("allocation of h failed\n");
         h2 = calloc(STATE_VEC_BYTES+32,1);
-        if(!h2) fail("allocation of h2 failed");
+        if(!h2) my_printf("allocation of h2 failed\n");
         m  = calloc(MAXTEST_BYTES+32,1);
-        if(!m) fail("allocation of m failed");
+        if(!m) my_printf("allocation of m failed\n");
         m2 = calloc(MAXTEST_BYTES+32,1);
-        if(!m2) fail("allocation of m2 failed");
+        if(!m2) my_printf("allocation of m2 failed\n");
 
         h  += 16;
         h2 += 16;
