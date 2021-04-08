@@ -75,9 +75,9 @@ int main (void)
     if (c == 'm')
     {
         // Enter monitor
-        my_printf("Welcome to the monitor");
+        my_printf("\nWelcome to the monitor\n");
         
-        uint16_t *blockptr = get512block(0x7000);
+        uint16_t *blockptr = get512block(0x0000);
         my_printf("\ngot block!\n");
         
         for (int i = 0; i < 64; i++)
