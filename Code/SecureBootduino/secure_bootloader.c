@@ -79,15 +79,14 @@ int main (void)
     static unsigned char *h;
     static unsigned char *m;
     
-    h  = calloc(crypto_hashblocks_STATEBYTES,1);
+    h  = malloc(crypto_hashblocks_STATEBYTES);
     if(!h) my_printf("allocation of h failed\n");
-    m  = calloc(MAXTEST_BYTES,1);
+    m  = malloc(MAXTEST_BYTES);
     if(!m) my_printf("allocation of m failed\n");
     
     if (c == 'm')
     {
         // Enter monitor
-        my_printf("\nWelcome to the monitor\n");
         
         // Create IV
         for (int i = 0; i < 64; i++)
