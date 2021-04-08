@@ -35,7 +35,7 @@
 
 //AVRNaCl Encryption Library
 #include "avrnacl.h"
-#define MAXTEST_BYTES 2**15
+#define MAXTEST_BYTES 1024
 
 
 /*
