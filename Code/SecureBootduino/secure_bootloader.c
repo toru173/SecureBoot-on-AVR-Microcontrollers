@@ -96,7 +96,7 @@ int main (void)
         //uint16_t *blockptr = get1024block(0x0000);
 
         my_printf("\nHashing beginning. Success should be zero:\n");
-        my_printf(bytetohex((uint8_t) (crypto_hashblocks_sha512(h, m, 128))));
+        my_printf(bytetohex((uint8_t) (crypto_hashblocks_sha512(h, m, 0))));
         my_printf("\nhashing finished!\n");
         
         for (int i = 0; i < 64; i++)
