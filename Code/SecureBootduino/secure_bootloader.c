@@ -123,9 +123,9 @@ int main (void)
         }
         checksum[2 * i] = 0;
 
-        print("Checksum: ");
-        print(checksum);
-        print("\n");
+        my_printf("Checksum: ");
+        my_printf(checksum);
+        my_printf("\n");
 
         h  -= 16;
         h2 -= 16;
