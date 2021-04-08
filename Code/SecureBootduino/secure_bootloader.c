@@ -77,7 +77,7 @@ int main (void)
         for (int i = 0; i < 64; i++)
         {
             my_printf("Byte ");
-            my_printf(bytetohex((char *) i));
+            my_printf(bytetohex((uint8_t) i));
             my_printf(" in block is: ");
             my_printf(bytetohex(*(blockptr + i)));
             my_printf("\n");
