@@ -49,12 +49,12 @@ FILE uart_stdio = FDEV_SETUP_STREAM(uart_putchar, uart_getchar, _FDEV_SETUP_RW);
 #endif
 
 
-uint16_t *get512block(uint16_t baseaddress) // Address always less than 64K.
+uint16_t *get1024block(uint16_t baseaddress) // Address always less than 64K.
 {
-    uint16_t *buffer = malloc(64); // 64 byte (512 bit) buffer
+    uint16_t *buffer = malloc(128); // 128 byte (1024 bit) buffer
     if (!buffer) // Unable to allocate
         return NULL;
-    for (int i = 0; i < 64; i++)
+    for (int i = 0; i < 128; i++)
     {
         *(buffer + i) = pgm_read_byte(baseaddress + i);
     }
@@ -77,11 +77,11 @@ int main (void)
         // Enter monitor
         my_printf("\nWelcome to the monitor\n");
         
-        uint16_t *blockptr = get512block(0x7000);
+        uint16_t *blockptr = get1024block(0x7000);
         
         my_printf("\ngot block!\n");
         
-        for (int i = 0; i < 64; i++)
+        for (int i = 0; i sizeof(*blockptr); i++)
         {
             my_printf(bytetohex(*(blockptr + i)));
         }
