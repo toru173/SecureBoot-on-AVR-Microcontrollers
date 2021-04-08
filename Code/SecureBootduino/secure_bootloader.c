@@ -93,7 +93,14 @@ int main (void)
         for (int i = 0; i < BLOCK_SIZE_BYTES; i++)
           m[i] = 0x00;
         
-        m[0] = '\0';
+        m[0] = 'H';
+        m[1] = 'e';
+        m[2] = 'l';
+        m[3] = 'l';
+        m[4] = 'o';
+        m[5] = '!';
+        
+
         
         //uint16_t *blockptr = get1024block(0x0000);
 
