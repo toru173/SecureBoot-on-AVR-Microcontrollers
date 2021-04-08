@@ -70,7 +70,7 @@ int main (void)
     
     if (c == 'm')
     {
-        printf("Hello from the bootloader!\n");
+        printf("\nHello from the bootloader!\n");
         // Enter monitor
         //uint16_t *blockptr = get512block(0x0000);
         my_printf("\ngot block!\n");
