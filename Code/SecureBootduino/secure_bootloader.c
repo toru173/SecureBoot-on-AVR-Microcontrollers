@@ -77,7 +77,7 @@ int main (void)
         // Enter monitor
         my_printf("\nWelcome to the monitor\n");
         
-        uint16_t *blockptr = get512block(0x0100);
+        uint16_t *blockptr = get512block(0x7000);
         
         my_printf("\ngot block!\n");
         
