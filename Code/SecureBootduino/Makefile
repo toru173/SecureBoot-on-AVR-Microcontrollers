@@ -25,7 +25,7 @@ MCU=atmega328p
 bootloader_addr = 0x7000 # Start of BLS on the Atmega2560 in BYTES
 simavr = simavr
 includedir = include
-avrnacl = include/avrnacl
+avrnacl = ${includedir}/avrnacl
 
 INCLUDE_FILES = $(wildcard ${includedir}/*.c)
 AVRNACL_FILES = $(wildcard ${avrnacl}/*.c)
@@ -45,6 +45,7 @@ IPATH += ${simavr}/simavr/sim
 VPATH = .
 VPATH += ${includedir}
 VPATH += ${simavr}/examples/parts
+VPATH += ${avrnacl}
 
 LDFLAGS += -lpthread -lutil
 
