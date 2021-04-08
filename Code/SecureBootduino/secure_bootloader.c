@@ -80,14 +80,10 @@ int main (void)
         
         char checksum[STATE_VEC_BYTES * 2 + 1];
 
-        h  = calloc(STATE_VEC_BYTES+32,1);
-        if(!h) my_printf("allocation of h failed\n");
-        h2 = calloc(STATE_VEC_BYTES+32,1);
-        if(!h2) my_printf("allocation of h2 failed\n");
-        m  = calloc(MAXTEST_BYTES+32,1);
-        if(!m) my_printf("allocation of m failed\n");
-        m2 = calloc(MAXTEST_BYTES+32,1);
-        if(!m2) my_printf("allocation of m2 failed\n");
+        unsigned char h[STATE_VEC_BYTES+32];
+        unsigned char h2[STATE_VEC_BYTES+32];
+        unsigned char m[MAXTEST_BYTES+32];
+        unsigned char m2[MAXTEST_BYTES+32];
 
         h  += 16;
         h2 += 16;
@@ -96,8 +92,8 @@ int main (void)
 
         for (i = 0;i < MAXTEST_BYTES;++i)
         {
-          long long hlen = STATE_VEC_BYTES;
-          long long mlen = i;
+          crypto_uint16 hlen = STATE_VEC_BYTES;
+          crypto_uint16 mlen = i;
           for (j = -16;j < 0;++j) h[j] = random();
           for (j = hlen;j < hlen + 16;++j) h[j] = random();
           for (j = -16;j < hlen + 16;++j) h2[j] = h[j];
