@@ -79,9 +79,9 @@ int main (void)
     const unsigned char *m;
     
     h  = calloc(crypto_hashblocks_STATEBYTES,1);
-    if(!h) my_printf("allocation of h failed");
-    m  = (const unsigned char) get1024block(0x0000);
-    if(!m) my_printf("allocation of m failed");
+    if(!h) my_printf("allocation of h failed\n");
+    m  = calloc(crypto_hashblocks_BLOCKBYTES,1);
+    if(!m) my_printf("allocation of m failed\n");
     
     if (c == 'm')
     {
