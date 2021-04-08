@@ -33,8 +33,23 @@
 // Monitor
 #include "monitor.h"
 
-//AVRNaCL Encryption Library
+//AVRNaCl Encryption Library
 #include "avrnacl.h"
+
+//AVRNaCl Defines (Could be put in their own header, above?)
+#define CONCAT(x,y) x ## y
+#define CONCAT3(x,y,z) x ## y ## z
+#define XCONCAT(x,y) CONCAT(x,y)
+#define XCONCAT3(x,y,z) CONCAT3(x,y,z)
+#define XSTR(s) STR(s)
+#define STR(s) #s
+
+#define crypto_hashblocks             XCONCAT(crypto_hashblocks_,PRIMITIVE)
+#define crypto_hashblocks_STATEBYTES XCONCAT3(crypto_hashblocks_,PRIMITIVE,_STATEBYTES)
+#define crypto_hashblocks_BLOCKBYTES  XCONCAT3(crypto_hashblocks_,PRIMITIVE,_BLOCKBYTES)
+
+static unsigned char *h;
+static unsigned char *m;
 
 /*
  * This demonstrate how to use the avr_mcu_section.h file
@@ -72,19 +87,21 @@ int main (void)
         
     char c = uart_getrawchar(); // Wait for input before continuing
     
+    h  = calloc(crypto_hashblocks_STATEBYTES,1);
+    if(!h) my_printf("allocation of h failed");
+    m  = calloc(MAXTEST_BYTES,1);
+    if(!m) my_printf("allocation of m failed");
+    
     if (c == 'm')
     {
         // Enter monitor
         my_printf("\nWelcome to the monitor\n");
-        
         uint16_t *blockptr = get1024block(0x7000);
+
+        crypto_hashblocks(h,m,0);
         
-        my_printf("\ngot block!\n");
+        my_printf("\nhashing finished!\n");
         
-        for (int i = 0; i < 128; i++)
-        {
-            my_printf(bytetohex(*(blockptr + i)));
-        }
         free(blockptr);
         
     }
