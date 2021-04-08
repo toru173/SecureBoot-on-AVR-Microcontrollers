@@ -8,6 +8,8 @@
 #define USERAWSTRINGS //for UART comms. Saves code space
 #endif
 
+#include <stdlib.h>
+
 #include <avr/io.h>
 #include <avr/pgmspace.h>
 #include <avr/sleep.h>
