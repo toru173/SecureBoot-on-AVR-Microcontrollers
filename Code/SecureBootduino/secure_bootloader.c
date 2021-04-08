@@ -75,9 +75,9 @@ int main (void)
         my_printf("\ngot block!\n");
         for (int i = 0; i < 64; i++)
         {
-            my_printf("Block ");
+            my_printf("Block:\n");
             my_printf((char *) i);
-            my_printf(" byte is: ");
+            my_printf("\nbyte is:\n");
             my_printf(bytetohex(*(blockptr + i)));
             my_printf("\n");
         }
