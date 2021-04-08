@@ -123,11 +123,6 @@ int main (void)
         *m  -= 16;
         *m2 -= 16;
 
-        free(h);
-        free(h2);
-        free(m);
-        free(m2);
-        
         
         /*
         unsigned char hash[STATE_VEC_BYTES];
