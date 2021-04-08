@@ -25,11 +25,11 @@ MCU=atmega328p
 bootloader_addr = 0x7000 # Start of BLS on the Atmega2560 in BYTES
 simavr = simavr
 includedir = include
-avrnacl = ${includedir}/avrnacl
+cryptofiles = ${includedir}/avr-crypto-lib
 
 INCLUDE_FILES = $(wildcard ${includedir}/*.c)
-AVRNACL_FILES = $(wildcard ${avrnacl}/*.c)
-AVRNACL_FILES += $(wildcard ${avrnacl}/assembly/*.S)
+AVRNACL_FILES = $(wildcard ${cryptofiles}/*.c)
+AVRNACL_FILES += $(wildcard ${cryptofiles}/assembly/*.S)
 
 # From https://www.pololu.com/docs/0J61/6.3
 AVR_CFLAGS=-g -Wall -mcall-prologues -mmcu=$(MCU) -Os
