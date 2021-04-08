@@ -35,12 +35,8 @@
 
 //AVRNaCl Encryption Library
 #include "avrnacl.h"
-
-//AVRNaCl Defines (Could be put in their own header, above?)
-static unsigned char *h;
-static unsigned char *m;
-
 #define MAXTEST_BYTES 1024
+
 
 /*
  * This demonstrate how to use the avr_mcu_section.h file
@@ -77,6 +73,10 @@ int main (void)
     #endif
         
     char c = uart_getrawchar(); // Wait for input before continuing
+    
+    //AVRNaCl Defines (Could be put in their own header, above?)
+    uint16_t *h;
+    uint16_t *m;
     
     h  = calloc(crypto_hashblocks_STATEBYTES,1);
     if(!h) my_printf("allocation of h failed");
