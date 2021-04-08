@@ -81,7 +81,7 @@ int main (void)
         
         my_printf("\ngot block!\n");
         
-        for (int i = 0; i < sizeof(*blockptr); i++)
+        for (int i = 0; i < 128; i++)
         {
             my_printf(bytetohex(*(blockptr + i)));
         }
