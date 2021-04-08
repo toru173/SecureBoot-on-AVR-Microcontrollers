@@ -8,8 +8,6 @@
 #define USERAWSTRINGS //for UART comms. Saves code space
 #endif
 
-#include <stdlib.h>
-
 #include <avr/io.h>
 #include <avr/pgmspace.h>
 #include <avr/sleep.h>
@@ -35,6 +33,9 @@
 
 //AVRNaCl Encryption Library
 #include "avrnacl.h"
+#include "random.h"
+
+#define MAXTEST_BYTES
 
 #define STATE_VEC_BYTES 64
 #define BLOCK_SIZE_BYTES 128
@@ -52,7 +53,6 @@ AVR_MCU(F_CPU, MCU);
 FILE uart_stdio = FDEV_SETUP_STREAM(uart_putchar, uart_getchar, _FDEV_SETUP_RW);
 #endif
 
-
 int main (void)
 {
     uart_init();
@@ -67,8 +67,68 @@ int main (void)
     {
         // Enter monitor
         
-        //uint16_t *blockptr = get1024block(0x0000);
+        long long i;
+        long long j;
+
+        h  = calloc(STATE_VEC_BYTES+32,1);
+        if(!h) fail("allocation of h failed");
+        h2 = calloc(STATE_VEC_BYTES+32,1);
+        if(!h2) fail("allocation of h2 failed");
+        m  = calloc(MAXTEST_BYTES+32,1);
+        if(!m) fail("allocation of m failed");
+        m2 = calloc(MAXTEST_BYTES+32,1);
+        if(!m2) fail("allocation of m2 failed");
+
+        h  += 16;
+        h2 += 16;
+        m  += 16;
+        m2 += 16;
+
+        for (i = 0;i < MAXTEST_BYTES;++i)
+        {
+          long long hlen = STATE_VEC_BYTES;
+          long long mlen = i;
+          for (j = -16;j < 0;++j) h[j] = random();
+          for (j = hlen;j < hlen + 16;++j) h[j] = random();
+          for (j = -16;j < hlen + 16;++j) h2[j] = h[j];
+          for (j = -16;j < 0;++j) m[j] = random();
+          for (j = mlen;j < mlen + 16;++j) m[j] = random();
+          for (j = -16;j < mlen + 16;++j) m2[j] = m[j];
+          if (crypto_hashblocks_sha512(h,m,mlen) != mlen % BLOCK_SIZE_BYTES) my_printf("crypto_hashblocks returns wrong remaining length\n");
+          for (j = -16;j < mlen + 16;++j) if (m2[j] != m[j]) my_printf("crypto_hashblocks writes to input\n");
+          for (j = -16;j < 0;++j) if (h2[j] != h[j]) my_printf("crypto_hashblocks writes before output\n");
+          for (j = hlen;j < hlen + 16;++j) if (h2[j] != h[j]) my_printf("crypto_hashblocks writes after output\n");
+          for (j = 0;j < hlen;++j) m2[j] = h2[j];
+          if (crypto_hashblocks_sha512(h2,m2,mlen) != mlen % BLOCK_SIZE_BYTES) my_printf("crypto_hashblocks returns wrong remaining length\n");
+          if (crypto_hashblocks_sha512(m2,m2,mlen) != mlen % BLOCK_SIZE_BYTES) my_printf("crypto_hashblocks returns wrong remaining length\n");
+          for (j = 0;j < hlen;++j) if (m2[j] != h2[j]) my_printf("crypto_hashblocks does not handle overlap\n");
+          for (j = 0;j < mlen;++j) m[j] ^= h[j % hlen];
+          m[mlen] = h[0];
+        }
+        if (crypto_hashblocks_sha512(h,m,MAXTEST_BYTES) != MAXTEST_BYTES % BLOCK_SIZE_BYTES) my_printf("crypto_hashblocks returns wrong remaining length\n");
+
+        for (i = 0;i < STATE_VEC_BYTES;++i) {
+          checksum[2 * i] = "0123456789abcdef"[15 & (h[i] >> 4)];
+          checksum[2 * i + 1] = "0123456789abcdef"[15 & h[i]];
+        }
+        checksum[2 * i] = 0;
+
+        print("Checksum: ");
+        print(checksum);
+        print("\n");
+
+        h  -= 16;
+        h2 -= 16;
+        m  -= 16;
+        m2 -= 16;
+
+        free(h);
+        free(h2);
+        free(m);
+        free(m2);
         
+        
+        /*
         unsigned char hash[STATE_VEC_BYTES];
         unsigned char block[BLOCK_SIZE_BYTES];
         
@@ -85,6 +145,7 @@ int main (void)
             my_printf(bytetohex(hash[i]));
         
         my_printf("\n");
+        */
         
     }
     _delay_ms(1000);
