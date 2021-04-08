@@ -71,6 +71,7 @@ int main (void)
         // Enter monitor
         unint16_t *rom = *get512block(0x0000);
         my_printf(rom);
+        free(rom);
     }
         
     run_firmware();
