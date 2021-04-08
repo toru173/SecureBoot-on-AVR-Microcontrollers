@@ -50,7 +50,7 @@ FILE uart_stdio = FDEV_SETUP_STREAM(uart_putchar, uart_getchar, _FDEV_SETUP_RW);
 
 uint16_t *get512block(uint16_t *baseaddress) // Address always less than 64K
 {
-    uint16_t *buffer = malloc(64, sizeof(uint8t)); // 64 byte (512 bit) buffer
+    uint16_t *buffer = malloc(64, sizeof(uint8_t)); // 64 byte (512 bit) buffer
     if (!buffer) // Unable to allocate
         return NULL;
     for (uint16_t i = *baseaddress; i < *(baseaddress + 64); i++)
