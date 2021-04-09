@@ -86,7 +86,7 @@ int main (void)
         raw_printf("\n");
         
         raw_printf("\nSigning beginning. Success should be zero: ");
-        raw_printf(bytetohex((uint8_t) verifcrypto_sign_ed25519_open(hash, sizeof(block), hash, sizeof(block), pk)));
+        raw_printf(bytetohex((uint8_t) crypto_sign_ed25519_open(hash, sizeof(block), hash, sizeof(block), pk)));
         raw_printf("\nSigning finished!\n");
         
     }
