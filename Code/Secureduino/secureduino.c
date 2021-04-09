@@ -95,7 +95,8 @@ int main(int argc, char *argv[])
 {
 	struct avr_flash flash_data;
 	char boot_path[1024] = "secure_bootloader.hex"; // Default hex
-	uint32_t boot_base, boot_size;
+    uint32_t boot_base = BLS_START;
+    uint32_t boot_size;
 	char * mmcu = MCU;
 	uint32_t freq = CLOCK;
 	int debug = 0;
