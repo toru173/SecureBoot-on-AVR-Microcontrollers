@@ -63,9 +63,9 @@ int main (void)
     #endif
         
     char c = uart_getrawchar(); // Wait for input before continuing
-    char c = uart_getrawchar(); // Wait for input before continuing
-
-    char c = uart_getrawchar(); // Wait for input before continuing
+    
+    c = uart_getrawchar(); // Wait for input before continuing
+    c = uart_getrawchar(); // Wait for input before continuing
 
     
     if (c == 'm')
