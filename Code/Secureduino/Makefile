@@ -28,8 +28,7 @@ bootloader_addr = 0x7000 # Start of BLS on the atmega328p in BYTES
 else ifeq "MCU" "atmega2560"
 bootloader_addr = 0x3FE00 # Start of BLS on the atmega2560 in BYTES
 else
-error_msg = "Unexpected MCU"
-$(error ${error_msg})
+$(error Unexpected_MCU)
 endif
 simavr = simavr
 includedir = lib
