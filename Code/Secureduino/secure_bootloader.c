@@ -75,15 +75,15 @@ int main (void)
         for (int i = 0; i < BLOCK_SIZE_BYTES; i++)
             block[i] = pgm_read_byte(i);
 
-        my_printf("\n");
-        my_printf("\nHashing beginning. Success should be zero: ");
-        my_printf(bytetohex((uint8_t) crypto_hashblocks_sha512(hash, block, sizeof(block))));
-        my_printf("\nhashing finished! Complete hash:\n");
+        raw_printf("\n");
+        raw_printf("\nHashing beginning. Success should be zero: ");
+        raw_printf(bytetohex((uint8_t) crypto_hashblocks_sha512(hash, block, sizeof(block))));
+        raw_printf("\nhashing finished! Complete hash:\n");
         
         for (int i = 0; i < 64; i++)
-            my_printf(bytetohex(hash[i]));
+            raw_printf(bytetohex(hash[i]));
         
-        my_printf("\n");
+        raw_printf("\n");
         
         
     }
