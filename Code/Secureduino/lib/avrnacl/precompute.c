@@ -77,7 +77,7 @@ static void printpoint(const ge25519 *p)
   printf("0x%02x}}},\n", p->y.v[31]);
 }
 
-int main()
+int precompute()
 {
   ge25519 t;
 
