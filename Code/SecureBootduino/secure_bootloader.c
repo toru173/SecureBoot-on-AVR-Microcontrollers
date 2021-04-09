@@ -76,7 +76,6 @@ int main (void)
             block[i] = pgm_read_byte(i);
 
         my_printf("\n");
-        my_printf(bytetohex(sizeof(block)));
         my_printf("\nHashing beginning. Success should be zero: ");
         my_printf(bytetohex((uint8_t) crypto_hashblocks_sha512(hash, block, sizeof(block))));
         my_printf("\nhashing finished! Complete hash:\n");
