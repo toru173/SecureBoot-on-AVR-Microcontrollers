@@ -21,14 +21,15 @@ payload = secure_payload
 payload_size := $$(stat -c '%s' ${payload}.hex)
 trailing_bytes = 13
 bootloader = secure_bootloader
-MCU=atmega2560
+MCU = atmega2560
 # bootloader start address on atmega328p = 0x7000, atmega2560 = 0x3FE00
 ifeq "MCU" "atmega328p"
 bootloader_addr = 0x7000 # Start of BLS on the atmega328p in BYTES
 else ifeq "MCU" "atmega2560"
 bootloader_addr = 0x3FE00 # Start of BLS on the atmega2560 in BYTES
 else
-$(error "Unexpected MCU")
+error_msg = "Unexpected MCU"
+$(error ${error_msg})
 endif
 simavr = simavr
 includedir = lib
