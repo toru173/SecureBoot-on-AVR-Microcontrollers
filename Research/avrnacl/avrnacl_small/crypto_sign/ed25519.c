@@ -6,7 +6,7 @@
  */
 
 #include "avrnacl.h"
-#include "randombytes.h"
+//#include "randombytes.h" Won't use this function. Not signing anything
 
 #include "ge25519.h"
 #include "sc25519.h"
@@ -24,7 +24,7 @@ static void get_hram(unsigned char *hram, const unsigned char *sm, const unsigne
   crypto_hash_sha512(hram,playground,smlen);
 }
 
-
+/* Won't use this function. Not generating a keypair
 int crypto_sign_ed25519_keypair(
     unsigned char *pk,
     unsigned char *sk
@@ -51,6 +51,7 @@ int crypto_sign_ed25519_keypair(
 
   return 0;
 }
+ */
 
 static void generate_sck(unsigned char *sm, sc25519 *sck, sc25519 *scsk, const unsigned char *m, const unsigned char *sk, unsigned char mlen) 
 {
