@@ -18,19 +18,17 @@
 
 target = secureduino
 payload = secure_payload
+bootloader = secure_bootloader
+
+# Valid options are atmega328p and atmega2560
+MCU = atmega328p
+# bootloader start address on atmega328p = 0x7000, atmega2560 = 0x3FE00
+bootloader_addr = 0x7000
+
+# For forming the total hex file
 payload_size := $$(stat -c '%s' ${payload}.hex)
 trailing_bytes = 13
-bootloader = secure_bootloader
-MCU = atmega328p # Valid options are atmega328p and atmega2560
-# bootloader start address on atmega328p = 0x7000, atmega2560 = 0x3FE00
-ifeq (${MCU}, atmega328p)
-bootloader_addr = 0x7000 # Start of BLS on the atmega328p in BYTES
-else ifeq (${MCU}, atmega2560)
-bootloader_addr = 0x3FE00 # Start of BLS on the atmega2560 in BYTES
-else
-error_msg = Unexpected MCU:
-$(error ${error_msg}" "${MCU})
-endif
+
 simavr = simavr
 includedir = lib
 cryptofiles = ${includedir}/avrnacl
