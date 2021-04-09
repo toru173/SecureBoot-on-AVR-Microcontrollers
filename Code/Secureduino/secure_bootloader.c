@@ -36,6 +36,7 @@
 //AVRNaCl Encryption Library
 #include "avrnacl.h"
 
+#define PK_BYTES 32
 #define STATE_VEC_BYTES 64
 #define BLOCK_SIZE_BYTES 128
 
@@ -67,7 +68,7 @@ int main (void)
     {
         // Enter monitor
 
-        
+        unsigned char pk[PK_BYTES];
         unsigned char hash[STATE_VEC_BYTES];
         unsigned char block[BLOCK_SIZE_BYTES];
         
@@ -84,6 +85,9 @@ int main (void)
         
         raw_printf("\n");
         
+        raw_printf("\nSigning beginning. Success should be zero: ");
+        raw_printf(bytetohex((uint8_t) verifcrypto_sign_ed25519_open(hash, sizeof(block), hash, sizeof(block), pk)));
+        raw_printf("\nSigning finished!\n");
         
     }
     _delay_ms(1000);
