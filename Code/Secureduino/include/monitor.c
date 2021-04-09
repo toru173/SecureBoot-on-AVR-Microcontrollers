@@ -45,10 +45,10 @@ void dumpROM()
     {
         for (int word = 0; word < 8; word++)
         {
-            my_printf(bytetohex(pgm_read_byte(flashpointer++)));
-            my_printf(bytetohex(pgm_read_byte(flashpointer++)));
-            my_printf(" ");
+            raw_printf(bytetohex(pgm_read_byte(flashpointer++)));
+            raw_printf(bytetohex(pgm_read_byte(flashpointer++)));
+            raw_printf(" ");
         }
-        my_printf("\n");
+        raw_printf("\n");
     }
 }
