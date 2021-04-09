@@ -19,7 +19,7 @@
 
 void uart_init(void)
 {
-    UCSR0A = 0x00; // Clear USART0 status register
+    //UCSR0A = 0x00; // Clear USART0 status register
     UBRR0H = UBRRH_VALUE; // Set baud values correctly
     UBRR0L = UBRRL_VALUE;
     UCSR0B = (1 << RXEN0 ) | (1 << TXEN0); // Enable transmit & receive
