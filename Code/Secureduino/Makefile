@@ -21,9 +21,9 @@ payload = secure_payload
 bootloader = secure_bootloader
 
 # Valid options are atmega328p and atmega2560
-MCU = atmega328p
+MCU = atmega2560
 # bootloader start address on atmega328p = 0x7000, atmega2560 = 0x3FE00
-bootloader_addr = 0x7000
+bootloader_addr = 0x3FE00
 
 # For forming the total hex file
 payload_size := $$(stat -c '%s' ${payload}.hex)
