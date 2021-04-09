@@ -35,7 +35,6 @@
 
 //AVRNaCl Encryption Library
 #include "avrnacl.h"
-#include "randombytes.h"
 
 #define STATE_VEC_BYTES 64
 #define BLOCK_SIZE_BYTES 128
