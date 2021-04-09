@@ -22,6 +22,7 @@ payload_size := $$(stat -c '%s' ${payload}.hex)
 trailing_bytes = 13
 bootloader = secure_bootloader
 MCU=atmega328p
+# bootloader start address on atmega328p = 0x7000, atmega2560 = 0x3FE00
 bootloader_addr = 0x7000 # Start of BLS on the Atmega2560 in BYTES
 simavr = simavr
 includedir = include
