@@ -64,9 +64,8 @@ int main (void)
         
     char c = uart_getrawchar(); // Wait for input before continuing
     
-    c = uart_getrawchar(); // Wait for input before continuing
-    c = uart_getrawchar(); // Wait for input before continuing
-
+    while (1)
+        raw_printf("Hello from the bootloader!\n");
     
     if (c == 'm')
     {
