@@ -2,10 +2,6 @@
  * function for uart comms
  */
 
-#ifdef DEBUG
-#define USERICHSTRINGS
-#endif
-
 #include "mcu_defs.h"
 #include <avr/io.h>
 
@@ -19,7 +15,6 @@
 
 void uart_init(void)
 {
-    //UCSR0A = 0x00; // Clear USART0 status register
     UBRR0H = UBRRH_VALUE; // Set baud values correctly
     UBRR0L = UBRRL_VALUE;
     UCSR0B = (1 << RXEN0 ) | (1 << TXEN0); // Enable transmit & receive
@@ -27,7 +22,6 @@ void uart_init(void)
 }
 
 
-#ifdef USERICHSTRINGS
 int uart_putchar(char c, FILE *stream)
 {
     if (c == '\n')
@@ -37,7 +31,6 @@ int uart_putchar(char c, FILE *stream)
     
     return 0;
 }
-#endif
 
 int uart_putrawchar(char c)
 {
@@ -49,7 +42,6 @@ int uart_putrawchar(char c)
     return 0;
 }
 
-#ifdef USERICHSTRINGS
 int uart_getchar(FILE *stream)
 {
     char c;
@@ -58,9 +50,8 @@ int uart_getchar(FILE *stream)
     uart_putchar(c, stream); //echo byte back so we can see what we typed
     return c;
 }
-#endif
 
-int uart_getrawchar()
+int uart_getrawchar(void)
 {
     char c;
     loop_until_bit_is_set(UCSR0A, RXC0); // Wait until byte received
@@ -69,7 +60,7 @@ int uart_getrawchar()
     return c;
 }
 
-void my_printf(char *string)
+void raw_printf(char *string)
 {
     int i = 0;
     while (string[i] != '\0') // C strings are null terminated
@@ -77,4 +68,9 @@ void my_printf(char *string)
         uart_putrawchar(string[i]);
         i++;
     }
+}
+
+char *raw_scanf(void)
+{
+    return "";
 }
