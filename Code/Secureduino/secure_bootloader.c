@@ -77,7 +77,7 @@ int main (void)
 
         raw_printf("\n");
         raw_printf("\nHashing beginning. Success should be zero: ");
-        raw_printf(bytetohex((uint8_t) crypto_hashblocks_sha512(hash, block, sizeof(block))));
+        // raw_printf(bytetohex((uint8_t) crypto_hashblocks_sha512(hash, block, sizeof(block))));
         raw_printf("\nhashing finished! Complete hash:\n");
         
         for (int i = 0; i < 64; i++)
