@@ -4,8 +4,6 @@
 
 //#define DEBUG
 
-#include <stdlib.h>
-
 #ifndef DEBUG
 #define USERAWSTRINGS //for UART comms. Saves code space
 #endif
