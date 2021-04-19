@@ -31,11 +31,14 @@ trailing_bytes = 13
 
 simavr = simavr
 includedir = lib
-cryptofiles = ${includedir}/avrnacl
+avrnacl = ${includedir}/avrnacl
+avrcryptolib = ${includedir}/AVRCryptoLib
 
 INCLUDE_FILES = $(wildcard ${includedir}/*.c)
-AVRNACL_FILES = $(wildcard ${cryptofiles}/*.c)
-AVRNACL_FILES += $(wildcard ${cryptofiles}/assembly/*.S)
+CRYPTOLIBS = $(wildcard ${avrnacl}/*.c)
+CRYPTOLIBS += $(wildcard ${avrnacl}/assembly/*.S)
+CRYPTOLIBS += $(wildcard ${avrcryptolib}/*.c)
+CRYPTOLIBS += $(wildcard ${avrcryptolib}/*.S)
 
 # From https://www.pololu.com/docs/0J61/6.3
 AVR_CFLAGS=-g -Wall -mcall-prologues -mmcu=${MCU} -Os
