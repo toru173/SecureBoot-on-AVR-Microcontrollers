@@ -42,7 +42,7 @@ CRYPTOLIBS += $(wildcard ${avrcryptolib}/*.S)
 
 # From https://www.pololu.com/docs/0J61/6.3
 AVR_CFLAGS=-g -Wall -mcall-prologues -mmcu=${MCU} -Os
-AVR_LDFLAGS=-Wl,-gc-sections -Wl,-relax -I${includedir} -I${cryptofiles}
+AVR_LDFLAGS=-Wl,-gc-sections -Wl,-relax -I${CRYPTOLIBS}
 AVR_BOOTLOADER_LDFLAGS=-Wl,--section-start=.text=${bootloader_addr}
 AVR_CC=avr-gcc
 
@@ -77,7 +77,7 @@ payload:
 	avr-size ${payload}.hex
 
 bootloader:
-	@${AVR_CC} ${AVR_CFLAGS} ${AVR_LDFLAGS} ${AVR_BOOTLOADER_LDFLAGS} ${bootloader}.c ${INCLUDE_FILES} ${AVRNACL_FILES} -o ${bootloader}.elf
+	@${AVR_CC} ${AVR_CFLAGS} ${AVR_LDFLAGS} ${AVR_BOOTLOADER_LDFLAGS} ${bootloader}.c ${INCLUDE_FILES} ${CRYPTOLIBS} -o ${bootloader}.elf
 	@avr-objcopy -j .text -j .data -O ihex ${bootloader}.elf ${bootloader}.hex
 	avr-size ${bootloader}.hex
 	
