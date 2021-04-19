@@ -21,9 +21,9 @@ payload = secure_payload
 bootloader = secure_bootloader
 
 # Valid options are atmega328p and atmega2560
-MCU = atmega328p
+MCU = atmega2560
 # bootloader start address on atmega328p = 0x7000, atmega2560 = 0x3FE00
-bootloader_addr = 0x7000
+bootloader_addr = 0x3FE00
 
 # For forming the total hex file
 payload_size := $$(stat -c '%s' ${payload}.hex)
@@ -38,7 +38,7 @@ AVRNACL_FILES = $(wildcard ${cryptofiles}/*.c)
 AVRNACL_FILES += $(wildcard ${cryptofiles}/assembly/*.S)
 
 # From https://www.pololu.com/docs/0J61/6.3
-AVR_CFLAGS=-g -Wall -mcall-prologues -mmcu=$(MCU) -Os
+AVR_CFLAGS=-g -Wall -mcall-prologues -mmcu=${MCU} -Os
 AVR_LDFLAGS=-Wl,-gc-sections -Wl,-relax -I${includedir} -I${cryptofiles}
 AVR_BOOTLOADER_LDFLAGS=-Wl,--section-start=.text=${bootloader_addr}
 AVR_CC=avr-gcc
