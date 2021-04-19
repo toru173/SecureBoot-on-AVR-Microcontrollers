@@ -97,11 +97,11 @@ int main(int argc, char *argv[])
 	char boot_path[1024] = "secure_bootloader.hex"; // Default hex
     uint32_t boot_base;
     uint32_t boot_size;
-	char * mmcu = MCU;
-	uint32_t freq = CLOCK;
+	char * mmcu = "atmega2560";
+	uint32_t freq = 20000000;
 	int debug = 0;
 	int verbose = 0;
-    avr_flashaddr_t    bootloader_pc = BLS_START; // Force boot address to bootloader as there is no reliable way to programme fuses
+    avr_flashaddr_t    bootloader_pc = 0x3FE00; // Force boot address to bootloader as there is no reliable way to programme fuses
 
 	for (int i = 1; i < argc; i++) {
 		if (!strcmp(argv[i] + strlen(argv[i]) - 4, ".hex"))
@@ -129,7 +129,7 @@ int main(int argc, char *argv[])
 	}
 	if (boot_base > 32*1024*1024) {
 		mmcu = "atmega2560";
-		freq = CLOCK;
+		freq = 20000000;
 	}
 	printf("%s bootloader 0x%05x: %d bytes\n", mmcu, boot_base, boot_size);
 
