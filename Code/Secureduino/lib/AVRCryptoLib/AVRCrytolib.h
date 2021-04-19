@@ -10,12 +10,12 @@
 
 
 
-#include "des.h"
+//#include "des.h"
 #include "rsa.h"
-#include "sha.h"
-#include "md5.h"
-#include "SkipJack.h"
-#include "AES.h"
+//#include "sha.h"
+//#include "md5.h"
+//#include "SkipJack.h"
+//#include "AES.h"
 
 #endif // __AVRCrytolib_h__
 
