@@ -4,10 +4,6 @@
 
 //#define DEBUG
 
-#ifndef DEBUG
-#define USERAWSTRINGS //for UART comms. Saves code space
-#endif
-
 #include <avr/io.h>
 #include <avr/pgmspace.h>
 #include <avr/sleep.h>
@@ -32,12 +28,14 @@
 #include "monitor.h"
 
 //AVRNaCl Encryption Library
-//#include "avrnacl.h"
+#include "avrnacl.h"
+
+//AVRCryptoLib Encryption Library
+#include "AVRCrytolib.h"
 
 #define PK_BYTES 32
 #define STATE_VEC_BYTES 64
 #define BLOCK_SIZE_BYTES 128
-
 
 /*
  * This demonstrate how to use the avr_mcu_section.h file
@@ -45,7 +43,7 @@
  * information for the simulator
  */
 #include "avr_mcu_section.h"
-AVR_MCU(F_CPU, MCU);
+AVR_MCU(F_CPU, "atmega2560");
 
 #ifdef DEBUG
 FILE uart_stdio = FDEV_SETUP_STREAM(uart_putchar, uart_getchar, _FDEV_SETUP_RW);
