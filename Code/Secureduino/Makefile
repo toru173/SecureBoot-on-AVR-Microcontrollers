@@ -42,7 +42,7 @@ CRYPTOLIBS += $(wildcard ${avrcryptolib}/*.S)
 
 # From https://www.pololu.com/docs/0J61/6.3
 AVR_CFLAGS=-g -Wall -mcall-prologues -mmcu=${MCU} -Os
-AVR_LDFLAGS=-Wl,-gc-sections -Wl,-relax -I${CRYPTOLIBS}
+AVR_LDFLAGS=-Wl,-gc-sections -Wl,-relax -I${includedir} -I${avrnacl} -I${avrcryptolib}
 AVR_BOOTLOADER_LDFLAGS=-Wl,--section-start=.text=${bootloader_addr}
 AVR_CC=avr-gcc
 
