@@ -39,7 +39,7 @@
 #include "uart_pty.h"
 #include "sim_vcd_file.h"
 
-#include "/libs/mcu_defs.h"
+#include "/lib/mcu_defs.h"
 
 
 uart_pty_t uart_pty;
