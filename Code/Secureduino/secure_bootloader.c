@@ -164,12 +164,12 @@ int main (void)
         {
             if (signature_block[i] != hash[i - 108])
             {
-                raw_printf("\nInvalid firmware signature. Hanging here...\n");
+                raw_printf("\nInvalid firmware signature. Hanging here...");
                 while(1);
             }
         }
         
-        raw_printf("Firmware signature is valid. Proceeding to boot payload\n");
+        raw_printf("\nFirmware signature is valid. Proceeding to boot payload\n\n");
         run_firmware();
     }
 }
