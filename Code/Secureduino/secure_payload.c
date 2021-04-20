@@ -32,7 +32,7 @@ FILE uart_stdio = FDEV_SETUP_STREAM(uart_putchar, uart_getchar, _FDEV_SETUP_RW);
 
 int main (void)
 {
-    //uart_init();
+    uart_init();
     stdout = stdin = stderr = &uart_stdio;
     
     while (1)
