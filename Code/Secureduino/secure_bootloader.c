@@ -107,17 +107,17 @@ int main (void)
         raw_printf("\n");
         raw_printf("\nHashing beginning:\n ");
         
-        unsigned char c[]={"000000800000001F00000000"};
+        //unsigned char c[]={"000000800000001F00000000"};
 
         Sha_Init();
-        Sha_Update(c,strlen((char *)c));
+        Sha_Update(message, strlen(message));
         Sha_Final();
         
-        if (Sha_Info.Digest[0]!= 0x84983e44 ||
-            Sha_Info.Digest[1]!= 0x1c3bd26e ||
-            Sha_Info.Digest[2]!= 0xbaae4aa1 ||
-            Sha_Info.Digest[3]!= 0xf95129e5 ||
-            Sha_Info.Digest[4]!= 0xe54670f1 )
+        if (Sha_Info.Digest[0]!= 0x2ef7bde6 ||
+            Sha_Info.Digest[1]!= 0x08ce5404 ||
+            Sha_Info.Digest[2]!= 0xe97d5f04 ||
+            Sha_Info.Digest[3]!= 0x2f95f89f ||
+            Sha_Info.Digest[4]!= 0x1c232871 )
         {
             raw_printf("Success!\n");
         }
