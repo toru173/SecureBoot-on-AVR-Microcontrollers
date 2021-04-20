@@ -5,7 +5,7 @@
 #include <avr/io.h>
 #include <avr/pgmspace.h>
 
-#include "mcu_defs.h"
+//#include "mcu_defs.h"
 #include "monitor.h"
 #include "uart.h"
 
