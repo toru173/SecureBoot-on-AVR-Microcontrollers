@@ -127,19 +127,18 @@ int main (void)
         uint8_t buffer[64];
 
         get512block(buffer, 0);
-
-        for (int i = 0; i < sizeof(buffer); i++)
-        {
-            raw_printf(bytetohex(buffer[i]));
-        }
-        
         
         raw_printf("\n");
         raw_printf("\nHashing beginning:\n");
         
 
         Sha_Init();
-        Sha_Update(buffer, sizeof(buffer));
+        for (int i = 0; i < 128; i+= 64)
+        {
+            get512block(buffer, i);
+            Sha_Update(buffer, sizeof(buffer));
+        }
+        
         Sha_Final();
         
         for (int i = 0; i < 5; i ++)
