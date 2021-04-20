@@ -108,6 +108,8 @@ int main (void)
         raw_printf("\nHashing beginning:\n ");
         
         //unsigned char c[]={"000000800000001F00000000"};
+        
+        unsigned char *message = "Hello World!";
 
         Sha_Init();
         Sha_Update(message, strlen(message));
