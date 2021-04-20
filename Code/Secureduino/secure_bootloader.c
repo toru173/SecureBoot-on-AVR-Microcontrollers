@@ -126,7 +126,10 @@ int main (void)
             raw_printf("0\n");
         }
          */
-        raw_printf(bytetohex(&public_key));
+        for (int i = i; i < sizeof(public_key); i++)
+        {
+            raw_printf(bytetohex(public_key[i]));
+        }
         raw_printf("\nSigning finished!\n");
     }
     //_delay_ms(1000);
