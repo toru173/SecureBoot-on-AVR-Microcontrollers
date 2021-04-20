@@ -49,11 +49,10 @@ AVR_MCU(F_CPU, "atmega328p");
 FILE uart_stdio = FDEV_SETUP_STREAM(uart_putchar, uart_getchar, _FDEV_SETUP_RW);
 #endif
 
-#define RSA_MAX_LEN (2048/8)
+#define RSA_MAX_LEN (1024/8)
 
 unsigned char cryptdata[RSA_MAX_LEN];
 unsigned char public_key[RSA_MAX_LEN];
-// unsigned char private_key[RSA_MAX_LEN];
 unsigned int  public_exponent;
 
 unsigned char rsa_tmp[3*RSA_MAX_LEN];
@@ -126,10 +125,16 @@ int main (void)
             raw_printf("0\n");
         }
          */
-        for (int i = i; i < sizeof(public_key); i++)
+        for (int i = i; i < sizeof(cryptdata); i++)
         {
-            raw_printf(bytetohex(public_key[i]));
+            raw_printf(bytetohex(cryptdata[i]));
         }
+        
+        for (int i = i; i < sizeof(CONSTANT_DATA); i++)
+        {
+            raw_printf(bytetohex(CONSTANT_DATA[i]));
+        }
+        
         raw_printf("\nSigning finished!\n");
     }
     //_delay_ms(1000);
