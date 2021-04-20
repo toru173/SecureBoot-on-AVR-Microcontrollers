@@ -109,10 +109,12 @@ int main (void)
         
         unsigned char c[]={"Hello World!"};
         
-        //unsigned char *message = {"Hello World!"};
-
+        raw_printf(bytetohex((uint8_t) strlen((char *)c)));
+        raw_printf("\n");
+        raw_printf(bytetohex((uint8_t) sizeof(c)));
+        
         Sha_Init();
-        Sha_Update(c, sizeof(c));
+        Sha_Update(c, strlen((char *)c));
         Sha_Final();
         
         if (Sha_Info.Digest[0]!= 0x5557599a ||
