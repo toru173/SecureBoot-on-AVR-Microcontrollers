@@ -12,12 +12,12 @@
 #include <stdio.h> // Handy for debugging but bloats code significantly
 #endif
 
-#include "mcu_defs.h"
+//#include "mcu_defs.h"
 #include "secure_bootloader.h"
 
 // Set up MCU
-#define F_CPU CLOCK
-#define BAUD UART_BAUD
+#define F_CPU 20000000
+#define BAUD 9600
 #include <util/setbaud.h>
 #include <util/delay.h>
 
