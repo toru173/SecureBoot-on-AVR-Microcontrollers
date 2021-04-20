@@ -73,12 +73,12 @@ ${target}: ${board}
 payload:
 	@echo ${INCLUDE_FILES}
 	@${AVR_CC} ${AVR_CFLAGS} ${AVR_LDFLAGS} ${payload}.c ${INCLUDE_FILES} -o ${payload}.elf
-	@avr-objcopy -j .text -j .data -O ihex ${payload}.elf ${payload}.hex
+	@avr-objcopy -R .eeprom -O ihex ${payload}.elf ${payload}.hex
 	avr-size ${payload}.hex
 
 bootloader:
 	@${AVR_CC} ${AVR_CFLAGS} ${AVR_LDFLAGS} ${AVR_BOOTLOADER_LDFLAGS} ${bootloader}.c ${INCLUDE_FILES} ${CRYPTOLIBS} -o ${bootloader}.elf
-	@avr-objcopy -j .text -j .data -O ihex ${bootloader}.elf ${bootloader}.hex
+	@avr-objcopy -R .eeprom -O ihex ${bootloader}.elf ${bootloader}.hex
 	avr-size ${bootloader}.hex
 	
 # Hex merging from https://www.avrfreaks.net/forum/merging-bootloader-hex-file-and-application-hex-file-one
