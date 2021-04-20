@@ -52,14 +52,14 @@ FILE uart_stdio = FDEV_SETUP_STREAM(uart_putchar, uart_getchar, _FDEV_SETUP_RW);
 #define RSA_MAX_LEN 4
 
 unsigned char cryptdata[RSA_MAX_LEN];
-unsigned char public_key[RSA_MAX_LEN];
+char public_key[RSA_MAX_LEN];
 unsigned char private_key[RSA_MAX_LEN];
 unsigned int  public_exponent;
 
 unsigned char rsa_tmp[3*RSA_MAX_LEN];
 #define rsa_s (rsa_tmp+(2*RSA_MAX_LEN))
 
-const char test[] PROGMEM={"hi!"};
+const unsigned char test[] PROGMEM={"hi!"};
 
 // Change to another 1024 bit key
 const unsigned char public1024e3[] PROGMEM={
