@@ -33,7 +33,7 @@
 //AVRCryptoLib Encryption Library
 #include "AVRCrytolib.h"
 
-#include "sha512.h"
+#include "lib/avr-crypto-lib/sha512.h"
 
 #define PK_BYTES 32
 #define STATE_VEC_BYTES 64
