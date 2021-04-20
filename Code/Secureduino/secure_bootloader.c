@@ -115,7 +115,7 @@ int main (void)
         raw_printf("\n");
 
         Sha_Init();
-        Sha_Update(c, sizeof(c) - 1));
+        Sha_Update(c, sizeof(c) - 1);
         Sha_Final();
         
         for (int i = 0; i < 5; i ++)
