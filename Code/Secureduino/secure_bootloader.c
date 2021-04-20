@@ -111,21 +111,27 @@ int main (void)
         raw_printf("\n");
         raw_printf("\nHashing beginning:\n ");
         
-        uint8_t hash[64];
-        sha512_ctx_t ctx;
+        unsigned char c[]={"000000800000001F00000000"};
+
+        Sha_Init();
+        Sha_Update(c,strlen((char *)c));
+        Sha_Final();
         
-        sha512_init(&ctx);
-
-        sha512_lastBlock(&ctx, message, sizeof(message));
-
-        sha512_ctx2hash(hash, &ctx);
+        if (Sha_Info.Digest[0]!= 0x84983e44 ||
+            Sha_Info.Digest[1]!= 0x1c3bd26e ||
+            Sha_Info.Digest[2]!= 0xbaae4aa1 ||
+            Sha_Info.Digest[3]!= 0xf95129e5 ||
+            Sha_Info.Digest[4]!= 0xe54670f1 )
+        {
+            raw_printf("Success!\n");
+        }
         
         for (int i = i; i < sizeof(hash); i++)
         {
             raw_printf(bytetohex((uint8_t) hash[i]));
         }
         
-        raw_printf("\nhashing finished! Complete hash:\n");
+        raw_printf("\nhashing finished!\n");
 
         raw_printf("\n");
         
