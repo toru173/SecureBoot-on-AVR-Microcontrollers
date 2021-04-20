@@ -122,10 +122,13 @@ int main (void)
             raw_printf("Success!\n");
         }
         
+        /*
         for (int i = i; i < sizeof(hash); i++)
         {
             raw_printf(bytetohex((uint8_t) hash[i]));
         }
+         
+         */
         
         raw_printf("\nhashing finished!\n");
 
