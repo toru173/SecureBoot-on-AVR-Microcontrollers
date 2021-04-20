@@ -126,7 +126,7 @@ int main (void)
         Sha_Final();
         
         raw_printf("\nHashing finished!\n");
-        raw_printf("Final Hash:\n");
+        raw_printf("Final Hash:\n\n");
 
         for (int i = 0; i < 5; i ++)
         {
@@ -141,7 +141,7 @@ int main (void)
 
         raw_printf("\n");
         
-        raw_printf("\nChecking Signature...\n");
+        raw_printf("\nChecking Signature...\n\n");
         
         get1024block(signature, ROM_TOP);
         
@@ -154,7 +154,10 @@ int main (void)
         
         raw_printf("\n");
         
-        raw_printf("\nSigning finished!\n");
+        for(int i = 128; i > 108; i --)
+            
+        
+        
     }
     //_delay_ms(1000);
     while(1); // hang here while debugging
