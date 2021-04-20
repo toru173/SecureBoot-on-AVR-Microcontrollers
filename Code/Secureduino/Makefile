@@ -93,6 +93,7 @@ binary: payload bootloader
 	@cat ${payload}.hex | awk '/^:00000001FF/ == 0' > binary.hex
 	@cat ${bootloader}.hex >> binary.hex
 	@avr-objcopy --gap-fill 0xFF -I ihex -O binary binary.hex binary.bin
+	xxd binary.bin
 	@dd if=/dev/zero of=hash.bin  bs=1 count=108
 	@dd if=binary.bin bs=1 count=28544 | openssl sha1 -binary >> hash.bin
 	stat -c%s hash.bin
