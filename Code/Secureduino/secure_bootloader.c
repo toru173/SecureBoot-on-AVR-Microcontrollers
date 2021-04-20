@@ -122,8 +122,13 @@ int main (void)
             Sha_Info.Digest[4]!= 0xdb696871 )
         {
             raw_printf("Failure!\n");
-        }
+        } else
+            raw_printf("Success!\n");
         
+        for (int i = 0; i < 5; i ++)
+        {
+            raw_printf(bytetohex((uint8_t) Sha_Info.Digest[i]))
+        }
         /*
         for (int i = i; i < sizeof(hash); i++)
         {
