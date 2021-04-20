@@ -145,10 +145,10 @@ int main (void)
         for (int i = 0; i < 5; i ++)
         {
             unsigned long word = Sha_Info.Digest[i];
-            hash[(i * 4) + 0] = (word & 0xFF000000) >> 24);
-            hash[(i * 4) + 1] = (word & 0x00FF0000) >> 16);
-            hash[(i * 4) + 2] = (word & 0x0000FF00) >> 8);
-            hash[(i * 4)+ 3] = word & 0x000000FF));
+            hash[(i * 4) + 0] = (word & 0xFF000000) >> 24;
+            hash[(i * 4) + 1] = (word & 0x00FF0000) >> 16;
+            hash[(i * 4) + 2] = (word & 0x0000FF00) >> 8;
+            hash[(i * 4) + 3] = word & 0x000000FF));
         }
         
         for (int i = 0; i < sizeof(hash); i++)
