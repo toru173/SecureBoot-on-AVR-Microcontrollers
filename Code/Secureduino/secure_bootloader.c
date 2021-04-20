@@ -121,7 +121,7 @@ int main (void)
         {
             raw_printf("0\n");
         }
-         */
+         /**/
         raw_printf("\nSigning finished!\n");
     }
     //_delay_ms(1000);
