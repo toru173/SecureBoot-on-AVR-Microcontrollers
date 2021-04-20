@@ -137,12 +137,11 @@ int main (void)
         
         memcpy_P(cryptdata, crypt1024e3, sizeof(public1024e3));
         
-        public_exponent = 3;
+        public_exponent = 65537;
         memcpy_P(public_key    ,public1024e3        ,sizeof(public1024e3));
         //memcpy(public_key    ,test        ,sizeof(test));
-        raw_printf(bytetohex((uint8_t) sizeof(public1024e3)));
         rsa_decrypt(sizeof(public1024e3), cryptdata, public_exponent, public_key, rsa_s, rsa_tmp);
-        if (memcmp_P(cryptdata,CONSTANT_DATA,sizeof(public1024e3)))
+        if (memcmp_P(cryptdata, CONSTANT_DATA, sizeof(public1024e3)))
         {
             raw_printf("They are the different!\n");
         } else
@@ -156,12 +155,6 @@ int main (void)
         }
         
         raw_printf("\n");
-        raw_printf("\n");
-        
-        for (int i = i; i < sizeof(CONSTANT_DATA); i++)
-        {
-            raw_printf(bytetohex(pgm_read_byte(CONSTANT_DATA + i)));
-        }
         
         raw_printf("\nSigning finished!\n");
     }
