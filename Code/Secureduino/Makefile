@@ -34,7 +34,7 @@ includedir = lib
 avrcryptolib = ${includedir}/AVRCryptoLib
 
 INCLUDE_FILES = $(wildcard ${includedir}/*.c)
-CRYPTOLIBS = $(wildcard ${avr-crypto-lib}/*.c)
+CRYPTOLIBS = $(wildcard ${avrcryptolib}/*.c)
 
 # From https://www.pololu.com/docs/0J61/6.3
 AVR_CFLAGS=-g -Wall -mcall-prologues -mmcu=${MCU} -Os
