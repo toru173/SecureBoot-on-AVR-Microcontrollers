@@ -112,7 +112,7 @@ int main (void)
         //unsigned char *message = {"Hello World!"};
 
         Sha_Init();
-        Sha_Update(c, strlen((char *)c));
+        Sha_Update(c, sizeof(c));
         Sha_Final();
         
         if (Sha_Info.Digest[0]!= 0x5557599a ||
