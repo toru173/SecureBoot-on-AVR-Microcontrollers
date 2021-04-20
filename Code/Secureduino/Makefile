@@ -33,12 +33,14 @@ simavr = simavr
 includedir = lib
 avrnacl = ${includedir}/avrnacl
 avrcryptolib = ${includedir}/AVRCryptoLib
+avr-crypto-lib = ${includedir}/avr-crypto-lib
 
 INCLUDE_FILES = $(wildcard ${includedir}/*.c)
 CRYPTOLIBS = $(wildcard ${avrnacl}/*.c)
 CRYPTOLIBS += $(wildcard ${avrnacl}/assembly/*.S)
 CRYPTOLIBS += $(wildcard ${avrcryptolib}/*.c)
 CRYPTOLIBS += $(wildcard ${avrcryptolib}/*.S)
+CRYPTOLIBS += $(wildcard ${avr-crypto-lib}/sha2/*.c)
 
 # From https://www.pololu.com/docs/0J61/6.3
 AVR_CFLAGS=-g -Wall -mcall-prologues -mmcu=${MCU} -Os
