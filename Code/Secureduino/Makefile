@@ -24,6 +24,7 @@ bootloader = secure_bootloader
 MCU = atmega328p
 # bootloader start address on atmega328p = 0x7000, atmega2560 = 0x3FE00
 bootloader_addr = 0x7000
+ROM_TOP = 28544 # 0x6F80, leaving room for signature
 
 # For forming the total hex file
 payload_size := $$(stat -c '%s' ${payload}.hex)
@@ -89,9 +90,9 @@ binary: payload bootloader
 	@cat ${bootloader}.hex >> binary.hex
 	@avr-objcopy --gap-fill 0xFF -I ihex -O binary binary.hex binary.bin
 	@dd if=/dev/zero of=hash.bin  bs=1 count=108
-	@dd if=binary.bin bs=1 count=28544 | openssl sha1 -binary >> hash.bin
+	@dd if=binary.bin bs=1 count=${ROM_TOP} | openssl sha1 -binary >> hash.bin
 	@cat hash.bin | openssl rsautl -sign -inkey keys/private.pem -raw > encrypted_hash.bin
-	@dd conv=notrunc if=encrypted_hash.bin of=binary.bin bs=1 seek=28544
+	@dd conv=notrunc if=encrypted_hash.bin of=binary.bin bs=1 seek=${ROM_TOP}
 	@avr-objcopy -I binary -O ihex binary.bin binary.hex
 	@echo done
 	
