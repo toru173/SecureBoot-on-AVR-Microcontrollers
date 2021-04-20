@@ -101,7 +101,7 @@ int main(int argc, char *argv[])
 	uint32_t freq = 20000000;
 	int debug = 0;
 	int verbose = 0;
-    avr_flashaddr_t    bootloader_pc = 0x3FE00; // Force boot address to bootloader as there is no reliable way to programme fuses
+    avr_flashaddr_t    bootloader_pc = 0x00000; //0x3FE00; // Force boot address to bootloader as there is no reliable way to programme fuses
 
 	for (int i = 1; i < argc; i++) {
 		if (!strcmp(argv[i] + strlen(argv[i]) - 4, ".hex"))
