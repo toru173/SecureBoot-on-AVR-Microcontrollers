@@ -128,19 +128,23 @@ int main (void)
 
         get512block(buffer, 0);
         
-        raw_printf("\n");
-        raw_printf("\nHashing beginning:\n");
+        raw_printf("Hashing beginning:\n");
         
 
         Sha_Init();
-        for (int i = 0; i < 128; i+= 64)
+        
+        for (int i = 0; i < 0x7000; i+= 64)
         {
             get512block(buffer, i);
             Sha_Update(buffer, sizeof(buffer));
+            raw_printf(". ");
         }
         
         Sha_Final();
         
+        raw_printf("hashing finished!\n");
+        raw_printf("Final Hash:\n");
+
         for (int i = 0; i < 5; i ++)
         {
             unsigned long word = Sha_Info.Digest[i];
@@ -151,7 +155,6 @@ int main (void)
             raw_printf(" ");
         }
         
-        raw_printf("\nhashing finished!\n");
 
         raw_printf("\n");
         
