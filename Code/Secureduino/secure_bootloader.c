@@ -174,7 +174,8 @@ int main (void)
         
         for (int i = i; i < sizeof(cryptdata); i++)
         {
-            raw_printf(bytetohex(cryptdata[i]));
+            if(cryptdata[i] != 0x00)
+                raw_printf(cryptdata[i]);
         }
         
         raw_printf("\n");
