@@ -130,7 +130,7 @@ int main (void)
         
         for (int i = i; i < sizeof(buffer); i++)
         {
-            raw_printf(bytetohex((uint8_t) buffer[i]));
+            raw_printf(bytetohex((uint8_t) &buffer[i]));
         }
         
         
