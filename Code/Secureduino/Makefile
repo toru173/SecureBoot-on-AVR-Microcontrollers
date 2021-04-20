@@ -88,7 +88,7 @@ bootloader:
 # Hex merging from https://www.avrfreaks.net/forum/merging-bootloader-hex-file-and-application-hex-file-one
 # simduino doesn't like an Intel Hex file with multiple segments (it will only load the first)
 # Below hack to get everything into a single .hex file with one segment. Leave BIN behind for debug
-# We Compile to a .bin, hash, sign with our private key and concatenate the key on the end of the binary
+# We Compile to a .bin, hash, sign with our private key and concatenate the key on the end of the payload binary
 binary: payload bootloader
 	@cat ${payload}.hex | awk '/^:00000001FF/ == 0' > binary.hex
 	@cat ${bootloader}.hex >> binary.hex
