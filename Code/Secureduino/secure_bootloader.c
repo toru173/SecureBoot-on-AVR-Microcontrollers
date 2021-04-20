@@ -99,7 +99,7 @@ unsigned char test_bin[] = {
   0x00, 0x00, 0x00, 0x00
 };
 
-void get512block(uint8_t *buffer, uint16_t baseaddress);
+void get512block(uint8_t *buffer, uint16_t baseaddress)
 {
     for (int i = 0; i < 64; i++)
         buffer[i] = pgm_read_byte(i)
@@ -122,7 +122,7 @@ int main (void)
 
         // Enter monitor
 
-        *uint8_t buffer[64];
+        uint8_t *buffer[64];
         
         get512block(buffer, 0);
         
