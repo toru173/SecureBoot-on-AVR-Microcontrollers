@@ -75,6 +75,6 @@ int main (void)
         raw_printf("\nSigning finished!\n");
         
     }
-    _delay_ms(1000);
+    //_delay_ms(1000);
     run_firmware();
 }
