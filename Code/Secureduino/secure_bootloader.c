@@ -126,7 +126,7 @@ int main (void)
 
         uint8_t *buffer[64];
         
-        get512block(buffer, 0);
+        get512block(*buffer, 0);
         
         for (int i = i; i < sizeof(buffer); i++)
         {
