@@ -105,23 +105,23 @@ int main (void)
         // Enter monitor
 
         raw_printf("\n");
-        raw_printf("\nHashing beginning:\n ");
+        raw_printf("\nHashing beginning:\n");
         
-        //unsigned char c[]={"000000800000001F00000000"};
+        unsigned char c[]={"000000800000001F00000000"};
         
-        unsigned char *message = {"Hello World!"};
+        //unsigned char *message = {"Hello World!"};
 
         Sha_Init();
-        Sha_Update(message, sizeof(message));
+        Sha_Update(c, strlen((char *)c));
         Sha_Final();
         
-        if (Sha_Info.Digest[0]!= 0x2ef7bde6 ||
-            Sha_Info.Digest[1]!= 0x08ce5404 ||
-            Sha_Info.Digest[2]!= 0xe97d5f04 ||
-            Sha_Info.Digest[3]!= 0x2f95f89f ||
-            Sha_Info.Digest[4]!= 0x1c232871 )
+        if (Sha_Info.Digest[0]!= 0x5557599a ||
+            Sha_Info.Digest[1]!= 0x1083edf6 ||
+            Sha_Info.Digest[2]!= 0xe848193d ||
+            Sha_Info.Digest[3]!= 0xdca0024a ||
+            Sha_Info.Digest[4]!= 0xdb696871 )
         {
-            raw_printf("Success!\n");
+            raw_printf("Failure!\n");
         }
         
         /*
