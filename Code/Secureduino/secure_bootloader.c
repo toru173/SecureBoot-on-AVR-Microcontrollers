@@ -175,7 +175,7 @@ int main (void)
         for (int i = i; i < sizeof(cryptdata); i++)
         {
             if(cryptdata[i] != 0x00)
-                raw_printf(cryptdata[i]);
+                uart_putrawchar(cryptdata[i]);
         }
         
         raw_printf("\n");
