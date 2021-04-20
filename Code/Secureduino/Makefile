@@ -90,18 +90,17 @@ bootloader:
 # Below hack to get everything into a single .hex file with one segment. Leave BIN behind for debug
 # We Compile to a .bin, hash, sign with our private key and concatenate the key on the end of the binary
 binary: payload bootloader
-	@avr-objcopy --gap-fill 0xFF -I ihex -O binary ${payload}.hex ${payload}.bin
+	@cat ${payload}.hex | awk '/^:00000001FF/ == 0' > binary.hex
+	@cat ${bootloader}.hex >> binary.hex
+	@avr-objcopy --gap-fill 0xFF -I ihex -O binary binary.hex binary.bin
 	@dd if=/dev/zero of=hash.bin  bs=1 count=108
-	xxd ${payload}.bin
-	@dd if=${payload}.bin bs=1 count=28544 | openssl sha1 -binary >> hash.bin
+	xxd binary.bin
+	@dd if=binary.bin bs=1 count=28544 | openssl sha1 -binary >> hash.bin
 	stat -c%s hash.bin
 	xxd hash.bin
 	@cat hash.bin | openssl rsautl -sign -inkey keys/private.pem -raw > encrypted_hash.bin
 	xxd encrypted_hash.bin
-	@dd if=encrypted_hash.bin of=${payload}.bin bs=1 seek=28544
-	@cp ${payload}.bin binary.bin
-	@avr-objcopy -I ihex -O binary ${bootloader}.hex ${bootloader}.bin
-	@cat ${bootloader}.bin >> $binary.bin
+	@dd if=encrypted_hash.bin of=binary.bin bs=1 seek=28544
 	@avr-objcopy -I binary -O ihex binary.bin binary.hex
 	@echo done
 	
