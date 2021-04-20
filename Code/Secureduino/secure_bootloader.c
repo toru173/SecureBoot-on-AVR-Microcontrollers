@@ -59,6 +59,8 @@ unsigned int  public_exponent;
 unsigned char rsa_tmp[3*RSA_MAX_LEN];
 #define rsa_s (rsa_tmp+(2*RSA_MAX_LEN))
 
+const unsigned char test[] PROGMEM={"hi!"};
+
 // Change to another 1024 bit key
 const unsigned char public1024e3[] PROGMEM={
 0xB1,0x92,0x97,0xD1,0xC9,0x0F,0x4A,0xE9,
@@ -115,13 +117,15 @@ int main (void)
         raw_printf("\nSigning beginning. Success should be zero: ");
         /* (ciphertext^public_exponent)%public_key = plaintext */
         public_exponent = 3;
-        memcpy_P(public_key    ,public1024e3        ,sizeof(public1024e3));
+        // memcpy_P(public_key    ,public1024e3        ,sizeof(public1024e3));
+        memcpy_P(public_key    ,test        ,sizeof(test));
         //rsa_decrypt(sizeof(public1024e3),cryptdata,public_exponent,public_key,rsa_s,rsa_tmp);
         /*if (memcmp_P(cryptdata,CONSTANT_DATA,sizeof(public1024e3)))
         {
             raw_printf("0\n");
         }
          */
+        raw_printf(public_key);
         raw_printf("\nSigning finished!\n");
     }
     //_delay_ms(1000);
