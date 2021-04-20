@@ -51,13 +51,17 @@ FILE uart_stdio = FDEV_SETUP_STREAM(uart_putchar, uart_getchar, _FDEV_SETUP_RW);
 
 
 //AVRCryptoLib vars
-#define RSA_MAX_LEN (128) //1024 bites = 128 bytes
+#define RSA_MAX_LEN (128) // 1024 bites = 128 bytes
 
 unsigned char cryptdata[RSA_MAX_LEN];
-unsigned int  public_exponent;
+unsigned int  public_exponent = 3; // Valid options in OpenSSL are 3 and 65537
 
 unsigned char rsa_tmp[3 * RSA_MAX_LEN];
 #define rsa_s (rsa_tmp + (2 * RSA_MAX_LEN))
+
+unsigned char hash[64];
+
+const void message = NULL;
 
 // Generated using OpenSSL
 unsigned char public_key[]  =
@@ -75,7 +79,7 @@ unsigned char public_key[]  =
     0xe0, 0x1a, 0x60, 0x78, 0xf1, 0xe2, 0xbb, 0x3f
 };
 
-//Encrypted on Mac using Open SSL
+// Encrypted test data on Mac using OpenSSL
 const unsigned char test_data[] PROGMEM =
 {
     0x5d, 0xb8, 0x33, 0xc8, 0x90, 0x6e, 0x98, 0x66, 0x5c, 0xf2, 0x81, 0x9b,
@@ -106,19 +110,23 @@ int main (void)
         // Enter monitor
 
         raw_printf("\n");
-        raw_printf("\nHashing beginning. Success should be zero: ");
-        // raw_printf(bytetohex((uint8_t) crypto_hashblocks_sha512(hash, block, sizeof(block))));
+        raw_printf("\nHashing beginning:\n ");
+        
+        sha512(hash, message, 0);
+        
+        for (int i = i; i < sizeof(hash); i++)
+        {
+            raw_printf(bytetohex((uint8_t) hash[i]));
+        }
+        
         raw_printf("\nhashing finished! Complete hash:\n");
 
         raw_printf("\n");
         
         raw_printf("\nSigning beginning...\n");
-        /* (ciphertext^public_exponent)%public_key = plaintext */
         
         memcpy_P(cryptdata, test_data, sizeof(test_data));
         
-        public_exponent = 3;
-        //memcpy(public_key    ,test        ,sizeof(test));
         rsa_decrypt(sizeof(public_key), cryptdata, public_exponent, public_key, rsa_s, rsa_tmp);
         
         for (int i = i; i < sizeof(cryptdata); i++)
