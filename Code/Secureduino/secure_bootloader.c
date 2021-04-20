@@ -116,7 +116,7 @@ int main (void)
         
         sha512_init(&ctx);
 
-        sha512_lastBlock(&ctx, msg, sizeof(message));
+        sha512_lastBlock(&ctx, message, sizeof(message));
 
         sha512_ctx2hash(hash, &ctx);
         
