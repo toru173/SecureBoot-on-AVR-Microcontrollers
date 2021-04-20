@@ -132,10 +132,11 @@ int main (void)
 
         raw_printf("\n");
         
-        raw_printf("\nSigning beginning. Key size: ");
+        raw_printf("\nSigning beginning...\n");
         /* (ciphertext^public_exponent)%public_key = plaintext */
         
-        memcpy_P(cryptdata,crypt1024e3,sizeof(public1024e3));
+        memcpy_P(cryptdata, crypt1024e3, sizeof(public1024e3));
+        
         public_exponent = 3;
         memcpy_P(public_key    ,public1024e3        ,sizeof(public1024e3));
         //memcpy(public_key    ,test        ,sizeof(test));
@@ -144,6 +145,9 @@ int main (void)
         if (memcmp_P(cryptdata,CONSTANT_DATA,sizeof(public1024e3)))
         {
             raw_printf("They are the different!\n");
+        } else
+        {
+            raw_printf("They are the the same!\n");
         }
         
         for (int i = i; i < sizeof(cryptdata); i++)
@@ -156,7 +160,7 @@ int main (void)
         
         for (int i = i; i < sizeof(CONSTANT_DATA); i++)
         {
-            raw_printf(bytetohex(CONSTANT_DATA[i]));
+            raw_printf(bytetohex(pgm_read_byte(CONSTANT_DATA + i)));
         }
         
         raw_printf("\nSigning finished!\n");
