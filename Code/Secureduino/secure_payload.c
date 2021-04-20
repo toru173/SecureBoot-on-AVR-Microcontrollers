@@ -38,7 +38,7 @@ int main (void)
     
     while (1)
     {
-        printf("Hello World!\n");
+        printf("Hello Apple!\n");
         _delay_ms(1000);
     }
 }
