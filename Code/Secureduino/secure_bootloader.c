@@ -99,6 +99,13 @@ unsigned char test_bin[] = {
   0x00, 0x00, 0x00, 0x00
 };
 
+void get512block(*uint8_t buffer, uint16_t baseaddress);
+{
+    for (int i = 0; i < 64; i++)
+        buffer[i] = pgm_read_byte(i)
+}
+
+
 int main (void)
 {
     uart_init();
@@ -111,8 +118,20 @@ int main (void)
     
     if (c == 'm')
     {
+        raw_printf("\n");
+
         // Enter monitor
 
+        *uint8_t buffer[64];
+        
+        get512block(buffer, 0);
+        
+        for (int i = i; i < sizeof(buffer); i++)
+        {
+            raw_printf(bytetohex((uint8_t) buffer[i]));
+        }
+        
+        
         raw_printf("\n");
         raw_printf("\nHashing beginning:\n");
         
