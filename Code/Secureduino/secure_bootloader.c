@@ -27,15 +27,12 @@
 // Monitor
 #include "monitor.h"
 
-//AVRNaCl Encryption Library
-//#include "avrnacl.h"
-
 //AVRCryptoLib Encryption Library
 #include "AVRCrytolib.h"
 
-#define PK_BYTES 32
-#define STATE_VEC_BYTES 64
-#define BLOCK_SIZE_BYTES 128
+//#define PK_BYTES 32
+//#define STATE_VEC_BYTES 64
+//#define BLOCK_SIZE_BYTES 128
 
 /*
  * This demonstrate how to use the avr_mcu_section.h file
@@ -44,6 +41,8 @@
  */
 #include "avr_mcu_section.h"
 AVR_MCU(F_CPU, "atmega328p");
+
+#define ROM_TOP = (0x7000 - 1024)
 
 #ifdef DEBUG
 FILE uart_stdio = FDEV_SETUP_STREAM(uart_putchar, uart_getchar, _FDEV_SETUP_RW);
@@ -90,14 +89,8 @@ const unsigned char test_data[] PROGMEM =
     0x1b, 0x85, 0x61, 0xba, 0x3e, 0x87, 0x43, 0x5a
   };
 
-unsigned char test_bin[] = {
-  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-  0x00, 0x00, 0x00, 0x00
-};
+
+
 
 void get512block(uint8_t *buffer, uint16_t baseaddress)
 {
@@ -133,7 +126,7 @@ int main (void)
 
         Sha_Init();
         
-        for (int i = 0; i < 0x7000; i+= 64)
+        for (int i = 0; i < ROM_TOP; i+= 64)
         {
             get512block(buffer, i);
             Sha_Update(buffer, sizeof(buffer));
@@ -142,7 +135,7 @@ int main (void)
         
         Sha_Final();
         
-        raw_printf("hashing finished!\n");
+        raw_printf("\nHashing finished!\n");
         raw_printf("Final Hash:\n");
 
         for (int i = 0; i < 5; i ++)
