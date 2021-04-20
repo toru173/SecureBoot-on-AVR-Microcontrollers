@@ -39,7 +39,6 @@
 #include "uart_pty.h"
 #include "sim_vcd_file.h"
 
-//#include "lib/mcu_defs.h"
 
 uart_pty_t uart_pty;
 avr_t * avr = NULL;
@@ -95,8 +94,7 @@ int main(int argc, char *argv[])
 {
 	struct avr_flash flash_data;
 	char boot_path[1024] = "secure_bootloader.hex"; // Default hex
-    uint32_t boot_base;
-    uint32_t boot_size;
+    uint32_t boot_base, boot_size;
 	char * mmcu = "atmega328p";
 	uint32_t freq = 20000000;
 	int debug = 0;
