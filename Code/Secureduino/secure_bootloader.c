@@ -118,7 +118,7 @@ int main (void)
         
 
         Sha_Init();
-        Sha_Update(test_bin, sizeof(test_bin) - 1);
+        Sha_Update(test_bin, sizeof(test_bin));
         Sha_Final();
         
         for (int i = 0; i < 5; i ++)
