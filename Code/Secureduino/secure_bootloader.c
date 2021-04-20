@@ -62,7 +62,7 @@ unsigned char rsa_tmp[3 * RSA_MAX_LEN];
 
 
 unsigned char hash[64];
-const void *message = NULL;
+const char *message = "Hello World!";
 
 // Generated using OpenSSL
 unsigned char public_key[]  =
@@ -113,7 +113,7 @@ int main (void)
         raw_printf("\n");
         raw_printf("\nHashing beginning:\n ");
         
-        sha512(hash, message, 0);
+        sha512(hash, message, sizeof(message));
         
         for (int i = i; i < sizeof(hash); i++)
         {
