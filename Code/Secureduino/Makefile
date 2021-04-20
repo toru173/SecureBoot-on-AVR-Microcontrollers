@@ -72,12 +72,14 @@ ${board} : ${OBJ}/${target}.o
 ${target}: ${board}
 	@echo $@ done
 
+
 payload:
 	@echo ${INCLUDE_FILES}
 	@${AVR_CC} ${AVR_CFLAGS} ${AVR_LDFLAGS} ${payload}.c ${INCLUDE_FILES} -o ${payload}.elf
 	@avr-objcopy -R .eeprom -O ihex ${payload}.elf ${payload}.hex
 	avr-size ${payload}.hex
-
+	
+	
 bootloader:
 	@${AVR_CC} ${AVR_CFLAGS} ${AVR_LDFLAGS} ${AVR_BOOTLOADER_LDFLAGS} ${bootloader}.c ${INCLUDE_FILES} ${CRYPTOLIBS} -o ${bootloader}.elf
 	@avr-objcopy -R .eeprom -O ihex ${bootloader}.elf ${bootloader}.hex
@@ -86,12 +88,18 @@ bootloader:
 # Hex merging from https://www.avrfreaks.net/forum/merging-bootloader-hex-file-and-application-hex-file-one
 # simduino doesn't like an Intel Hex file with multiple segments (it will only load the first)
 # Below hack to get everything into a single .hex file with one segment. Leave BIN behind for debug
-
+# We Compile to a .bin, hash, sign with our private key and concatenate the key on the end of the binary
 binary: payload bootloader
-	@cat ${payload}.hex | awk '/^:00000001FF/ == 0' > binary.hex
-	@cat ${bootloader}.hex >> binary.hex
-	@avr-objcopy --gap-fill 0xFF -I ihex -O binary binary.hex binary.bin
+	@avr-objcopy --gap-fill 0xFF -I ihex -O binary ${payload}.hex ${payload}.bin
+	@dd if=/dev/zero of=hash.bin  bs=1 count=108
+	@dd if=binary.bin bs=1 count=27648 | openssl sha1 -binary >> hash.bin
+	@cat hash.bin | openssl rsautl -sign -inkey keys/private.pem -raw > encrypted_hash.bin
+	@dd if=encrypted_hash.bin of=${payload}.bin bs=1 skip=27648
+	@cp ${payload}.bin binary.bin
+	@avr-objcopy -I ihex -O binary ${bootloader}.hex ${bootloader}.bin
+	@cat {bootloader}.bin >> $binary.bin
 	@avr-objcopy -I binary -O ihex binary.bin binary.hex
+	@echo done
 	
 debug:
 	@export SIMAVR_UART_XTERM=1
