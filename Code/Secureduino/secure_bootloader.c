@@ -162,9 +162,11 @@ int main (void)
         
         for (int i = sizeof(signature_block); i > 108; i--)
         {
+            raw_printf(bytetohex(i));
+            raw_printf("\n");
             if (signature_block[i] != hash[i - 108])
             {
-                raw_printf("Invalid firmware signature. Hanging here...\n");
+                raw_printf("\nInvalid firmware signature. Hanging here...\n");
                 while(1);
             }
         }
