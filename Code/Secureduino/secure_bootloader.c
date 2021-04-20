@@ -109,7 +109,7 @@ int main (void)
         
         //unsigned char c[]={"000000800000001F00000000"};
         
-        unsigned char *message = "Hello World!";
+        unsigned char *message = {"Hello World!"};
 
         Sha_Init();
         Sha_Update(message, sizeof(message));
