@@ -64,25 +64,14 @@ int main (void)
     {
         // Enter monitor
 
-        unsigned char pk[PK_BYTES];
-        unsigned char hash[STATE_VEC_BYTES];
-        unsigned char block[BLOCK_SIZE_BYTES];
-        
-        for (int i = 0; i < BLOCK_SIZE_BYTES; i++)
-            block[i] = pgm_read_byte(i);
-
         raw_printf("\n");
         raw_printf("\nHashing beginning. Success should be zero: ");
         // raw_printf(bytetohex((uint8_t) crypto_hashblocks_sha512(hash, block, sizeof(block))));
         raw_printf("\nhashing finished! Complete hash:\n");
-        /*
-        for (int i = 0; i < 64; i++)
-            raw_printf(bytetohex(hash[i]));
-        */
+
         raw_printf("\n");
         
         raw_printf("\nSigning beginning. Success should be zero: ");
-        //raw_printf(bytetohex((uint8_t) crypto_sign_ed25519_open(hash, sizeof(block), hash, sizeof(block), pk)));
         raw_printf("\nSigning finished!\n");
         
     }
