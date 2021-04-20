@@ -31,7 +31,7 @@
 //#include "avrnacl.h"
 
 //AVRCryptoLib Encryption Library
-//#include "AVRCrytolib.h"
+#include "AVRCrytolib.h"
 
 #define PK_BYTES 32
 #define STATE_VEC_BYTES 64
