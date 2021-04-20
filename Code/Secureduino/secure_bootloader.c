@@ -49,7 +49,7 @@ AVR_MCU(F_CPU, "atmega2560");
 FILE uart_stdio = FDEV_SETUP_STREAM(uart_putchar, uart_getchar, _FDEV_SETUP_RW);
 #endif
 
-#define RSA_MAX_LEN (1024/8)
+#define RSA_MAX_LEN (2048/8)
 
 unsigned char cryptdata[RSA_MAX_LEN];
 unsigned char public_key[RSA_MAX_LEN];
@@ -116,7 +116,7 @@ int main (void)
         /* (ciphertext^public_exponent)%public_key = plaintext */
         public_exponent = 3;
         memcpy_P(public_key    ,public1024e3        ,sizeof(public1024e3));
-        rsa_decrypt(sizeof(public1024e3),cryptdata,public_exponent,public_key,rsa_s,rsa_tmp);
+        //rsa_decrypt(sizeof(public1024e3),cryptdata,public_exponent,public_key,rsa_s,rsa_tmp);
         /*if (memcmp_P(cryptdata,CONSTANT_DATA,sizeof(public1024e3)))
         {
             raw_printf("0\n");
