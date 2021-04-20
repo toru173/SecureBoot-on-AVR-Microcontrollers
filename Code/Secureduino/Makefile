@@ -92,12 +92,12 @@ bootloader:
 binary: payload bootloader
 	@avr-objcopy --gap-fill 0xFF -I ihex -O binary ${payload}.hex ${payload}.bin
 	@dd if=/dev/zero of=hash.bin  bs=1 count=108
-	@dd if=binary.bin bs=1 count=27648 | openssl sha1 -binary >> hash.bin
+	@dd if={payload}.bin bs=1 count=27648 | openssl sha1 -binary >> hash.bin
 	@cat hash.bin | openssl rsautl -sign -inkey keys/private.pem -raw > encrypted_hash.bin
 	@dd if=encrypted_hash.bin of=${payload}.bin bs=1 seek=27648
 	@cp ${payload}.bin binary.bin
 	@avr-objcopy -I ihex -O binary ${bootloader}.hex ${bootloader}.bin
-	@cat {bootloader}.bin >> $binary.bin
+	@cat ${bootloader}.bin >> $binary.bin
 	@avr-objcopy -I binary -O ihex binary.bin binary.hex
 	@echo done
 	
