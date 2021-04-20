@@ -136,6 +136,10 @@ int main (void)
         raw_printf(bytetohex(*buffer[0]));
         raw_printf("\n");
         
+        raw_printf("Second Byte: ");
+        raw_printf(bytetohex(*buffer[1]));
+        raw_printf("\n");
+        
         
         for (int i = i; i < sizeof(buffer); i++)
         {
