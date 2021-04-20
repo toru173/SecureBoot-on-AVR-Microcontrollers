@@ -117,11 +117,11 @@ int main (void)
         public_exponent = 3;
         //memcpy_P(public_key    ,public1024e3        ,sizeof(public1024e3));
         //rsa_decrypt(sizeof(public1024e3),cryptdata,public_exponent,public_key,rsa_s,rsa_tmp);
-        if (memcmp_P(cryptdata,CONSTANT_DATA,sizeof(public1024e3)))
+        /*if (memcmp_P(cryptdata,CONSTANT_DATA,sizeof(public1024e3)))
         {
             raw_printf("0\n");
         }
-         /**/
+         */
         raw_printf("\nSigning finished!\n");
     }
     //_delay_ms(1000);
