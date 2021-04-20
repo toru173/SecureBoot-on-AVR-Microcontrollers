@@ -40,7 +40,7 @@ CRYPTOLIBS = $(wildcard ${avrnacl}/*.c)
 CRYPTOLIBS += $(wildcard ${avrnacl}/assembly/*.S)
 CRYPTOLIBS += $(wildcard ${avrcryptolib}/*.c)
 CRYPTOLIBS += $(wildcard ${avrcryptolib}/*.S)
-CRYPTOLIBS += $(wildcard ${avr-crypto-lib}/sha2/*.c)
+CRYPTOLIBS += $(wildcard ${avr-crypto-lib}/*.c)
 
 # From https://www.pololu.com/docs/0J61/6.3
 AVR_CFLAGS=-g -Wall -mcall-prologues -mmcu=${MCU} -Os
