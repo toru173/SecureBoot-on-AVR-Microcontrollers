@@ -125,23 +125,10 @@ int main (void)
         // Enter monitor
 
         uint8_t buffer[64];
-        
-        raw_printf("Buffer size: ");
-        raw_printf(bytetohex(sizeof(buffer)));
-        raw_printf("\n");
-        
+
         get512block(buffer, 0);
-        
-        raw_printf("First Byte: ");
-        raw_printf(bytetohex(buffer[0]));
-        raw_printf("\n");
-        
-        raw_printf("Second Byte: ");
-        raw_printf(bytetohex(buffer[1]));
-        raw_printf("\n");
-        
-        
-        for (int i = i; i < sizeof(buffer); i++)
+
+        for (int i = 0; i < sizeof(buffer); i++)
         {
             raw_printf(bytetohex(buffer[i]));
         }
@@ -165,13 +152,6 @@ int main (void)
             raw_printf(bytetohex(word & 0x000000FF));
             raw_printf(" ");
         }
-        /*
-        for (int i = i; i < sizeof(hash); i++)
-        {
-            raw_printf(bytetohex((uint8_t) hash[i]));
-        }
-         
-         */
         
         raw_printf("\nhashing finished!\n");
 
