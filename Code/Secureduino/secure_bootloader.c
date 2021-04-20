@@ -92,9 +92,7 @@ const unsigned char CONSTANT_DATA[] PROGMEM=
 };
 
 int main (void)
-{
-    while(1); // hang here while debugging
-    
+{    
     uart_init();
     
     #ifdef DEBUG
