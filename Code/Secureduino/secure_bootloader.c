@@ -100,7 +100,7 @@ int main (void)
         
     char c = uart_getrawchar(); // Wait for input before continuing
     
-    if (c == 'm')
+    if (c)
     {
         raw_printf("\n");
 
@@ -159,9 +159,17 @@ int main (void)
         }
         
         raw_printf("\n");
-
+        
+        for (int i = sizeof(signature_block); i > 108; i--)
+        {
+            if (signature_block[i] != hash[i - 108])
+            {
+                raw_printf("Invalid firmware signature. Hanging here...\n");
+                while(1);
+            }
+        }
+        
+        raw_printf("Firmware signature is valid. Proceeding to boot payload\n");
+        run_firmware();
     }
-    //_delay_ms(1000);
-    while(1); // hang here while debugging
-    run_firmware();
 }
