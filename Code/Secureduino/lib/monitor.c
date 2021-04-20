@@ -13,7 +13,7 @@ char *bytetohex(uint8_t byte)
 {
     char *c = "\0\0";
     uint8_t nybble0 = (byte >> 4) & 0x0F;
-    uint8_t nybble1 = byte& 0x0F;
+    uint8_t nybble1 = byte & 0x0F;
     if (nybble0 > 0x09)
         nybble0 += 0x37; // A-F
     else
