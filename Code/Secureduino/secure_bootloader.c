@@ -106,7 +106,7 @@ int main (void)
 
         get512block(hash_block, 0);
         
-        raw_printf("Hashing beginning:\n");
+        raw_printf("Hashing beginning...\n");
         
 
         Sha_Init();
@@ -115,7 +115,6 @@ int main (void)
         {
             get512block(hash_block, i);
             Sha_Update(hash_block, sizeof(hash_block));
-            raw_printf(". ");
         }
         
         Sha_Final();
