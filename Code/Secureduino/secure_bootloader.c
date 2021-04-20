@@ -111,21 +111,11 @@ int main (void)
         
         raw_printf(bytetohex((uint8_t) strlen((char *)c)));
         raw_printf("\n");
-        raw_printf(bytetohex((uint8_t) sizeof(c)));
+        raw_printf(bytetohex((uint8_t) sizeof(c) - 1));
         
         Sha_Init();
         Sha_Update(c, strlen((char *)c));
         Sha_Final();
-        
-        if (Sha_Info.Digest[0]!= 0x5557599a ||
-            Sha_Info.Digest[1]!= 0x1083edf6 ||
-            Sha_Info.Digest[2]!= 0xe848193d ||
-            Sha_Info.Digest[3]!= 0xdca0024a ||
-            Sha_Info.Digest[4]!= 0xdb696871 )
-        {
-            raw_printf("Failure!\n");
-        } else
-            raw_printf("Success!\n");
         
         for (int i = 0; i < 5; i ++)
         {
