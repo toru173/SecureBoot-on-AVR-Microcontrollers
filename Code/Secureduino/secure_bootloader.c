@@ -33,8 +33,6 @@
 //AVRCryptoLib Encryption Library
 #include "AVRCrytolib.h"
 
-#include "lib/avr-crypto-lib/sha512.h"
-
 #define PK_BYTES 32
 #define STATE_VEC_BYTES 64
 #define BLOCK_SIZE_BYTES 128
@@ -59,8 +57,6 @@ unsigned int  public_exponent = 3; // Valid options in OpenSSL are 3 and 65537
 
 unsigned char rsa_tmp[3 * RSA_MAX_LEN];
 #define rsa_s (rsa_tmp + (2 * RSA_MAX_LEN))
-
-const char *message = "Hello World!";
 
 // Generated using OpenSSL
 unsigned char public_key[]  =
