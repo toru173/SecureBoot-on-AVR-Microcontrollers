@@ -81,6 +81,14 @@ void get512block(uint8_t *buffer, uint16_t baseaddress)
     }
 }
 
+void get1024block(uint8_t *buffer, uint16_t baseaddress)
+{
+    for (int i = 0; i < 128; i++)
+    {
+        buffer[i] = pgm_read_byte(baseaddress + i);
+    }
+}
+
 
 int main (void)
 {
@@ -98,9 +106,10 @@ int main (void)
 
         // Enter monitor
 
-        uint8_t buffer[64];
+        uint8_t hash[64];
+        uint8_t signature[128];
 
-        get512block(buffer, 0);
+        get512block(hash, 0);
         
         raw_printf("Hashing beginning:\n");
         
@@ -109,8 +118,8 @@ int main (void)
         
         for (int i = 0; i < ROM_TOP; i+= 64)
         {
-            get512block(buffer, i);
-            Sha_Update(buffer, sizeof(buffer));
+            get512block(hash, i);
+            Sha_Update(hash, sizeof(hash));
             raw_printf(". ");
         }
         
@@ -133,15 +142,12 @@ int main (void)
         raw_printf("\n");
         
         raw_printf("\nSigning beginning...\n");
-        /*
-        memcpy_P(cryptdata, test_data, sizeof(test_data));
         
-        rsa_decrypt(sizeof(public_key), cryptdata, public_exponent, public_key, rsa_s, rsa_tmp);
-        */
-        for (int i = i; i < sizeof(cryptdata); i++)
+        rsa_decrypt(sizeof(public_key), signature, public_exponent, public_key, rsa_s, rsa_tmp);
+        
+        for (int i = i; i < sizeof(signature); i++)
         {
-            if(cryptdata[i] != 0x00)
-                uart_putrawchar(cryptdata[i]);
+            raw_printf(bytetohex(signature[i]));
         }
         
         raw_printf("\n");
