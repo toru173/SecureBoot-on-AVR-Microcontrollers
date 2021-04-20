@@ -106,10 +106,10 @@ int main (void)
 
         // Enter monitor
 
-        uint8_t hash[64];
-        uint8_t signature[128];
+        uint8_t hash_block[64];
+        uint8_t signature_block[128];
 
-        get512block(hash, 0);
+        get512block(hash_block, 0);
         
         raw_printf("Hashing beginning:\n");
         
@@ -118,16 +118,15 @@ int main (void)
         
         for (int i = 0; i < ROM_TOP; i+= 64)
         {
-            get512block(hash, i);
-            Sha_Update(hash, sizeof(hash));
+            get512block(hash_block, i);
+            Sha_Update(hash_block, sizeof(hash_block));
             raw_printf(". ");
         }
         
         Sha_Final();
         
         raw_printf("\nHashing finished!\n");
-        raw_printf("Final Hash:\n\n");
-
+        
         for (int i = 0; i < 5; i ++)
         {
             unsigned long word = Sha_Info.Digest[i];
@@ -138,14 +137,32 @@ int main (void)
             raw_printf(" ");
         }
         
+        
+        raw_printf("Final Hash:\n\n");
+        
+        uint8_t hash[20];
+
+        for (int i = 0; i < 5; i ++)
+        {
+            unsigned long word = Sha_Info.Digest[i];
+            hash[(i * 4) + 0] = (word & 0xFF000000) >> 24);
+            hash[(i * 4) + 1] = (word & 0x00FF0000) >> 16);
+            hash[(i * 4) + 2] = (word & 0x0000FF00) >> 8);
+            hash[(i * 4)+ 3] = word & 0x000000FF));
+        }
+        
+        for (int i = 0; i < sizeof(hash); i++)
+        {
+            raw_printf(bytetohex(hash[i]));
+        }
 
         raw_printf("\n");
         
         raw_printf("\nChecking Signature...\n\n");
         
-        get1024block(signature, ROM_TOP);
+        get1024block(signature_block, ROM_TOP);
         
-        rsa_decrypt(sizeof(public_key), signature, public_exponent, public_key, rsa_s, rsa_tmp);
+        rsa_decrypt(sizeof(public_key), signature_block, public_exponent, public_key, rsa_s, rsa_tmp);
         
         for (int i = i; i < sizeof(signature); i++)
         {
