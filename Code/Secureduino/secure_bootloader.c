@@ -127,7 +127,7 @@ int main (void)
         
         for (int i = 0; i < 5; i ++)
         {
-            for (int j = 0; j < sizeof(Sha_Info.Digest[i])); j++)
+            for (int j = 0; j < sizeof(Sha_Info.Digest[i]); j++)
             {
                 raw_printf(bytetohex(Sha_Info.Digest[i][j]));
             }
