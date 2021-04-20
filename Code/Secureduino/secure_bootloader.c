@@ -133,7 +133,7 @@ int main (void)
         raw_printf("\n");
         
         raw_printf("First Byte: ");
-        raw_printf(bytetohex(*buffer[0]);
+        raw_printf(bytetohex(*buffer[0]));
         raw_printf("\n");
         
         
