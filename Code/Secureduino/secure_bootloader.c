@@ -101,7 +101,7 @@ unsigned char test_bin[] = {
 
 void get512block(uint8_t *buffer, uint16_t baseaddress)
 {
-    raw_printf(sizeof(buffer));
+    raw_printf(bytetohex(sizeof(buffer)));
     raw_printf("\n");
     for (int i = 0; i < sizeof(buffer); i++)
     {
