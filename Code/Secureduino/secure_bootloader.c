@@ -59,7 +59,7 @@ unsigned int  public_exponent;
 unsigned char rsa_tmp[3*RSA_MAX_LEN];
 #define rsa_s (rsa_tmp+(2*RSA_MAX_LEN))
 
-const unsigned char test[] PROGMEM={"hi!"};
+const char test[] PROGMEM={"hi!"};
 
 // Change to another 1024 bit key
 const unsigned char public1024e3[] PROGMEM={
