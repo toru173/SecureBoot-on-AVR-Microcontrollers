@@ -39,6 +39,8 @@
 #include "uart_pty.h"
 #include "sim_vcd_file.h"
 
+#include "/libs/mcu_defs.h"
+
 
 uart_pty_t uart_pty;
 avr_t * avr = NULL;
@@ -95,11 +97,11 @@ int main(int argc, char *argv[])
 	struct avr_flash flash_data;
 	char boot_path[1024] = "secure_bootloader.hex"; // Default hex
     uint32_t boot_base, boot_size;
-	char * mmcu = "atmega328p";
-	uint32_t freq = 20000000;
+	char * mmcu = MCU;
+	uint32_t freq = CLOCK;
 	int debug = 0;
 	int verbose = 0;
-    avr_flashaddr_t    bootloader_pc = 0x7000; // Force boot address to bootloader as there is no reliable way to programme fuses
+    avr_flashaddr_t    bootloader_pc = BLS_START; // Force boot address to bootloader as there is no reliable way to programme fuses
 
 	for (int i = 1; i < argc; i++) {
 		if (!strcmp(argv[i] + strlen(argv[i]) - 4, ".hex"))
@@ -125,11 +127,6 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "%s: Unable to load %s\n", argv[0], boot_path);
 		exit(1);
 	}
-	if (boot_base > 32*1024*1024) {
-		mmcu = "atmega2560";
-		freq = 20000000;
-	}
-	printf("%s bootloader 0x%05x: %d bytes\n", mmcu, boot_base, boot_size);
 
 	snprintf(flash_data.avr_flash_path, sizeof(flash_data.avr_flash_path),
 			"secureduino_%s_flash.bin", mmcu);

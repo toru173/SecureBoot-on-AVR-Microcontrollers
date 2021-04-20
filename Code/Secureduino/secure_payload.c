@@ -11,9 +11,10 @@
 
 #include <stdio.h>
 
+#include "mcu_defs.h"
+
 // Set up MCU
-#define F_CPU 20000000
-#define BAUD 9600
+#define F_CPU CLOCK
 #include <util/setbaud.h>
 #include <util/delay.h>
 
@@ -26,7 +27,7 @@
  * information for the simulator
  */
 #include "avr_mcu_section.h"
-AVR_MCU(F_CPU, "atmega328p");
+AVR_MCU(F_CPU, MCU);
 
 FILE uart_stdio = FDEV_SETUP_STREAM(uart_putchar, uart_getchar, _FDEV_SETUP_RW);
 

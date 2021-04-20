@@ -12,12 +12,11 @@
 #include <stdio.h> // Handy for debugging but bloats code significantly
 #endif
 
-//#include "mcu_defs.h"
+#include "mcu_defs.h"
 #include "secure_bootloader.h"
 
 // Set up MCU
-#define F_CPU 20000000
-#define BAUD 9600
+#define F_CPU CLOCK
 #include <util/setbaud.h>
 #include <util/delay.h>
 
@@ -30,19 +29,13 @@
 //AVRCryptoLib Encryption Library
 #include "AVRCrytolib.h"
 
-//#define PK_BYTES 32
-//#define STATE_VEC_BYTES 64
-//#define BLOCK_SIZE_BYTES 128
-
 /*
  * This demonstrate how to use the avr_mcu_section.h file
  * The macro adds a section to the ELF file with useful
  * information for the simulator
  */
 #include "avr_mcu_section.h"
-AVR_MCU(F_CPU, "atmega328p");
-
-#define ROM_TOP 28544
+AVR_MCU(F_CPU, MCU);
 
 #ifdef DEBUG
 FILE uart_stdio = FDEV_SETUP_STREAM(uart_putchar, uart_getchar, _FDEV_SETUP_RW);
@@ -57,7 +50,7 @@ unsigned int  public_exponent = 3; // Valid options in OpenSSL are 3 and 65537
 unsigned char rsa_tmp[3 * RSA_MAX_LEN];
 #define rsa_s (rsa_tmp + (2 * RSA_MAX_LEN))
 
-// Generated using OpenSSL
+// 1024 bit RSA Public Key, Generated using OpenSSL
 unsigned char public_key[]  =
 {
     0xc9, 0x08, 0x12, 0xc5, 0xe4, 0x2c, 0x63, 0xc0, 0xe6, 0x88, 0xbb, 0xfa,
@@ -73,6 +66,7 @@ unsigned char public_key[]  =
     0xe0, 0x1a, 0x60, 0x78, 0xf1, 0xe2, 0xbb, 0x3f
 };
 
+
 void get512block(uint8_t *buffer, uint16_t baseaddress)
 {
     for (int i = 0; i < 64; i++)
@@ -80,6 +74,7 @@ void get512block(uint8_t *buffer, uint16_t baseaddress)
         buffer[i] = pgm_read_byte(baseaddress + i);
     }
 }
+
 
 void get1024block(uint8_t *buffer, uint16_t baseaddress)
 {
@@ -102,9 +97,9 @@ int main (void)
     
     if (c)
     {
-        raw_printf("\n");
-
         // Enter monitor
+
+        raw_printf("\n");
 
         uint8_t hash_block[64];
         uint8_t signature_block[128];
