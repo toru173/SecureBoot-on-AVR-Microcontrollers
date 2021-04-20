@@ -31,7 +31,7 @@ trailing_bytes = 13
 
 simavr = simavr
 includedir = lib
-avrcryptolib = ${includedir}/AVRCryptoLib
+avrcryptolib = ${includedir}/AVRCryptoLib/
 
 INCLUDE_FILES = $(wildcard ${includedir}/*.c)
 CRYPTOLIBS = $(wildcard ${avrcryptolib}/*.c)
