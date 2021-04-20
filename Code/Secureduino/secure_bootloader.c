@@ -120,11 +120,11 @@ int main (void)
         memcpy_P(public_key    ,public1024e3        ,sizeof(public1024e3));
         //memcpy(public_key    ,test        ,sizeof(test));
         rsa_decrypt(sizeof(public1024e3), cryptdata, public_exponent, public_key, rsa_s, rsa_tmp);
-        /*if (memcmp_P(cryptdata,CONSTANT_DATA,sizeof(public1024e3)))
+        if (memcmp_P(cryptdata,CONSTANT_DATA,sizeof(public1024e3)))
         {
-            raw_printf("0\n");
+            raw_printf("They are the same!\n");
         }
-         */
+        
         for (int i = i; i < sizeof(cryptdata); i++)
         {
             raw_printf(bytetohex(cryptdata[i]));
