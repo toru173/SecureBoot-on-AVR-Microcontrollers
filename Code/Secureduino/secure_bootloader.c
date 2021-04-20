@@ -112,9 +112,10 @@ int main (void)
         raw_printf(bytetohex((uint8_t) strlen((char *)c)));
         raw_printf("\n");
         raw_printf(bytetohex((uint8_t) sizeof(c) - 1));
-        
+        raw_printf("\n");
+
         Sha_Init();
-        Sha_Update(c, strlen((char *)c));
+        Sha_Update(c, sizeof(c) - 1));
         Sha_Final();
         
         for (int i = 0; i < 5; i ++)
