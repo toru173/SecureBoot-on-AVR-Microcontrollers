@@ -96,6 +96,7 @@ binary: payload bootloader
 	stat -c%s hash.bin
 	xxd hash.bin
 	@cat hash.bin | openssl rsautl -sign -inkey keys/private.pem -raw > encrypted_hash.bin
+	xxd encrypted_hash.bin
 	@dd if=encrypted_hash.bin of=${payload}.bin bs=1 seek=27648
 	@cp ${payload}.bin binary.bin
 	@avr-objcopy -I ihex -O binary ${bootloader}.hex ${bootloader}.bin
