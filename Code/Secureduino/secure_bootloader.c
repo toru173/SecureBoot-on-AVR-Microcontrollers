@@ -148,7 +148,7 @@ int main (void)
             hash[(i * 4) + 0] = (word & 0xFF000000) >> 24;
             hash[(i * 4) + 1] = (word & 0x00FF0000) >> 16;
             hash[(i * 4) + 2] = (word & 0x0000FF00) >> 8;
-            hash[(i * 4) + 3] = word & 0x000000FF));
+            hash[(i * 4) + 3] = (word & 0x000000FF);
         }
         
         for (int i = 0; i < sizeof(hash); i++)
@@ -164,9 +164,9 @@ int main (void)
         
         rsa_decrypt(sizeof(public_key), signature_block, public_exponent, public_key, rsa_s, rsa_tmp);
         
-        for (int i = i; i < sizeof(signature); i++)
+        for (int i = i; i < sizeof(signature_block); i++)
         {
-            raw_printf(bytetohex(signature[i]));
+            raw_printf(bytetohex(signature_block[i]));
         }
         
         raw_printf("\n");
