@@ -170,11 +170,7 @@ int main (void)
         }
         
         raw_printf("\n");
-        
-        for(int i = 128; i > 108; i --)
-            
-        
-        
+
     }
     //_delay_ms(1000);
     while(1); // hang here while debugging
