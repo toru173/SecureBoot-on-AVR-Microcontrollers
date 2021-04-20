@@ -93,6 +93,8 @@ const unsigned char CONSTANT_DATA[] PROGMEM=
 
 int main (void)
 {
+    while(1); // hang here while debugging
+    
     uart_init();
     
     #ifdef DEBUG
@@ -113,7 +115,7 @@ int main (void)
         raw_printf("\n");
         
         raw_printf("\nSigning beginning. Success should be zero: ");
-        /* (ciphertext^public_exponent)%public_key = plaintext */
+        /* (ciphertext^public_exponent)%public_key = plaintext
         public_exponent=3;
         memcpy_P(public_key    ,public1024e3        ,sizeof(public1024e3));
         rsa_decrypt(sizeof(public1024e3),cryptdata,public_exponent,public_key,rsa_s,rsa_tmp);
@@ -121,6 +123,7 @@ int main (void)
         {
             raw_printf("0\n");
         }
+         */
         raw_printf("\nSigning finished!\n");
     }
     //_delay_ms(1000);
