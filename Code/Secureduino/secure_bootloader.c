@@ -107,7 +107,7 @@ int main (void)
         raw_printf("\n");
         raw_printf("\nHashing beginning:\n");
         
-        unsigned char c[]={"000000800000001F00000000"};
+        unsigned char c[]={"Hello World!"};
         
         //unsigned char *message = {"Hello World!"};
 
