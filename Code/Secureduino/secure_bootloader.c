@@ -43,7 +43,7 @@
  * information for the simulator
  */
 #include "avr_mcu_section.h"
-AVR_MCU(F_CPU, "atmega2560");
+AVR_MCU(F_CPU, "atmega328p");
 
 #ifdef DEBUG
 FILE uart_stdio = FDEV_SETUP_STREAM(uart_putchar, uart_getchar, _FDEV_SETUP_RW);
