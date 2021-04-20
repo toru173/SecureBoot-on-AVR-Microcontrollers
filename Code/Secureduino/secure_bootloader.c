@@ -49,7 +49,6 @@ AVR_MCU(F_CPU, "atmega328p");
 FILE uart_stdio = FDEV_SETUP_STREAM(uart_putchar, uart_getchar, _FDEV_SETUP_RW);
 #endif
 
-
 //AVRCryptoLib vars
 #define RSA_MAX_LEN (128) // 1024 bites = 128 bytes
 
@@ -61,7 +60,9 @@ unsigned char rsa_tmp[3 * RSA_MAX_LEN];
 
 unsigned char hash[64];
 
-const void message = NULL;
+#include "sha512.h"
+
+const void *message = NULL;
 
 // Generated using OpenSSL
 unsigned char public_key[]  =
