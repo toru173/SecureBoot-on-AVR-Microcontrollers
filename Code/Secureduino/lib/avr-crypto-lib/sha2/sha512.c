@@ -25,11 +25,11 @@
 
 
 void sha512_nextBlock (sha512_ctx_t *ctx, const void *block){
-	sha2_large_common_nextBlock(ctx, block);
+	sha2_small_common_nextBlock(ctx, block);
 }
 
 void sha512_lastBlock(sha512_ctx_t *ctx, const void *block, uint16_t length_b){
-	sha2_large_common_lastBlock(ctx, block, length_b);
+	sha2_small_common_lastBlock(ctx, block, length_b);
 }
 
 static const

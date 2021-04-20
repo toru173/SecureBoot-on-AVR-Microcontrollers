@@ -28,7 +28,7 @@
 #define SHA512_BLOCK_BITS 1024
 #define SHA5122_BLOCK_BYTES (SHA512_BLOCK_BITS/8)
 
-typedef sha2_large_common_ctx_t sha512_ctx_t;
+typedef sha2_small_common_ctx_t sha512_ctx_t;
 
 
 void sha512_init(sha512_ctx_t *ctx);
