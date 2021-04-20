@@ -109,10 +109,10 @@ int main (void)
         
         //unsigned char c[]={"000000800000001F00000000"};
         
-        char *message = "Hello World!";
+        unsigned char *message = "Hello World!";
 
         Sha_Init();
-        Sha_Update(message, strlen(message));
+        Sha_Update(message, sizeof(message));
         Sha_Final();
         
         if (Sha_Info.Digest[0]!= 0x2ef7bde6 ||
