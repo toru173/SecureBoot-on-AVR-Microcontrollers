@@ -130,6 +130,9 @@ int main (void)
             raw_printf(bytetohex(cryptdata[i]));
         }
         
+        raw_printf("\n");
+        raw_printf("\n");
+        
         for (int i = i; i < sizeof(CONSTANT_DATA); i++)
         {
             raw_printf(bytetohex(CONSTANT_DATA[i]));
