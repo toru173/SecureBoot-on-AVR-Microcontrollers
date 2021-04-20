@@ -2,7 +2,7 @@
  * Secure bootloader checks signature of firmware and provides for other utilities
  */
 
-#define DEBUG
+//#define DEBUG
 
 #include <avr/io.h>
 #include <avr/pgmspace.h>
@@ -129,7 +129,12 @@ int main (void)
         {
             for (int j = 0; j < sizeof(Sha_Info.Digest[i]); j++)
             {
-                printf(Sha_Info.Digest[i]);
+                unsigned long word = Sha_Info.Digest[i];
+                raw_printf(bytetohex((word & 0xFF000000) >> 48));
+                raw_printf(bytetohex((word & 0x00FF0000) >> 32));
+                raw_printf(bytetohex((word & 0x0000FF00) >> 16));
+                raw_printf(bytetohex(word & 0x000000FF));
+                raw_printf(" ");
             }
         }
         /*
