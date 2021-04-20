@@ -130,20 +130,20 @@ int main (void)
         raw_printf(bytetohex(sizeof(buffer)));
         raw_printf("\n");
         
-        get512block(*buffer, 0);
+        get512block(buffer, 0);
         
         raw_printf("First Byte: ");
-        raw_printf(bytetohex(*buffer[0]));
+        raw_printf(bytetohex(buffer[0]));
         raw_printf("\n");
         
         raw_printf("Second Byte: ");
-        raw_printf(bytetohex(*buffer[1]));
+        raw_printf(bytetohex(buffer[1]));
         raw_printf("\n");
         
         
         for (int i = i; i < sizeof(buffer); i++)
         {
-            raw_printf(bytetohex(*buffer[i]));
+            raw_printf(bytetohex(buffer[i]));
         }
         
         
