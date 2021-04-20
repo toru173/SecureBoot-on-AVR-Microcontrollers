@@ -129,7 +129,7 @@ int main (void)
         {
             for (int j = 0; j < sizeof(Sha_Info.Digest[i]); j++)
             {
-                raw_printf(bytetohex((Sha_Info.Digest[i])[j]));
+                raw_printf(Sha_Info.Digest[i]);
             }
         }
         /*
