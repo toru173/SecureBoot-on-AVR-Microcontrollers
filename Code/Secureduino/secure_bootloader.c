@@ -133,11 +133,11 @@ int main (void)
         raw_printf("\n");
         
         raw_printf("\nSigning beginning...\n");
-        
+        /*
         memcpy_P(cryptdata, test_data, sizeof(test_data));
         
         rsa_decrypt(sizeof(public_key), cryptdata, public_exponent, public_key, rsa_s, rsa_tmp);
-        
+        */
         for (int i = i; i < sizeof(cryptdata); i++)
         {
             if(cryptdata[i] != 0x00)
