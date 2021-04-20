@@ -103,6 +103,10 @@ void get512block(uint8_t *buffer, uint16_t baseaddress)
 {
     for (int i = 0; i < sizeof(buffer); i++)
     {
+        raw_printf(bytetohex(i));
+        raw_printf("\n");
+        raw_printf(bytetohex(pgm_read_byte(baseaddress + i)));
+        raw_printf("\n");
         buffer[i] = pgm_read_byte(baseaddress + i);
     }
 }
