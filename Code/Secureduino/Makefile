@@ -96,7 +96,6 @@ binary: payload bootloader
 	@dd if=/dev/zero of=hash.bin  bs=1 count=108
 	@dd if=binary.bin bs=1 count=28544 | openssl sha1 -binary >> hash.bin
 	@cat hash.bin | openssl rsautl -sign -inkey keys/private.pem -raw > encrypted_hash.bin
-	xxd encrypted_hash.bin
 	@dd conv=notrunc if=encrypted_hash.bin of=binary.bin bs=1 seek=28544
 	@avr-objcopy -I binary -O ihex binary.bin binary.hex
 	@echo done
