@@ -60,8 +60,6 @@ unsigned int  public_exponent = 3; // Valid options in OpenSSL are 3 and 65537
 unsigned char rsa_tmp[3 * RSA_MAX_LEN];
 #define rsa_s (rsa_tmp + (2 * RSA_MAX_LEN))
 
-
-unsigned char hash[64];
 const char *message = "Hello World!";
 
 // Generated using OpenSSL
@@ -113,7 +111,14 @@ int main (void)
         raw_printf("\n");
         raw_printf("\nHashing beginning:\n ");
         
-        sha512(hash, message, sizeof(message));
+        uint8_t hash[64];
+        sha512_ctx_t ctx;
+        
+        sha512_init(&ctx);
+
+        sha512_lastBlock(&ctx, msg, sizeof(message));
+
+        sha512_ctx2hash(hash, &ctx);
         
         for (int i = i; i < sizeof(hash); i++)
         {
