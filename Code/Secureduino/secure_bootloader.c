@@ -49,20 +49,19 @@ AVR_MCU(F_CPU, "atmega2560");
 FILE uart_stdio = FDEV_SETUP_STREAM(uart_putchar, uart_getchar, _FDEV_SETUP_RW);
 #endif
 
-#define RSA_MAX_LEN 4
+#define RSA_MAX_LEN (2048/8)
 
 unsigned char cryptdata[RSA_MAX_LEN];
-char public_key[RSA_MAX_LEN];
-unsigned char private_key[RSA_MAX_LEN];
+unsigned char public_key[RSA_MAX_LEN];
+// unsigned char private_key[RSA_MAX_LEN];
 unsigned int  public_exponent;
 
 unsigned char rsa_tmp[3*RSA_MAX_LEN];
 #define rsa_s (rsa_tmp+(2*RSA_MAX_LEN))
 
-const unsigned char test[] PROGMEM={"hi!"};
 
 // Change to another 1024 bit key
-const unsigned char public1024e3[] PROGMEM={
+const unsigned char public1024e3[] ={
 0xB1,0x92,0x97,0xD1,0xC9,0x0F,0x4A,0xE9,
 0x7C,0x1C,0x61,0xDA,0xCA,0x82,0x9E,0x37,
 0xCB,0x85,0x36,0xCB,0xB1,0xB9,0xEF,0x8D,
@@ -81,7 +80,7 @@ const unsigned char public1024e3[] PROGMEM={
 0x3A,0x55,0x41,0x6B,0x4B,0xF0,0xEE,0x67};
 
 /* just random data for testeting */
-const unsigned char CONSTANT_DATA[] PROGMEM=
+const unsigned char CONSTANT_DATA[] =
 {
     0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0x10,0x11,0x12,0x13,0x14,0x15,0x16,0x5A,0x59,0xE9,0x71,0x1A,0xCB,0x01,0x11,0xDF,0x92,0x8E,0xF4,0x7B,0xAD,0xD8,0x69,
     0xD5,0x8F,0x8C,0xAD,0xC2,0xEB,0xAD,0xCC,0x01,0xB9,0xB2,0x36,0x42,0xF4,0xA0,0x3A,0x11,0x22,0x33,0x44,0x55,0x66,0x77,0x88,0x99,0xaa,0xbb,0xcc,0xdd,0xee,0x00,0xff,
@@ -117,9 +116,9 @@ int main (void)
         raw_printf("\nSigning beginning. Success should be zero: ");
         /* (ciphertext^public_exponent)%public_key = plaintext */
         public_exponent = 3;
-        // memcpy_P(public_key    ,public1024e3        ,sizeof(public1024e3));
-        memcpy_P(public_key    ,test        ,sizeof(test));
-        //rsa_decrypt(sizeof(public1024e3),cryptdata,public_exponent,public_key,rsa_s,rsa_tmp);
+        memcpy(public_key    ,public1024e3        ,sizeof(public1024e3));
+        //memcpy(public_key    ,test        ,sizeof(test));
+        rsa_decrypt(sizeof(public1024e3), cryptdata, public_exponent, public_key, rsa_s, rsa_tmp);
         /*if (memcmp_P(cryptdata,CONSTANT_DATA,sizeof(public1024e3)))
         {
             raw_printf("0\n");
