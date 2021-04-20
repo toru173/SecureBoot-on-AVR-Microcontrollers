@@ -130,9 +130,9 @@ int main (void)
             for (int j = 0; j < sizeof(Sha_Info.Digest[i]); j++)
             {
                 unsigned long word = Sha_Info.Digest[i];
-                raw_printf(bytetohex((word & 0xFF000000) >> 48));
-                raw_printf(bytetohex((word & 0x00FF0000) >> 32));
-                raw_printf(bytetohex((word & 0x0000FF00) >> 16));
+                raw_printf(bytetohex((word & 0xFF000000) >> 24));
+                raw_printf(bytetohex((word & 0x00FF0000) >> 16));
+                raw_printf(bytetohex((word & 0x0000FF00) >> 8));
                 raw_printf(bytetohex(word & 0x000000FF));
                 raw_printf(" ");
             }
