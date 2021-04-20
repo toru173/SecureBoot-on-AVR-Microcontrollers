@@ -160,7 +160,7 @@ int main (void)
         
         raw_printf("\n");
         
-        for (int i = sizeof(signature_block); i > 108; i--)
+        for (int i = sizeof(signature_block) - 1; i > 108; i--)
         {
             raw_printf(bytetohex(i));
             raw_printf(": ");
