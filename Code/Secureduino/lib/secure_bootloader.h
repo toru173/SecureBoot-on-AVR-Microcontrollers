@@ -3,5 +3,5 @@
  */
 
 uint16_t *get512block(uint16_t baseaddress);
-void (*run_firmware)(void) = 0x0000;
+void (*run_firmware)(void) = 0x00000;
 
