@@ -141,7 +141,9 @@ int main (void)
 
         raw_printf("\n");
         
-        raw_printf("\nSigning beginning...\n");
+        raw_printf("\nChecking Signature...\n");
+        
+        get1024block(signature, ROM_TOP);
         
         rsa_decrypt(sizeof(public_key), signature, public_exponent, public_key, rsa_s, rsa_tmp);
         
