@@ -10,4 +10,4 @@
 #define ROM_TOP BLS_START - 1024
 
 #define CLOCK 20000000
-#define UART_BAUD 9600
+#define BAUD 9600
