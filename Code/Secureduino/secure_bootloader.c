@@ -49,7 +49,7 @@ AVR_MCU(F_CPU, "atmega2560");
 FILE uart_stdio = FDEV_SETUP_STREAM(uart_putchar, uart_getchar, _FDEV_SETUP_RW);
 #endif
 
-#define RSA_MAX_LEN (2048/8)
+#define RSA_MAX_LEN 4
 
 unsigned char cryptdata[RSA_MAX_LEN];
 unsigned char public_key[RSA_MAX_LEN];
