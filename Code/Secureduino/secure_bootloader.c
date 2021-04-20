@@ -126,11 +126,11 @@ int main (void)
 
         uint8_t *buffer[64];
         
-        get512block(*buffer, 0);
-        
         raw_printf("Buffer size: ");
         raw_printf(bytetohex(sizeof(buffer)));
         raw_printf("\n");
+        
+        get512block(*buffer, 0);
         
         raw_printf("First Byte: ");
         raw_printf(bytetohex(*buffer[0]));
