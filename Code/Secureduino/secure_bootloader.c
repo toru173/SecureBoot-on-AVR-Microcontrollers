@@ -127,17 +127,6 @@ int main (void)
         
         raw_printf("\nHashing finished!\n");
         
-        for (int i = 0; i < 5; i ++)
-        {
-            unsigned long word = Sha_Info.Digest[i];
-            raw_printf(bytetohex((word & 0xFF000000) >> 24));
-            raw_printf(bytetohex((word & 0x00FF0000) >> 16));
-            raw_printf(bytetohex((word & 0x0000FF00) >> 8));
-            raw_printf(bytetohex(word & 0x000000FF));
-            raw_printf(" ");
-        }
-        
-        
         raw_printf("Final Hash:\n\n");
         
         uint8_t hash[20];
@@ -164,7 +153,7 @@ int main (void)
         
         rsa_decrypt(sizeof(public_key), signature_block, public_exponent, public_key, rsa_s, rsa_tmp);
         
-        for (int i = i; i < sizeof(signature_block); i++)
+        for (int i = 108; i < sizeof(signature_block); i++)
         {
             raw_printf(bytetohex(signature_block[i]));
         }
